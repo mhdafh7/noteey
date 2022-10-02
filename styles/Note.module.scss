@@ -1,0 +1,49 @@
+@import "colors";
+@import "fonts";
+
+.container {
+    padding: 2rem;
+    margin: 0.5rem;
+    border: #1d1d1b54 solid 2px;
+    position: relative;
+    width: 100%;
+    max-width: 22rem;
+    height: 12rem;
+    transition: all 0.1s ease-in;
+
+    &:hover {
+        translate: -5px -5px;
+        box-shadow: 5px 5px 0px 0px #1d1d1bfc;
+    }
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+
+    .pinned {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+    }
+    .title {
+        display: -webkit-box;
+        line-height: 1.8em;
+        font-family: "FrederickatheGreat", Helvetica Neue, sans-serif;
+        font-weight: bolder;
+        font-size: 1.3rem;
+        max-height: 20rem;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-transform: uppercase;
+        // text-decoration: underline;
+        margin-bottom: 1rem;
+    }
+    .body {
+        font-family: "Jackwrite", Helvetica Neue, sans-serif;
+        font-weight: lighter;
+        opacity: 0.8;
+    }
+}

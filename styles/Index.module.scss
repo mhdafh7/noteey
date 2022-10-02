@@ -1,0 +1,44 @@
+$pad-left: 8vw;
+
+.container {
+    padding: 0 $pad-left;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+.main {
+    padding: 4rem 0;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.paperBg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 998;
+    height: 100%;
+    width: 100%;
+    background-image: url("../public/bg.jpg");
+    background-position: 50% 50%;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    background-size: auto;
+    opacity: 0.3;
+
+    &::before{
+        content: "";
+    }
+    &::after{
+        content: "";
+    }
+}
