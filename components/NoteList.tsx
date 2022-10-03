@@ -10,6 +10,7 @@ const NoteList = ({ noteList }) => {
         return (
             <Note id={note.id} key={note.id} title={note.title} body={note.body} isPinned={note.isPinned} />
         )
+        
       })}
     </div>
   )

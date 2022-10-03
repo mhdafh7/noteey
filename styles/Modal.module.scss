@@ -1,0 +1,122 @@
+@import "colors";
+
+.megaContainer {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 998;
+    .container {
+        max-width: 30rem;
+        width: 75%;
+        border: solid 3px #1d1d1bfc;
+        padding: 0.5rem;
+        background: url("/modal-bg.png");
+        mix-blend-mode: lighten;
+
+        .form {
+            border: solid 3px #1d1d1b6c;
+            border-style: dashed;
+            display: flex;
+            flex-direction: column;
+            background: transparent;
+            padding: 0.5rem;
+            .title,
+            .body {
+                background: transparent;
+                border: none;
+                padding: 1rem;
+                outline: none;
+                resize: none;
+                border-bottom: 1px solid #1d1d1b34;
+
+                &:focus,
+                &:hover {
+                    // translate: -5px -5px;
+                    // box-shadow: 5px 5px 0px 0px #1d1d1bfc;
+                    border-bottom: 2px solid #1d1d1bfc;
+                }
+            }
+            .body {
+            }
+            .toolBar {
+                width: 100%;
+                background: url("/bg.png");
+                padding: 0.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .toolsWrapper {
+                    width: 10%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    .pinned {
+                        cursor: pointer;
+                        scale: 0.9;
+                        padding: 0.5rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        transition: all 0.1s ease-in;
+                        border: solid #1d1d1b6c 0.5px;
+
+                        &:hover,
+                        &:focus {
+                            translate: -2px -2px;
+                            box-shadow: 2px 2px 0px 0px #1d1d1bfc;
+                        }
+                    }
+                    .delete {
+                        cursor: pointer;
+                        scale: 0.9;
+                        padding: 0.5rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        transition: all 0.1s ease-in;
+                        border: solid $accent 0.5px;
+
+                        &:hover,
+                        &:focus {
+                            translate: -2px -2px;
+                            box-shadow: 2px 2px 0px 0px $accent;
+                        }
+                    }
+                }
+                .done {
+                    padding: 0.5rem;
+                    border-radius: 0;
+                    border: solid 0.5px #1d1d1b6c;
+                    transition: all 0.1s ease;
+                    background: transparent;
+
+                    &:hover {
+                        translate: -2px -2px;
+                        box-shadow: 2px 2px 0px 0px #1d1d1bfc;
+                    }
+                }
+            }
+        }
+    }
+    .overlay {
+        translate: 0;
+        z-index: -1;
+        position: fixed;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0.379);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

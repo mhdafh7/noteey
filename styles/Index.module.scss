@@ -7,6 +7,8 @@ $pad-left: 8vw;
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
+    background-image: url(/bg.png);
+    background-attachment: local;
 }
 
 .main {
@@ -19,26 +21,26 @@ $pad-left: 8vw;
     align-items: center;
 }
 
-.paperBg {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 998;
-    height: 100%;
-    width: 100%;
-    background-image: url("../public/bg.jpg");
-    background-position: 50% 50%;
-    mix-blend-mode: multiply;
-    pointer-events: none;
-    background-size: auto;
-    opacity: 0.3;
+// .paperBg {
+//     position: absolute;
+//     left: 0;
+//     top: 0;
+//     right: 0;
+//     bottom: 0;
+//     z-index: 998;
+//     height: 100%;
+//     width: 100%;
+//     background-image: url("../public/bg.png");
+//     // background-position: 50% 50%;
+//     mix-blend-mode: multiply;
+//     pointer-events: none;
+//     background-size: auto;
+//     opacity: 0.3;
 
-    &::before{
-        content: "";
-    }
-    &::after{
-        content: "";
-    }
-}
+//     &::before{
+//         content: "";
+//     }
+//     &::after{
+//         content: "";
+//     }
+// }

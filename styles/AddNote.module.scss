@@ -7,6 +7,7 @@
     max-width: 30rem;
     margin-top: 4vh;
     overflow-x: hidden;
+    box-shadow: 4px 4px 0px 0px #1d1d1b3c;
     transition: all 0.1s ease-in;
 
     &:hover,
@@ -28,6 +29,7 @@
                     border: none;
                     width: 100%;
                     padding: 0.5rem;
+                    background: transparent;
 
                     &:focus {
                         outline: none;

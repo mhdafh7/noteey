@@ -6,12 +6,14 @@ import Pagination from "../components/Pagination"
 import styles from "../styles/Index.module.scss"
 import { useState, useEffect } from "react"
 import { db } from '../utils/firebase/firebase'
-import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore'
+import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, orderBy, query } from 'firebase/firestore'
 
 export default function Home() {
 
     const [noteList, setNoteList] = useState([])
     const notesRef = collection(db, "notes")
+    const sortedData = query(notesRef, orderBy("isPinned", "desc"))
+
 
     // dummy data
     // const noteList = [
@@ -67,24 +69,12 @@ export default function Home() {
 
     useEffect(() => {
         getNotes()
-    }, [])
+    }, [notesRef])
 
     // get notes
     const getNotes = async () => {
-        const data = await getDocs(notesRef)
+        const data = await getDocs(sortedData)
         setNoteList(data.docs.map((note) => ({ ...note.data(), id: note.id })))
-    }
-
-    // update note 
-    const updateUser = async (id, age) => {
-        const userDoc = doc(db, "users", id)
-        const newFields = { age: age + 1 }
-        await updateDoc(userDoc, newFields)
-    }
-    // delete note
-    const deleteUser = async (id) => {
-        const userDoc = doc(db, "users", id)
-        await deleteDoc(userDoc)
     }
 
     return (
@@ -101,9 +91,10 @@ export default function Home() {
             <main className={styles.main}>
                 <NoteList noteList={noteList} />
             </main>
+            {/* TODO: pagination 
             <footer>
                 <Pagination />
-            </footer>
+            </footer> */}
         </div>
     )
 }
