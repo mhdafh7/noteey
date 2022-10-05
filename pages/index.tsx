@@ -9,6 +9,8 @@ import { db } from '../utils/firebase/firebase'
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, orderBy, query } from 'firebase/firestore'
 
 export default function Home() {
+    
+    // TODO: imporove state management using context
 
     const [noteList, setNoteList] = useState([])
     const notesRef = collection(db, "notes")

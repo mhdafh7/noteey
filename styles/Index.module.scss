@@ -1,7 +1,5 @@
-$pad-left: 8vw;
-
 .container {
-    padding: 0 $pad-left;
+    padding: 0;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -12,7 +10,7 @@ $pad-left: 8vw;
 }
 
 .main {
-    padding: 4rem 0;
+    padding: 4rem 6rem;
     width: 100%;
     flex: 1;
     display: flex;

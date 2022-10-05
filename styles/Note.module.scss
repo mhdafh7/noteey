@@ -6,6 +6,7 @@
     padding: 2rem;
     margin: 0.5rem;
     border: #1d1d1b54 solid 2px;
+    border-radius: 7px;
     position: relative;
     width: 100%;
     max-width: 22rem;
@@ -28,15 +29,29 @@
     }
 
     .pinned {
+        height: 40px;
+        width: 40px;
         position: absolute;
-        top: -10px;
-        right: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: -15px;
+        padding: 0.2rem;
+        border: 1px #1d1d1b54 solid;
+        background-color: #f9f7f4;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg{
+            rotate: -45deg;
+        }
     }
     .title {
         display: -webkit-box;
-        padding: 0.2rem;
         line-height: 1.8em;
-        font-family: "FrederickatheGreat", Helvetica Neue, sans-serif;
+        font-family: "Headline", Helvetica Neue, sans-serif;
+        letter-spacing: 2px;
         font-weight: bolder;
         font-size: 1.3rem;
         max-height: 20rem;
@@ -52,7 +67,7 @@
         text-overflow: ellipsis;
     }
     .body {
-        font-family: "Jackwrite", Helvetica Neue, sans-serif;
+        font-family: "Jackwrite", sans-serif;
         font-weight: lighter;
         opacity: 0.8;
     }

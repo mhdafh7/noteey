@@ -15,24 +15,28 @@ const AddNote = ({ notesRef }) => {
 
     // create note
 
-    const createUser = async () => {
+    const createNote = async () => {
         await addDoc(notesRef, { title: inputTitle, body: inputBody, isPinned: isPinned })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        createUser()
+        createNote()
 
+        // reseting states
         setInputBody("")
         setInputTitle("")
         setIsPinned(false)
         setShowInput(false)
     }
 
+    // close input when clicking outside of the input
     const handleClickOutside = (e) => {
         const { current: wrap } = titleRef
         const { current: wrap2 } = pinRef
+        console.log(wrap,wrap2);
+        
 
         if ((wrap && !wrap.contains(e.target)) && (wrap2 && !wrap2.contains(e.target))) {
             setShowInput(false)

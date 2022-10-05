@@ -1,4 +1,3 @@
-
 import { deleteDoc, doc, updateDoc } from "firebase/firestore"
 import { useRef, useState } from "react"
 import styles from "../styles/Modal.module.scss"
@@ -14,30 +13,30 @@ const Modal = ({ id, title, body, isPinned, showModal, setShowModal }) => {
 
   const modalRef = useRef()
 
-  // remove todo
-  const removeTodo = async () => {
-    const userDoc = doc(db, "notes", id)
-    await deleteDoc(userDoc)
+  // remove Note
+  const removeNote = async () => {
+    const noteDoc = doc(db, "notes", id)
+    await deleteDoc(noteDoc)
   }
 
-  // update todo
-  const updateTodo = async () => {
-    const userDoc = doc(db, "notes", id)
-    await updateDoc(userDoc, { title: modalTitle, body: modalBody, isPinned: modalIsPinned })
+  // update Note
+  const updateNote = async () => {
+    const noteDoc = doc(db, "notes", id)
+    await updateDoc(noteDoc, { title: modalTitle, body: modalBody, isPinned: modalIsPinned })
   }
 
   // close modal
   const closeModal = (e) => {
     if (modalRef.current === e.target) {
       setShowModal(false)
-      updateTodo()
+      updateNote()
     }
   }
 
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    updateTodo()
+    updateNote()
     setShowModal(false)
   }
 
@@ -75,7 +74,7 @@ const Modal = ({ id, title, body, isPinned, showModal, setShowModal }) => {
                       </svg>
                     )}
                   </span>
-                  <span className={styles.delete} onClick={removeTodo}>
+                  <span className={styles.delete} onClick={removeNote}>
                     <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M1.75 1.5C1.35218 1.5 0.970644 1.65804 0.68934 1.93934C0.408035 2.22064 0.25 2.60218 0.25 3V4.5C0.25 4.89782 0.408035 5.27936 0.68934 5.56066C0.970644 5.84196 1.35218 6 1.75 6H2.5V19.5C2.5 20.2956 2.81607 21.0587 3.37868 21.6213C3.94129 22.1839 4.70435 22.5 5.5 22.5H14.5C15.2956 22.5 16.0587 22.1839 16.6213 21.6213C17.1839 21.0587 17.5 20.2956 17.5 19.5V6H18.25C18.6478 6 19.0294 5.84196 19.3107 5.56066C19.592 5.27936 19.75 4.89782 19.75 4.5V3C19.75 2.60218 19.592 2.22064 19.3107 1.93934C19.0294 1.65804 18.6478 1.5 18.25 1.5H13C13 1.10218 12.842 0.720644 12.5607 0.43934C12.2794 0.158035 11.8978 0 11.5 0L8.5 0C8.10218 0 7.72064 0.158035 7.43934 0.43934C7.15804 0.720644 7 1.10218 7 1.5H1.75ZM6.25 7.5C6.44891 7.5 6.63968 7.57902 6.78033 7.71967C6.92098 7.86032 7 8.05109 7 8.25V18.75C7 18.9489 6.92098 19.1397 6.78033 19.2803C6.63968 19.421 6.44891 19.5 6.25 19.5C6.05109 19.5 5.86032 19.421 5.71967 19.2803C5.57902 19.1397 5.5 18.9489 5.5 18.75V8.25C5.5 8.05109 5.57902 7.86032 5.71967 7.71967C5.86032 7.57902 6.05109 7.5 6.25 7.5V7.5ZM10 7.5C10.1989 7.5 10.3897 7.57902 10.5303 7.71967C10.671 7.86032 10.75 8.05109 10.75 8.25V18.75C10.75 18.9489 10.671 19.1397 10.5303 19.2803C10.3897 19.421 10.1989 19.5 10 19.5C9.80109 19.5 9.61032 19.421 9.46967 19.2803C9.32902 19.1397 9.25 18.9489 9.25 18.75V8.25C9.25 8.05109 9.32902 7.86032 9.46967 7.71967C9.61032 7.57902 9.80109 7.5 10 7.5V7.5ZM14.5 8.25V18.75C14.5 18.9489 14.421 19.1397 14.2803 19.2803C14.1397 19.421 13.9489 19.5 13.75 19.5C13.5511 19.5 13.3603 19.421 13.2197 19.2803C13.079 19.1397 13 18.9489 13 18.75V8.25C13 8.05109 13.079 7.86032 13.2197 7.71967C13.3603 7.57902 13.5511 7.5 13.75 7.5C13.9489 7.5 14.1397 7.57902 14.2803 7.71967C14.421 7.86032 14.5 8.05109 14.5 8.25V8.25Z" fill="#b22e30" />
                     </svg>
