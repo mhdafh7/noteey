@@ -20,7 +20,7 @@
         max-width: 30rem;
         width: 75%;
         border: solid 3px #1d1d1bfc;
-        border-radius: 7px;
+        border-radius: 9px;
         padding: 0.5rem;
         mix-blend-mode: lighten;
         background: rgba(255, 255, 255, 0.92);
@@ -29,6 +29,7 @@
         .form {
             border: solid 3px #1d1d1b6c;
             border-style: dashed;
+            border-radius: 7px;
             display: flex;
             flex-direction: column;
             padding: 0.5rem;
@@ -57,7 +58,6 @@
             }
             .toolBar {
                 width: 100%;
-                // background: url("/bg.png");
                 padding: 0.5rem;
                 display: flex;
                 align-items: center;
@@ -93,13 +93,13 @@
                         align-items: center;
                         justify-content: center;
                         transition: all 0.1s ease-in;
-                        border: solid $accent 0.5px;
+                        border: solid $danger 0.5px;
                         border-radius: 5px;
 
                         &:hover,
                         &:focus {
                             translate: -2px -2px;
-                            box-shadow: 2px 2px 0px 0px $accent;
+                            box-shadow: 2px 2px 0px 0px $danger;
                         }
                     }
                 }

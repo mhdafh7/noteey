@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react"
-import { db } from "../utils/firebase/firebase"
 import { addDoc } from 'firebase/firestore'
+import { toast } from 'react-toastify'
 import styles from "../styles/AddNote.module.scss"
 
 const AddNote = ({ notesRef }) => {
@@ -24,6 +24,12 @@ const AddNote = ({ notesRef }) => {
 
         createNote()
 
+        toast.success("Note Created", {
+            position: toast.POSITION.BOTTOM_CENTER,
+            autoClose: 3500,
+            closeOnClick: true
+        })
+
         // reseting states
         setInputBody("")
         setInputTitle("")
@@ -35,8 +41,7 @@ const AddNote = ({ notesRef }) => {
     const handleClickOutside = (e) => {
         const { current: wrap } = titleRef
         const { current: wrap2 } = pinRef
-        console.log(wrap,wrap2);
-        
+
 
         if ((wrap && !wrap.contains(e.target)) && (wrap2 && !wrap2.contains(e.target))) {
             setShowInput(false)

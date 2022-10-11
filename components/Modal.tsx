@@ -1,5 +1,6 @@
 import { deleteDoc, doc, updateDoc } from "firebase/firestore"
 import { useRef, useState } from "react"
+import { toast } from "react-toastify"
 import styles from "../styles/Modal.module.scss"
 import { db } from "../utils/firebase/firebase"
 
@@ -15,12 +16,23 @@ const Modal = ({ id, title, body, isPinned, showModal, setShowModal }) => {
 
   // remove Note
   const removeNote = async () => {
+    toast.error("Note deleted", {
+      position: toast.POSITION.BOTTOM_CENTER,
+      autoClose: 3500,
+      closeOnClick: true
+    })
     const noteDoc = doc(db, "notes", id)
     await deleteDoc(noteDoc)
+
   }
 
   // update Note
   const updateNote = async () => {
+    toast.info("Note updated", {
+      position: toast.POSITION.BOTTOM_CENTER,
+      autoClose: 3500,
+      closeOnClick: true
+    })
     const noteDoc = doc(db, "notes", id)
     await updateDoc(noteDoc, { title: modalTitle, body: modalBody, isPinned: modalIsPinned })
   }
@@ -62,6 +74,11 @@ const Modal = ({ id, title, body, isPinned, showModal, setShowModal }) => {
                     title="Pin note"
                     className={styles.pinned}
                     onClick={() => {
+                      toast.info("Note Pinned", {
+                        position: toast.POSITION.BOTTOM_CENTER,
+                        autoClose: 3500,
+                        closeOnClick: true
+                      })
                       setModalIsPinned(!modalIsPinned)
                     }}>
                     {!modalIsPinned ? (

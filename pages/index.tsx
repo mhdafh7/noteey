@@ -2,81 +2,45 @@ import Head from "next/head"
 import Header from "../components/Header"
 import TabBar from "../components/TabBar"
 import NoteList from "../components/NoteList"
-import Pagination from "../components/Pagination"
-import styles from "../styles/Index.module.scss"
+// import Pagination from "../components/Pagination"
 import { useState, useEffect } from "react"
+import { ToastContainer, toast } from 'react-toastify'
 import { db } from '../utils/firebase/firebase'
-import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, orderBy, query } from 'firebase/firestore'
+import { collection, getDocs, orderBy, query, onSnapshot } from 'firebase/firestore'
+import styles from "../styles/Index.module.scss"
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function Home() {
-    
+
     // TODO: imporove state management using context
 
     const [noteList, setNoteList] = useState([])
+
     const notesRef = collection(db, "notes")
     const sortedData = query(notesRef, orderBy("isPinned", "desc"))
 
 
-    // dummy data
-    // const noteList = [
-    //     {
-    //         "id": 1,
-    //         "isPinned": true,
-    //         "title": "delectus aut autem",
-    //         "body": "Heloo im under the water"
-    //     },
-    //     {
-    //         "id": 2,
-    //         "isPinned": false,
-    //         "title": "quis ut nam facilis et officia qui",
-    //         "body": "Heloo im under the water"
-    //     },
-    //     {
-    //         "id": 3,
-    //         "isPinned": true,
-    //         "title": "fugiat veniam minus",
-    //         "body": "Heloo im under the water"
-    //     },
-    //     {
-    //         "id": 4,
-    //         "isPinned": false,
-    //         "title": "et porro tempora",
-    //         "body": "not under the water"
-    //     },
-    //     {
-    //         "id": 5,
-    //         "isPinned": false,
-    //         "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
-    //         "body": "Heloo im under the water"
-    //     },
-    //     {
-    //         "id": 6,
-    //         "isPinned": false,
-    //         "title": "qui ullam ratione quibusdam voluptatem quia omnis",
-    //         "body": "Heloo im under the water"
-    //     },
-    //     {
-    //         "id": 7,
-    //         "isPinned": false,
-    //         "title": "illo expedita consequatur quia in",
-    //         "body": "Heloo im under the water"
-    //     },
-    //     {
-    //         "id": 8,
-    //         "isPinned": true,
-    //         "title": "quo adipisci enim quam ut ab",
-    //         "body": "not under the water"
-    //     },
-    // ]
+
 
     useEffect(() => {
         getNotes()
-    }, [notesRef])
+
+        console.log("Notes fetched")
+    }, [])
 
     // get notes
     const getNotes = async () => {
-        const data = await getDocs(sortedData)
-        setNoteList(data.docs.map((note) => ({ ...note.data(), id: note.id })))
+        onSnapshot(sortedData, (querySnapshot) => {
+            setNoteList(
+                querySnapshot.docs.map((note) => ({
+                    id: note.id,
+                    title: note.data().title,
+                    body: note.data().body,
+                    isPinned: note.data().isPinned
+
+                }))
+            )
+        })
     }
 
     return (
@@ -97,6 +61,7 @@ export default function Home() {
             <footer>
                 <Pagination />
             </footer> */}
+            <ToastContainer theme="colored" limit={3} />
         </div>
     )
 }
