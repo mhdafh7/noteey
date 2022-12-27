@@ -36,7 +36,7 @@ const Note = ({ id, title, body, isPinned }: Note) => {
         ) : (
           <div className={styles.title}>{title}</div>
         )}
-        <div className={styles.body}>{body}</div>
+        <p className={styles.body}>{body}</p>
       </div>
       <Modal
         title={title}

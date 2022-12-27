@@ -55,7 +55,6 @@ export default function Home() {
           href="/favicon.ico"
         />
       </Head>
-      <div className={styles.paperBg}></div>
       <Header />
       <TabBar notesRef={notesRef} />
 

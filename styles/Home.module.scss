@@ -1,12 +1,12 @@
 .container {
   padding: 0;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
-  background-image: url(/bg.png);
-  background-attachment: local;
+  background-image: url(/wood-bg.jpg);
+  background-size: cover;
 }
 
 .main {

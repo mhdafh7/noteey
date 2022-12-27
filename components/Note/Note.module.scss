@@ -2,29 +2,26 @@
 @import '/styles/utils/fonts';
 
 .container {
-  background-color: rgba(255, 255, 255, 0.149);
+  background: linear-gradient(to bottom right, $paper-dark, 20%, $transparent),
+    $paper-color;
+  min-width: 250px;
+  min-height: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 3px 3px 2px $paper-dark;
+
   padding: 2rem;
   margin: 0.5rem;
-  border: #1d1d1b54 solid 2px;
-  border-radius: 7px;
   position: relative;
   width: 100%;
   max-width: 22rem;
   height: 12rem;
   transition: all 0.1s ease-in;
-  box-shadow: 4px 4px 0px 0px #1d1d1b56;
   cursor: pointer;
+  overflow: hidden;
 
-  &:hover {
-    border: #1d1d1bfc solid 2px;
-    border-right: #1d1d1bfc solid 5px;
-    border-bottom: #1d1d1bfc solid 5px;
-    translate: -7px -7px;
-    box-shadow: 7px 7px 0px 0px #1d1d1bfc;
-  }
-  @media (max-width: 768px) {
-    width: 100%;
-  }
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -49,27 +46,54 @@
     }
   }
   .title {
-    display: -webkit-box;
-    line-height: 1.8em;
-    font-family: 'Headline', Helvetica Neue, sans-serif;
-    letter-spacing: 2px;
-    font-weight: bolder;
-    font-size: 1.3rem;
-    max-height: 20rem;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-
-    // need to fix text truncation
-
+    width: 100%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: block;
+    word-break: break-all;
+    font-family: 'Jackwrite', sans-serif;
+    letter-spacing: 2px;
+    line-height: 1.6em;
+    font-weight: bolder;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    text-align: center;
   }
   .body {
     font-family: 'Jackwrite', sans-serif;
     font-weight: lighter;
     opacity: 0.8;
+    font-size: 1.2rem;
+    height: 100%;
+    width: 100%;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: justify;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        $transparent,
+        50%,
+        $paper-dark,
+        51%,
+        $transparent
+      ),
+      linear-gradient(
+        to right,
+        $transparent,
+        50%,
+        $paper-dark,
+        51%,
+        $transparent
+      );
   }
 }
