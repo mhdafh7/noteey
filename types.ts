@@ -1,5 +1,6 @@
 export type Note = {
   id: string,
   title: string,
-  body: string
+  body: string,
+  isPinned: boolean
 }
