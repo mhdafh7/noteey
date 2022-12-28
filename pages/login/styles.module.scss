@@ -1,0 +1,24 @@
+@import '../../styles/utils/mixins';
+
+.container {
+  @include container;
+  .title {
+    @include title;
+  }
+
+  .card {
+    @include card;
+    .form {
+      @include form;
+      .loginBtn {
+        @include btn;
+      }
+    }
+  }
+  .bottomText {
+    font-weight: 400;
+    span {
+      text-decoration: underline;
+    }
+  }
+}
