@@ -1,7 +1,7 @@
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { Dispatch, MouseEvent, SetStateAction, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
-import styles from './Modal.module.scss';
+import styles from './styles.module.scss';
 import { db } from '../../utils/firebase/firebase';
 import { Note } from '../../types';
 

@@ -1,5 +1,5 @@
 import Modal from '../Modal';
-import styles from './Note.module.scss';
+import styles from './styles.module.scss';
 import { useState } from 'react';
 import { Note } from '../../types';
 

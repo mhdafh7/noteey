@@ -1,4 +1,4 @@
-import styles from './NoteList.module.scss';
+import styles from './styles.module.scss';
 import Note from '../Note';
 import { DocumentData } from '@firebase/firestore-types';
 

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, MutableRefObject, FormEvent } from 'react';
 import { addDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
-import styles from './AddNote.module.scss';
+import styles from './styles.module.scss';
 
 const AddNote = ({ notesRef }: any) => {
   const [inputTitle, setInputTitle] = useState('');
