@@ -12,3 +12,7 @@ A web app to manage your tasks.
 - [Next.js](https://nextjs.org/)
 - [Firebase](https://firebase.google.com)
 - [Scss](https:sass-lang.com)
+
+## TODOs
+- [ ] Authentication
+- [ ] Updated UI
