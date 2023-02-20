@@ -1,4 +1,4 @@
-@import '/styles/utils/fonts';
+@import '/styles/utils/colors';
 
 .container {
   position: fixed;
@@ -9,11 +9,11 @@
   width: 100vw;
   padding: 4vh;
   color: whitesmoke;
-  background-color: #1d1d1bcc;
+  background-color: $primary;
 
   .logo {
-    font-family: 'Telegraphem', sans-serif;
-    font-weight: 600;
+    font-family: 'Amulya', sans-serif;
+    font-weight: bold;
     font-size: 2rem;
   }
 }

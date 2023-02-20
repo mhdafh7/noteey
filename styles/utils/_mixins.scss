@@ -1,19 +1,19 @@
-@import './fonts';
-@import './colors';
+@import "./fonts";
+@import "./colors";
 
 @mixin container {
-  font-family: 'Jackwrite', sans-serif;
+  font-family: "Synonym", Helvetica, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   min-height: 100vh;
-  gap: 3rem;
+  gap: 2rem;
 }
 
 @mixin title {
-  font-family: Jackwrite;
-  font-weight: 600;
+  font-family: "Amulya", Helvetica, sans-serif;
+  font-weight: 700;
   font-size: 2rem;
 }
 
@@ -24,20 +24,7 @@
   justify-content: center;
   min-width: 360px;
   width: 20rem;
-  background-color: $paper-color;
-  padding: 3rem 1.5rem;
-  box-shadow: 0px 4px 2px $paper-dark;
-
-  .tape {
-    position: absolute;
-    height: 4vmin;
-    top: -8px;
-    width: 110%;
-    background-color: $tape-gray;
-    border-right: 1px dotted $tape-edge-gray;
-    border-left: 1px dotted $tape-edge-gray;
-    opacity: 0.3;
-  }
+  padding: 1.5rem;
 }
 
 @mixin form {
@@ -58,19 +45,39 @@
       font-size: 0.8rem;
     }
     .input {
-      border: solid 1px rgba(0, 0, 0, 0.179);
+      border-radius: 3px;
+      border: $primary solid 2px;
+      box-shadow: 4px 4px 0px $primary;
       padding: 0.5rem;
-      font-family: Jackwrite;
+      font-family: "Synonym", Helvetica, sans-serif;
+      outline: none;
+      transition: all 0.1s ease;
+      &:hover,
+      &:focus {
+        translate: -3px -3px;
+        border: $misc solid 2px;
+        box-shadow: 6px 6px 0px 0px $primary;
+      }
     }
   }
 }
 @mixin btn {
   width: 100%;
-  border: none;
-  background-color: $primary;
-  color: $paper-color;
+  border-radius: 3px;
+  border: $primary solid 2px;
+  background-color: $misc;
+  box-shadow: 4px 4px 0px $primary;
+  color: $secondary;
   padding: 1rem 1.5rem;
   margin-top: 1rem;
-  font-family: Jackwrite;
+  font-family: "Synonym", Helvetica, sans-serif;
   font-weight: 600;
+  cursor: pointer;
+  transition: all 0.1s ease;
+
+  &:hover,
+  &:focus {
+    translate: -3px -3px;
+    box-shadow: 6px 6px 0px 0px $primary;
+  }
 }

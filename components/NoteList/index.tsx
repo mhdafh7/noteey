@@ -6,7 +6,7 @@ const NoteList = ({ noteList }: any) => {
   return noteList.length !== 0 ? (
     <>
       <div className={styles.container}>
-        <h3 className={styles.title}>Pinned Notes</h3>
+        <h3 className={styles.title}>Pinned <span>Notes</span></h3>
         <div className={styles.noteListContainer}>
           {noteList.map((note: DocumentData) => {
             if (note.isPinned)

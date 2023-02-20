@@ -1,5 +1,4 @@
-@import '/styles/utils/colors';
-@import '/styles/utils/fonts';
+@import "/styles/utils/colors";
 
 .megaContainer {
   position: fixed;
@@ -19,19 +18,16 @@
   .container {
     max-width: 30rem;
     width: 75%;
-    border: solid 3px #1d1d1bfc;
-    border-radius: 9px;
+    border: solid 3px $primary;
+    border-radius: 5px;
     padding: 0.5rem;
-    mix-blend-mode: lighten;
     background: rgba(255, 255, 255, 0.92);
     background-image: url(/bg.png);
 
     .form {
-      border: solid 3px #1d1d1b6c;
-      border-style: dashed;
-      border-radius: 7px;
       display: flex;
       flex-direction: column;
+      gap: 1rem;
       padding: 0.5rem;
       .title,
       .body {
@@ -40,21 +36,24 @@
         padding: 1rem;
         outline: none;
         resize: none;
-        border-bottom: 1px solid #1d1d1b34;
+        border: 2px solid $primary;
+        transition: all 0.1s ease;
+        border-radius: 5px;
 
         &:focus,
         &:hover {
-          border-bottom: 2px solid #1d1d1bfc;
+          border: 2px solid $accent;
         }
       }
       .title {
-        font-family: 'Jackwrite', Helvetica Neue, sans-serif;
-        letter-spacing: 2px;
+        font-family: "amulya", Helvetica Neue, sans-serif;
         font-size: 1.5rem;
+        font-weight: 700;
         text-transform: uppercase;
       }
       .body {
-        font-family: 'Jackwrite', sans-serif;
+        font-family: "Synonym", sans-serif;
+        font-weight: 400;
       }
       .toolBar {
         width: 100%;
@@ -68,52 +67,63 @@
           display: flex;
           align-items: center;
           justify-content: space-between;
+          gap: 0.5rem;
+
           .pinned {
             cursor: pointer;
-            scale: 0.9;
             padding: 0.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.1s ease-in;
-            border: solid #1d1d1b6c 0.5px;
+            border: solid $primary 2px;
             border-radius: 5px;
+            background-color: $misc;
+            box-shadow: 2px 2px 0px 0px $primary;
 
             &:hover,
             &:focus {
               translate: -2px -2px;
-              box-shadow: 2px 2px 0px 0px #1d1d1bfc;
+              box-shadow: 4px 4px 0px 0px $primary;
             }
+          }
+          .unpinned {
+            @extend .pinned;
+            background-color: $secondary;
           }
           .delete {
             cursor: pointer;
-            scale: 0.9;
             padding: 0.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.1s ease-in;
-            border: solid $danger 0.5px;
+            border: solid $primary 2px;
             border-radius: 5px;
+            background-color: $danger;
+            box-shadow: 2px 2px 0px 0px $primary;
 
             &:hover,
             &:focus {
               translate: -2px -2px;
-              box-shadow: 2px 2px 0px 0px $danger;
+              box-shadow: 4px 4px 0px 0px $primary;
             }
           }
         }
         .done {
-          padding: 0.5rem;
+          padding: 0.5rem 1rem;
           border-radius: 0;
-          border: solid 0.5px #1d1d1b6c;
+          border: solid 2px $primary;
           border-radius: 5px;
           transition: all 0.1s ease;
-          background: transparent;
+          background-color: $accent;
+          font-weight: 700;
+          box-shadow: 2px 2px 0px 0px $primary;
+          cursor: pointer;
 
           &:hover {
             translate: -2px -2px;
-            box-shadow: 2px 2px 0px 0px #1d1d1bfc;
+            box-shadow: 4px 4px 0px 0px $primary;
           }
         }
       }

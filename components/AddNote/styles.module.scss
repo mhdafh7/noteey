@@ -1,23 +1,24 @@
-@import '/styles/utils/fonts';
+@import "/styles/utils/colors";
 
 .container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: solid #1d1d1b89 2px;
+  border: solid $primary 2px;
+  background-color: $tertiary;
   border-radius: 7px;
   width: 100%;
   max-width: 30rem;
   margin-top: 4vh;
   overflow-x: hidden;
-  box-shadow: 4px 4px 0px 0px #1d1d1b3c;
+  box-shadow: 4px 4px 0px 0px $primary;
   transition: all 0.1s ease-in;
 
-  &:hover,
-  &:focus {
-    border: solid #1d1d1bfc 2px;
+  &:focus,
+  &:hover {
+    border: solid $primary 2px;
     translate: -7px -7px;
-    box-shadow: 7px 7px 0px 0px #1d1d1bfc;
+    box-shadow: 7px 7px 0px 0px $primary;
   }
 
   .form {
@@ -29,7 +30,8 @@
         position: relative;
 
         .titleInput {
-          font-family: 'Jackwrite', Helvetica Neue, sans-serif;
+          font-family: "Amulya", Helvetica Neue, sans-serif;
+          font-weight: bold;
           text-transform: uppercase;
           letter-spacing: 2px;
           border: none;
@@ -43,7 +45,7 @@
         }
       }
       .bodyInput {
-        font-family: 'Jackwrite', sans-serif;
+        font-family: "Synonym", sans-serif;
         background: transparent;
         outline: none;
         padding: 0.5rem;
@@ -58,35 +60,42 @@
       align-items: center;
       justify-content: space-between;
       .done {
-        padding: 0.5rem;
+        padding: 0.5rem 1rem;
         border-radius: 0;
-        border: solid 0.5px #1d1d1b6c;
+        border: solid 2px $primary;
         border-radius: 5px;
         transition: all 0.1s ease;
-        background: transparent;
+        background-color: $accent;
+        font-weight: 700;
+        box-shadow: 2px 2px 0px 0px $primary;
+        cursor: pointer;
 
         &:hover {
           translate: -2px -2px;
-          box-shadow: 2px 2px 0px 0px #1d1d1bfc;
+          box-shadow: 4px 4px 0px 0px $primary;
         }
       }
-      .pinIcon {
+      .pinned {
         cursor: pointer;
-        scale: 0.9;
-        margin-top: 5px;
         padding: 0.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: all 0.1s ease-in;
+        border: solid $primary 2px;
         border-radius: 5px;
-        border: solid #1d1d1b6c 0.5px;
+        background-color: $misc;
+        box-shadow: 2px 2px 0px 0px $primary;
 
         &:hover,
         &:focus {
           translate: -2px -2px;
-          box-shadow: 2px 2px 0px 0px #1d1d1bfc;
+          box-shadow: 4px 4px 0px 0px $primary;
         }
+      }
+      .unpinned {
+        @extend .pinned;
+        background-color: $secondary;
       }
     }
   }
