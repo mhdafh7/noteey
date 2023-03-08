@@ -1,9 +1,11 @@
+@import url("https://api.fontshare.com/v2/css?f[]=synonym@600,500,300,1,700,400&f[]=amulya@700,300,1,400,500&display=swap");
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Synonym", Helvetica Neue, sans-serif;
+  background-color: #fef9ed;
+  overflow-x: hidden;
 }
 
 a {
@@ -16,13 +18,3 @@ a {
   margin: 0;
   box-sizing: border-box;
 }
-
-// @media (prefers-color-scheme: dark) {
-//   html {
-//     color-scheme: dark;
-//   }
-//   body {
-//     color: white;
-//     background: black;
-//   }
-// }

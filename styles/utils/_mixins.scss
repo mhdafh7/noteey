@@ -1,0 +1,88 @@
+@import "./fonts";
+@import "./colors";
+
+@mixin container {
+  font-family: "Synonym", Helvetica, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  gap: 2rem;
+}
+
+@mixin title {
+  font-family: "Amulya", Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+@mixin card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 360px;
+  width: 20rem;
+  padding: 1.5rem;
+}
+
+@mixin form {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+
+  .formItem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label {
+      font-size: 0.8rem;
+    }
+    .input {
+      border-radius: 3px;
+      border: $primary solid 2px;
+      box-shadow: 4px 4px 0px $primary;
+      padding: 0.5rem;
+      font-family: "Synonym", Helvetica, sans-serif;
+      outline: none;
+      transition: all 0.1s ease;
+      &:hover,
+      &:focus {
+        translate: -3px -3px;
+        border: $misc solid 2px;
+        box-shadow: 6px 6px 0px 0px $primary;
+      }
+    }
+  }
+}
+@mixin btn {
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  border: $primary solid 2px;
+  background-color: $misc;
+  box-shadow: 4px 4px 0px $primary;
+  color: $secondary;
+  padding: 1rem 1.5rem;
+  margin-top: 1rem;
+  font-family: "Synonym", Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.1s ease;
+
+  &:hover,
+  &:focus {
+    translate: -3px -3px;
+    box-shadow: 6px 6px 0px 0px $primary;
+  }
+}
