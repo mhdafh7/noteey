@@ -1,15 +1,19 @@
-const SigninIcon = () => {
+type Props = {
+  size: number;
+  color: string;
+}
+const SigninIcon = ({ size, color }: Props) => {
   return (
     <svg
-      height="120"
-      width="120"
+      height={size}
+      width={size}
       version="1.1"
       id="_x32_"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 512 512"
       xmlSpace="preserve"
-      fill="#fff5035c"
+      fill={color}
     >
       <g>
         <polygon

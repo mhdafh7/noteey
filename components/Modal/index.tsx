@@ -2,7 +2,7 @@ import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { Dispatch, MouseEvent, SetStateAction, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import styles from "./styles.module.scss";
-import { db } from "../../utils/firebase/firebase";
+import { db } from "../../libs/firebase/firebase";
 import { Note } from "../../types";
 import { Pin, UnPin } from "../Svgs/Pins";
 import Delete from "../Svgs/Delete";

@@ -2,6 +2,7 @@
 
 .container {
   @include container;
+  overflow-x: hidden;
 
   .titleWrapper {
     z-index: 5;
@@ -36,6 +37,11 @@
     @include card;
     .form {
       @include form;
+
+      .errorMessage{
+        color: $danger;
+        font-weight: 600;
+      }
       .signupBtn {
         @include btn;
       }

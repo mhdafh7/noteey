@@ -44,8 +44,6 @@ const AddNote = ({ notesRef }: any) => {
       const { current: formWrap } = formRef;
 
       if (formWrap && !formWrap.contains(e.target as Element)) {
-        console.log("clicked outside", formWrap);
-
         setShowInput(false);
       }
     };

@@ -36,6 +36,11 @@
     @include card;
     .form {
       @include form;
+
+      .errorMessage {
+        color: $danger;
+        font-weight: 600;
+      }
       .loginBtn {
         @include btn;
       }

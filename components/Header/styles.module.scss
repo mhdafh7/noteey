@@ -5,15 +5,35 @@
   backdrop-filter: blur(10px);
   z-index: 996;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   width: 100vw;
-  padding: 4vh;
+  padding-inline: 4vw;
+  padding-block: 2rem;
   color: whitesmoke;
   background-color: $primary;
 
   .logo {
     font-family: 'Amulya', sans-serif;
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 1.5rem;
+  }
+  .logOutBtn{
+    background: none;
+    border:none;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    p{
+      font-weight: 500;
+      font-size: 1.2rem;
+      color: $secondary;
+    }
+
+    &:hover{
+      scale: 1.1;
+    }
   }
 }
