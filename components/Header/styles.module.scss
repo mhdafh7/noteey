@@ -1,39 +1,47 @@
-@import '/styles/utils/colors';
+@import "/styles/utils/colors";
 
 .container {
   position: fixed;
-  backdrop-filter: blur(10px);
   z-index: 996;
   display: flex;
   justify-content: space-between;
-  width: 100vw;
-  padding-inline: 4vw;
-  padding-block: 2rem;
-  color: whitesmoke;
-  background-color: $primary;
+  align-items: center;
+  width: 94vw;
+  padding-inline: 2vw;
+  padding-block: 1rem;
+  margin-top: 1rem;
+  color: $primary;
+  background-color: $tertiary;
+  border: solid 3px $primary;
+  text-transform: uppercase;
 
   .logo {
-    font-family: 'Amulya', sans-serif;
+    font-family: "Space Grotesk", sans-serif;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
-  .logOutBtn{
-    background: none;
-    border:none;
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  .logOutBtn {
+    background: $secondary;
+    border: solid $primary 2px;
+    padding: 0.3rem 0.8rem;
     cursor: pointer;
     display: flex;
     gap: 1rem;
     align-items: center;
+    box-shadow: 2px 2px 0px 0px $primary;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
-    p{
-      font-weight: 500;
-      font-size: 1.2rem;
-      color: $secondary;
+    p {
+      font-weight: bold;
+      font-size: 0.8rem;
+      color: $primary;
+      text-transform: uppercase;
     }
 
-    &:hover{
-      scale: 1.1;
+    &:hover {
+      background-color: $danger;
+      transform: translate(-4px, -4px);
+      box-shadow: 4px 4px 0px 0px $primary;
     }
   }
 }
