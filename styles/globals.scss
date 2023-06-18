@@ -1,10 +1,12 @@
 @import url("https://api.fontshare.com/v2/css?f[]=synonym@600,500,300,1,700,400&f[]=amulya@700,300,1,400,500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: "Synonym", Helvetica Neue, sans-serif;
-  background-color: #fef9ed;
+  background-color: #fffff4;
   overflow-x: hidden;
 }
 
