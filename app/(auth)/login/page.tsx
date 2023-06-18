@@ -1,15 +1,17 @@
+"use client";
+
 import Head from "next/head";
 import Link from "next/link";
 import * as Yup from "yup";
-import { useAuth } from "../../context/AuthProvider";
+// import { useAuth } from "@/context/AuthProvider";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { StarDark } from "../../components/Svgs/Abstract";
-import SigninIcon from "../../components/Svgs/SigninIcon";
+import { StarDark } from "@/components/Svgs/Abstract";
+import SigninIcon from "@/components/Svgs/SigninIcon";
 import styles from "./styles.module.scss";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from "next/router";
-import Spinner from "../../components/Spinner";
+import { useRouter } from "next/navigation";
+import Spinner from "@/components/Spinner";
 
 type SignInFormValues = {
   email: string;
@@ -21,14 +23,14 @@ const SignInSchema = Yup.object().shape({
   password: Yup.string().required("Required").min(8).max(200),
 });
 const Login = () => {
-  const { signIn, loading, setLoading, user } = useAuth();
+  // const { signIn, loading, setLoading, user } = useAuth();
   const router = useRouter();
 
-  if (user) {
-    console.log("Already signed in!!");
-    router.push("/");
-    return null;
-  }
+  // if (user) {
+  //   console.log("Already signed in!!");
+  //   router.push("/");
+  //   return null;
+  // }
 
   return (
     <div className={styles.container}>
@@ -52,26 +54,26 @@ const Login = () => {
             password: "",
           }}
           onSubmit={async (values: SignInFormValues) => {
-            try {
-              setLoading(true);
-              await signIn(values.email, values.password).then(() => {
-                setLoading(false);
-                router.push("/");
-                console.log("signed in");
-              });
-            } catch (error) {
-              let errorMessage = "error.unknown";
-              if (typeof error === "string") {
-                errorMessage = error.toUpperCase();
-              } else if (error instanceof Error) {
-                errorMessage = error.message;
-              }
-              toast.error(`Sign in error! ${errorMessage}`, {
-                position: toast.POSITION.BOTTOM_CENTER,
-                closeOnClick: true,
-              });
-              console.error(errorMessage);
-            }
+            // try {
+            //   setLoading(true);
+            //   await signIn(values.email, values.password).then(() => {
+            //     setLoading(false);
+            //     router.push("/");
+            //     console.log("signed in");
+            //   });
+            // } catch (error) {
+            //   let errorMessage = "error.unknown";
+            //   if (typeof error === "string") {
+            //     errorMessage = error.toUpperCase();
+            //   } else if (error instanceof Error) {
+            //     errorMessage = error.message;
+            //   }
+            //   toast.error(`Sign in error! ${errorMessage}`, {
+            //     position: toast.POSITION.BOTTOM_CENTER,
+            //     closeOnClick: true,
+            //   });
+            //   console.error(errorMessage);
+            // }
           }}
           validationSchema={SignInSchema}
         >
@@ -96,7 +98,7 @@ const Login = () => {
                 </p>
               </div>
               <button type="submit" className={styles.loginBtn}>
-                {loading ? <Spinner scale={0.8} /> : <p>Login</p>}
+                {/* {loading ? <Spinner scale={0.8} /> : <p>Login</p>} */}
               </button>
             </Form>
           )}

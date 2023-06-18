@@ -1,14 +1,16 @@
+"use client";
+
 import Head from "next/head";
 import Link from "next/link";
 import * as Yup from "yup";
-import { StarLight } from "../../components/Svgs/Abstract";
-import SignupIcon from "../../components/Svgs/SignupIcon";
+import { StarLight } from "@/components/Svgs/Abstract";
+import SignupIcon from "@/components/Svgs/SignupIcon";
 import styles from "./styles.module.scss";
-import passwordValidation from "../../libs/PasswordValidation";
-import { useAuth } from "../../context/AuthProvider";
+import passwordValidation from "@/libs/PasswordValidation";
+// import { useAuth } from "@/context/AuthProvider";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { toast, ToastContainer } from "react-toastify";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 type SignUpFormValues = {
   email: string;
@@ -25,7 +27,7 @@ const SignUpSchema = Yup.object().shape({
 });
 
 const Signup = () => {
-  const { signUp } = useAuth();
+  //   const { signUp } = useAuth();
   const router = useRouter();
 
   return (
@@ -52,25 +54,25 @@ const Signup = () => {
           }}
           validationSchema={SignUpSchema}
           onSubmit={async (values: SignUpFormValues) => {
-            try {
-              await signUp(values.email, values.password).then(() => {
-                router.push("/");
-                console.log("signed up");
-              });
-            } catch (error) {
-              let errorMessage = "error.unknown";
-              if (typeof error === "string") {
-                errorMessage = error.toUpperCase();
-              } else if (error instanceof Error) {
-                errorMessage = error.message;
-              }
-              toast.error(`Sign up error! ${errorMessage}`, {
-                position: toast.POSITION.BOTTOM_CENTER,
-                // autoClose: 3500,
-                closeOnClick: true,
-              });
-              console.error(errorMessage);
-            }
+            // try {
+            //   await signUp(values.email, values.password).then(() => {
+            //     router.push("/");
+            //     console.log("signed up");
+            //   });
+            // } catch (error) {
+            //   let errorMessage = "error.unknown";
+            //   if (typeof error === "string") {
+            //     errorMessage = error.toUpperCase();
+            //   } else if (error instanceof Error) {
+            //     errorMessage = error.message;
+            //   }
+            //   toast.error(`Sign up error! ${errorMessage}`, {
+            //     position: toast.POSITION.BOTTOM_CENTER,
+            //     // autoClose: 3500,
+            //     closeOnClick: true,
+            //   });
+            //   console.error(errorMessage);
+            // }
           }}
         >
           {({ errors, touched }) => (
