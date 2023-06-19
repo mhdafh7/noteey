@@ -1,0 +1,150 @@
+@import "@/styles/utils/colors";
+@import "@/styles/utils/border-radii";
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: $secondary;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 997;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  padding: 1.5rem 0.8rem;
+
+  .topBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .back {
+      cursor: pointer;
+      padding: 0.5rem;
+      display: flex;
+      height: 2.8rem;
+      width: 2.8rem;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.1s ease-in;
+      border: solid $primary 1px;
+      border-radius: $rounded-full;
+      background-color: $accent-2;
+      box-shadow: 2px 2px 0px 0px $primary;
+
+      &:hover,
+      &:focus {
+        translate: -2px -2px;
+        box-shadow: 4px 4px 0px 0px $primary;
+      }
+    }
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .pinned {
+        cursor: pointer;
+        padding: 0.5rem;
+        display: flex;
+        height: 2.8rem;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.1s ease-in;
+        border: solid $primary 1px;
+        border-radius: 5px;
+        background-color: $misc;
+        box-shadow: 2px 2px 0px 0px $primary;
+
+        &:hover,
+        &:focus {
+          translate: -2px -2px;
+          box-shadow: 4px 4px 0px 0px $primary;
+        }
+      }
+      .unpinned {
+        @extend .pinned;
+        background-color: $secondary;
+      }
+      .delete {
+        cursor: pointer;
+        padding: 0.5rem;
+        display: flex;
+        height: 2.8rem;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.1s ease-in;
+        border: solid $primary 1px;
+        border-radius: 5px;
+        background-color: $danger;
+        box-shadow: 2px 2px 0px 0px $primary;
+
+        &:hover,
+        &:focus {
+          translate: -2px -2px;
+          box-shadow: 4px 4px 0px 0px $primary;
+        }
+      }
+    }
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+
+    .formGroup {
+      width: 100%;
+      height: 100%;
+      gap: 1.5rem;
+      input,
+      textarea {
+        width: 100%;
+        border: none;
+        padding: 0.3rem 0.5rem;
+        font-family: "Space Grotesk", sans-serif;
+
+        &:focus,
+        &:hover {
+          outline: none;
+        }
+      }
+
+      input[type="text"] {
+        font-weight: 700;
+        font-size: 1.5rem;
+        &::placeholder {
+          font-weight: 700;
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      border: 1px solid $primary;
+      background-color: $success;
+      font-weight: 600;
+      font-size: 1.2rem;
+      text-align: center;
+      padding: 0.8rem 1rem;
+      border-radius: $rounded-lg;
+      box-shadow: 2px 2px 0 $primary;
+
+      &:disabled{
+        background-color: $disabled;
+        cursor: not-allowed;
+      }
+
+      &:hover,
+      &:focus {
+        translate: -2px -2px;
+        box-shadow: 4px 4px 0px 0px $primary;
+      }
+    }
+  }
+}
