@@ -1,11 +1,23 @@
 import { Metadata } from "next";
-import { AuthProvider } from "../context/AuthProvider";
 import "@/styles/globals.scss";
 
 export const metadata: Metadata = {
   title: "Noteey",
-  description:
-    "Noteey is a simple note taking app built with Next.js and DynamoDB.",
+  description: "A Note taking Web Application made using Nextjs",
+  keywords: [
+    "Next.js",
+    "React",
+    "JavaScript",
+    "notes",
+    "note taking",
+    "noteey",
+  ],
+  authors: [
+    {
+      name: "Muhammed Aflah",
+      url: "https://www.mhdafh.codes",
+    },
+  ],
 };
 export default function RootLayout({
   // Layouts must accept a children prop.
@@ -16,9 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      {/* <AuthProvider> */}
         <body>{children}</body>
-      {/* </AuthProvider> */}
     </html>
   );
 }
