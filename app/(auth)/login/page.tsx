@@ -6,7 +6,6 @@ import * as Yup from "yup";
 // import { useAuth } from "@/context/AuthProvider";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { StarDark } from "@/components/Svgs/Abstract";
-import SigninIcon from "@/components/Svgs/SigninIcon";
 import styles from "./styles.module.scss";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -45,7 +44,6 @@ const Login = () => {
       <span className={styles.titleWrapper}>
         <StarDark />
         <h2 className={styles.title}>Login</h2>
-        <SigninIcon size={120} color={"#fff5035c"} />
       </span>
       <div className={styles.card}>
         <Formik

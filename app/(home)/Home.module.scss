@@ -15,4 +15,8 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+  }
 }

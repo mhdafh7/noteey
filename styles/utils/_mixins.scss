@@ -45,7 +45,7 @@
       font-size: 0.8rem;
     }
     .input {
-      border-radius: 3px;
+      border-radius: $rounded;
       border: $primary solid 2px;
       box-shadow: 4px 4px 0px $primary;
       padding: 0.5rem;
@@ -67,7 +67,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 3px;
+  border-radius: $rounded;
   border: $primary solid 2px;
   background-color: $misc;
   box-shadow: 4px 4px 0px $primary;

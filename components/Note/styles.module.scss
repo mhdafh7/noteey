@@ -1,8 +1,8 @@
 @import "/styles/utils/colors";
 @import "/styles/utils/fonts";
+@import "/styles/utils/border-radii";
 
 .container {
-  background: $secondary;
   color: $primary;
   display: flex;
   flex-direction: column;
@@ -15,8 +15,8 @@
   position: relative;
   width: clamp(10rem, 100%, 22rem);
   height: 12rem;
-  border: solid 3px $primary;
-  border-radius: 5px;
+  border: solid 1px $primary;
+  border-radius: $rounded-lg;
   box-shadow: $primary 5px 5px 0px;
   transition: all 0.1s ease-in;
   cursor: pointer;

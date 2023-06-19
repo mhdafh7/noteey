@@ -1,7 +1,8 @@
 @import "/styles/utils/colors";
+@import "/styles/utils/border-radii";
 
 .container {
-  position: fixed;
+  // position: fixed;
   z-index: 996;
   display: flex;
   justify-content: space-between;
@@ -11,9 +12,19 @@
   padding-block: 1rem;
   margin-top: 1rem;
   color: $primary;
-  background-color: $tertiary;
+  background-color: $secondary;
   border: solid 3px $primary;
+  border-radius: $rounded-lg;
   text-transform: uppercase;
+
+  @media (max-width: 768px) {
+    width: 100vw;
+    padding-inline: 1.5rem;
+    margin-top: 0;
+    border: 0;
+    border-bottom: solid 3px $primary;
+    border-radius: 0;
+  }
 
   .logo {
     font-family: "Space Grotesk", sans-serif;
@@ -21,14 +32,15 @@
     font-size: 1.3rem;
   }
   .logOutBtn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 2px 2px 0px 0px $primary;
     background: $secondary;
     border: solid $primary 2px;
+    border-radius: $rounded;
     padding: 0.3rem 0.8rem;
     cursor: pointer;
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    box-shadow: 2px 2px 0px 0px $primary;
     transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     p {
@@ -36,6 +48,10 @@
       font-size: 0.8rem;
       color: $primary;
       text-transform: uppercase;
+
+      @media (max-width: 768px) {
+        display: none;
+      }
     }
 
     &:hover {

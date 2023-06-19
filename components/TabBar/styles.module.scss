@@ -9,4 +9,8 @@
   @media (max-width: 1024px) {
     padding: 0;
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }

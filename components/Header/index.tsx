@@ -2,6 +2,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 // import { useAuth } from "../../context/AuthProvider";
 import SigninIcon from "../Svgs/SigninIcon";
+import { LogOut } from "react-feather";
 import styles from "./styles.module.scss";
 
 const Header = () => {
@@ -32,7 +33,8 @@ const Header = () => {
       {/* TODO search */}
       {/* <div className={styles.search}>search</div> */}
       <button className={styles.logOutBtn} onClick={handleLogout}>
-        <p>Logout</p> <SigninIcon size={20} color={"#272727"} />
+        <p>Logout</p>
+        <LogOut size={18}/>
       </button>
     </div>
   );

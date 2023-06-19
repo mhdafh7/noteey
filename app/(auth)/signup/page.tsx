@@ -4,7 +4,6 @@ import Head from "next/head";
 import Link from "next/link";
 import * as Yup from "yup";
 import { StarLight } from "@/components/Svgs/Abstract";
-import SignupIcon from "@/components/Svgs/SignupIcon";
 import styles from "./styles.module.scss";
 import passwordValidation from "@/libs/PasswordValidation";
 // import { useAuth } from "@/context/AuthProvider";
@@ -43,7 +42,6 @@ const Signup = () => {
       <span className={styles.titleWrapper}>
         <StarLight />
         <h2 className={styles.title}>Create an account</h2>
-        <SignupIcon />
       </span>
       <div className={styles.card}>
         <Formik
