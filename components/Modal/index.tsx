@@ -1,8 +1,6 @@
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { Dispatch, MouseEvent, SetStateAction, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import styles from "./styles.module.scss";
-import { db } from "../../libs/firebase/firebase";
 import { Note } from "../../types";
 import { Pin, UnPin } from "../Svgs/Pins";
 import Delete from "../Svgs/Delete";
@@ -28,28 +26,20 @@ const Modal = ({
 
   // remove Note
   const removeNote = async () => {
-    toast.error("Note deleted", {
-      position: toast.POSITION.BOTTOM_CENTER,
-      autoClose: 3500,
-      closeOnClick: true,
-    });
-    const noteDoc = doc(db, "notes", id);
-    await deleteDoc(noteDoc);
+    // toast.error("Note deleted", {
+    //   position: toast.POSITION.BOTTOM_CENTER,
+    //   autoClose: 3500,
+    //   closeOnClick: true,
+    // });
   };
 
   // update Note
   const updateNote = async () => {
-    toast.info("Note updated", {
-      position: toast.POSITION.BOTTOM_CENTER,
-      autoClose: 3500,
-      closeOnClick: true,
-    });
-    const noteDoc = doc(db, "notes", id);
-    await updateDoc(noteDoc, {
-      title: modalTitle,
-      body: modalBody,
-      isPinned: modalIsPinned,
-    });
+    // toast.info("Note updated", {
+    //   position: toast.POSITION.BOTTOM_CENTER,
+    //   autoClose: 3500,
+    //   closeOnClick: true,
+    // });
   };
 
   // close modal

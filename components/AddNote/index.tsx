@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef, FormEvent } from "react";
-import { addDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import styles from "./styles.module.scss";
 import { Pin, UnPin } from "../Svgs/Pins";
 
-const AddNote = ({ notesRef }: any) => {
+const AddNote = () => {
   const [inputTitle, setInputTitle] = useState("");
   const [inputBody, setInputBody] = useState("");
   const [isPinned, setIsPinned] = useState(false);
@@ -14,11 +13,7 @@ const AddNote = ({ notesRef }: any) => {
 
   // create note
   const createNote = async () => {
-    await addDoc(notesRef, {
-      title: inputTitle,
-      body: inputBody,
-      isPinned: isPinned,
-    });
+
   };
 
   const handleSubmit = (e: FormEvent) => {

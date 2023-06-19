@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import "@/styles/globals.scss";
+import { ModalProvider } from "@/context/ModalContext";
 
 export const metadata: Metadata = {
   title: "Noteey",
@@ -28,7 +29,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <ModalProvider>
         <body>{children}</body>
+      </ModalProvider>
     </html>
   );
 }
