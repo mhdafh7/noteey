@@ -5,8 +5,8 @@ import { Note } from "../../types";
 import { Pin } from "../Svgs/Pins";
 import { ModalContext } from "@/context/ModalContext";
 
-type Props = Note & { color: string };
-const Note = ({ id, title, body, isPinned, color }: Props) => {
+// type Props = Note & { color: string };
+const Note = ({ id, title, body, isPinned }: Note) => {
   const [showModal, setShowModal] = useState(false);
   const { modalData, setModalData, openModal } = useContext(ModalContext);
 
@@ -19,7 +19,6 @@ const Note = ({ id, title, body, isPinned, color }: Props) => {
           setModalData({ id, title, body, isPinned });
           openModal()
         }}
-        style={{ backgroundColor: color }}
       >
         {isPinned ? (
           <span className={styles.pinned}>
