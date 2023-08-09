@@ -1,18 +1,7 @@
-import styles from "./styles.module.scss";
+import { MasonryGrid } from "@egjs/react-grid";
 import NoteItem from "../Note";
 import { Note } from "@/types";
-
-const colors = [
-  "#DAFFDE",
-  "#A6FAFF",
-  "#B8FF9F",
-  "#FFC29F",
-  "#FFA6F6",
-  "#A8A6FF",
-  "#FF9F9F",
-  "#FFF59F",
-  "#9FFFF3",
-];
+import styles from "./styles.module.scss";
 
 const NoteList = ({ noteList }: { noteList: Note[] }) => {
   const pinnedNotes = noteList.filter((note: Note) => note.isPinned);
@@ -25,7 +14,12 @@ const NoteList = ({ noteList }: { noteList: Note[] }) => {
           <h3 className={styles.title}>
             Pinned <span>Notes</span>
           </h3>
-          <div className={styles.noteListContainer}>
+          <MasonryGrid
+            gap={20}
+            defaultDirection="end"
+            align="center"
+            autoResize
+          >
             {pinnedNotes.map((note: Note, index: number) => (
               <NoteItem
                 id={note.id}
@@ -35,12 +29,12 @@ const NoteList = ({ noteList }: { noteList: Note[] }) => {
                 isPinned={note.isPinned}
               />
             ))}
-          </div>
+          </MasonryGrid>
           <hr />
         </div>
       )}
       <div className={styles.container}>
-        <div className={styles.noteListContainer}>
+        <MasonryGrid gap={20} defaultDirection="end" align="center" autoResize>
           {unpinnedNotes.map((note: Note, index: number) => (
             <NoteItem
               id={note.id}
@@ -50,7 +44,7 @@ const NoteList = ({ noteList }: { noteList: Note[] }) => {
               isPinned={note.isPinned}
             />
           ))}
-        </div>
+        </MasonryGrid>
       </div>
     </>
   ) : (
