@@ -4,6 +4,7 @@
 
 .container {
   color: $primary;
+  background-color: $secondary;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,6 +29,7 @@
 
   @media (max-width: 768px) {
     width: 100%;
+    margin: 0;
   }
 
   .pinned {
