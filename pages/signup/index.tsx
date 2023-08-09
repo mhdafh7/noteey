@@ -25,7 +25,7 @@ const SignUpSchema = Yup.object().shape({
 });
 
 const Signup = () => {
-  const { signUp } = useAuth();
+  const { signUp, setLoading } = useAuth();
   const router = useRouter();
 
   return (
@@ -53,11 +53,13 @@ const Signup = () => {
           validationSchema={SignUpSchema}
           onSubmit={async (values: SignUpFormValues) => {
             try {
+              setLoading(true);
               await signUp(values.email, values.password).then(() => {
                 router.push("/");
                 console.log("signed up");
               });
             } catch (error) {
+              setLoading(false);
               let errorMessage = "error.unknown";
               if (typeof error === "string") {
                 errorMessage = error.toUpperCase();

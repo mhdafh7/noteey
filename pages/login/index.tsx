@@ -60,6 +60,7 @@ const Login = () => {
                 console.log("signed in");
               });
             } catch (error) {
+              setLoading(false);
               let errorMessage = "error.unknown";
               if (typeof error === "string") {
                 errorMessage = error.toUpperCase();
