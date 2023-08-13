@@ -1,9 +1,7 @@
 "use client";
 
-import Head from "next/head";
 import Link from "next/link";
 import * as Yup from "yup";
-// import { useAuth } from "@/context/AuthProvider";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { StarDark } from "@/components/Svgs/Abstract";
 import styles from "./styles.module.scss";
@@ -22,25 +20,10 @@ const SignInSchema = Yup.object().shape({
   password: Yup.string().required("Required").min(8).max(200),
 });
 const Login = () => {
-  // const { signIn, loading, setLoading, user } = useAuth();
   const router = useRouter();
-
-  // if (user) {
-  //   console.log("Already signed in!!");
-  //   router.push("/");
-  //   return null;
-  // }
 
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Login</title>
-        <meta
-          name="description"
-          content="A Note taking Web Application made using Nextjs"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <span className={styles.titleWrapper}>
         <StarDark />
         <h2 className={styles.title}>Login</h2>
@@ -51,28 +34,7 @@ const Login = () => {
             email: "",
             password: "",
           }}
-          onSubmit={async (values: SignInFormValues) => {
-            // try {
-            //   setLoading(true);
-            //   await signIn(values.email, values.password).then(() => {
-            //     setLoading(false);
-            //     router.push("/");
-            //     console.log("signed in");
-            //   });
-            // } catch (error) {
-            //   let errorMessage = "error.unknown";
-            //   if (typeof error === "string") {
-            //     errorMessage = error.toUpperCase();
-            //   } else if (error instanceof Error) {
-            //     errorMessage = error.message;
-            //   }
-            //   toast.error(`Sign in error! ${errorMessage}`, {
-            //     position: toast.POSITION.BOTTOM_CENTER,
-            //     closeOnClick: true,
-            //   });
-            //   console.error(errorMessage);
-            // }
-          }}
+          onSubmit={async (values: SignInFormValues) => {}}
           validationSchema={SignInSchema}
         >
           {({ errors, touched }) => (
