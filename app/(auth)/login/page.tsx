@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { StarDark } from "@/components/Svgs/Abstract";
 import styles from "./styles.module.scss";
@@ -9,18 +8,28 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import Spinner from "@/components/Spinner";
+import { register } from "@/libs/api/auth";
+import { messages } from "@/constants/messages";
+import { signInSchema } from "@/constants/validation";
 
 type SignInFormValues = {
   email: string;
   password: string;
 };
 
-const SignInSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required"),
-  password: Yup.string().required("Required").min(8).max(200),
-});
 const Login = () => {
   const router = useRouter();
+
+  const handleSubmit = async (values: SignInFormValues) => {
+    try {
+      await register(values);
+      toast.success(messages.auth.success.login);
+      router.push("/");
+    } catch (error) {
+      console.error(error);
+      toast.error(messages.auth.errors.login);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -34,10 +43,10 @@ const Login = () => {
             email: "",
             password: "",
           }}
-          onSubmit={async (values: SignInFormValues) => {}}
-          validationSchema={SignInSchema}
+          onSubmit={(values) => handleSubmit(values)}
+          validationSchema={signInSchema}
         >
-          {({ errors, touched }) => (
+          {({ errors, touched, isSubmitting }) => (
             <Form className={styles.form}>
               <div className={styles.formItem}>
                 <label htmlFor="email">Email</label>
@@ -58,7 +67,7 @@ const Login = () => {
                 </p>
               </div>
               <button type="submit" className={styles.loginBtn}>
-                {/* {loading ? <Spinner scale={0.8} /> : <p>Login</p>} */}
+                {isSubmitting ? <Spinner scale={0.8} /> : <p>Login</p>}
               </button>
             </Form>
           )}
