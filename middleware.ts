@@ -18,8 +18,8 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
     pathname.startsWith("/static") ||
-    pathname.startsWith("/signin") ||
-    pathname.startsWith("/register") ||
+    pathname.startsWith("/login") ||
+    pathname.startsWith("/signup") ||
     PUBLIC_FILE.test(pathname)
   ) {
     return NextResponse.next();
@@ -27,7 +27,7 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
 
   const jwt = req.cookies.get(process.env.COOKIE_NAME as string);
   if (!jwt) {
-    req.nextUrl.pathname = "/signin";
+    req.nextUrl.pathname = "/login";
     return NextResponse.redirect(req.nextUrl);
   }
 
@@ -36,7 +36,7 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
     return NextResponse.next();
   } catch (e) {
     console.error(e);
-    req.nextUrl.pathname = "/signin";
+    req.nextUrl.pathname = "/login";
     return NextResponse.redirect(req.nextUrl);
   }
 }
