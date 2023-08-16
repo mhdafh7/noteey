@@ -10,9 +10,9 @@ export const register = async (user: Partial<User>) => {
   });
 };
 
-export const signin = async (user: Partial<User>) => {
+export const login = async (user: Partial<User>) => {
   return fetcher({
-    url: "/api/signin",
+    url: "/api/login",
     method: "POST",
     body: user,
     json: false,

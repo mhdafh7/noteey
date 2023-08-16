@@ -10,9 +10,9 @@ import { useRouter } from "next/navigation";
 import Spinner from "@/components/Spinner";
 import { register } from "@/libs/api/auth";
 import { messages } from "@/constants/messages";
-import { signInSchema } from "@/constants/validation";
+import { loginSchema } from "@/constants/validation";
 
-type SignInFormValues = {
+type LoginFormValues = {
   email: string;
   password: string;
 };
@@ -20,7 +20,7 @@ type SignInFormValues = {
 const Login = () => {
   const router = useRouter();
 
-  const handleSubmit = async (values: SignInFormValues) => {
+  const handleSubmit = async (values: LoginFormValues) => {
     try {
       await register(values);
       toast.success(messages.auth.success.login);
@@ -44,7 +44,7 @@ const Login = () => {
             password: "",
           }}
           onSubmit={(values) => handleSubmit(values)}
-          validationSchema={signInSchema}
+          validationSchema={loginSchema}
         >
           {({ errors, touched, isSubmitting }) => (
             <Form className={styles.form}>

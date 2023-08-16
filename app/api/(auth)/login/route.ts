@@ -3,7 +3,7 @@ import { serialize } from "cookie";
 import { comparePasswords, createJWT } from "@/libs/auth";
 import { db } from "@/libs/db";
 
-export default async function signin(
+export default async function login(
   req: NextApiRequest,
   res: NextApiResponse
 ) {

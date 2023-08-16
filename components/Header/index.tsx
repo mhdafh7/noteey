@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 // import { useAuth } from "../../context/AuthProvider";
-import SigninIcon from "../Svgs/SigninIcon";
+import LoginIcon from "../Svgs/LoginIcon";
 import { LogOut } from "react-feather";
 import styles from "./styles.module.scss";
 
