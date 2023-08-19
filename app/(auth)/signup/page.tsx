@@ -5,9 +5,11 @@ import Link from "next/link";
 import { StarLight } from "@/components/Svgs/Abstract";
 import styles from "./styles.module.scss";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { toast, ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { SignUpSchema } from "@/constants/validation";
+import { messages } from "@/constants/messages";
+import { login } from "@/libs/api/auth";
+import { toast } from "react-toastify";
 
 type SignUpFormValues = {
   email: string;
@@ -18,8 +20,19 @@ type SignUpFormValues = {
 const Signup = () => {
   const router = useRouter();
 
+  const handleSubmit = async (values: SignUpFormValues) => {
+    try {
+      await login(values);
+      toast.success(messages.auth.success.login);
+      router.push("/");
+    } catch (error) {
+      console.error(error);
+      toast.error(messages.auth.errors.login);
+    }
+  };
+
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>Create an account</title>
         <meta
@@ -40,8 +53,7 @@ const Signup = () => {
             confirmPassword: "",
           }}
           validationSchema={SignUpSchema}
-          onSubmit={async (values: SignUpFormValues) => {
-          }}
+          onSubmit={(values) => handleSubmit(values)}
         >
           {({ errors, touched }) => (
             <Form className={styles.form}>
@@ -94,9 +106,7 @@ const Signup = () => {
           <Link href={"/login"}>Login.</Link>
         </span>
       </h4>
-      <h5 className={styles.branding}>Noteey</h5>
-      <ToastContainer theme="colored" limit={3} />
-    </div>
+    </>
   );
 };
 export default Signup;

@@ -4,11 +4,10 @@ import Link from "next/link";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { StarDark } from "@/components/Svgs/Abstract";
 import styles from "./styles.module.scss";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import Spinner from "@/components/Spinner";
-import { register } from "@/libs/api/auth";
+import { login } from "@/libs/api/auth";
 import { messages } from "@/constants/messages";
 import { loginSchema } from "@/constants/validation";
 
@@ -22,7 +21,7 @@ const Login = () => {
 
   const handleSubmit = async (values: LoginFormValues) => {
     try {
-      await register(values);
+      await login(values);
       toast.success(messages.auth.success.login);
       router.push("/");
     } catch (error) {
@@ -32,7 +31,7 @@ const Login = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <>
       <span className={styles.titleWrapper}>
         <StarDark />
         <h2 className={styles.title}>Login</h2>
@@ -79,9 +78,7 @@ const Login = () => {
           <Link href={"/signup"}>Sign up.</Link>
         </span>
       </h4>
-      <h5 className={styles.branding}>Noteey</h5>
-      <ToastContainer theme="colored" limit={3} />
-    </div>
+    </>
   );
 };
 export default Login;
