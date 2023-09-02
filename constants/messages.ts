@@ -5,6 +5,7 @@ export const messages = {
       signup: "Signup failed",
       logout: "Logout failed",
       incorrect_credentials: "Incorrect email or password",
+      unauthorized: "Unauthorized",
     },
     success: {
       login: "Login successful",
