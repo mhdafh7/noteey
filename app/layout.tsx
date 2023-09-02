@@ -1,6 +1,7 @@
 import { Metadata } from "next";
-import "@/styles/globals.scss";
 import { ModalProvider } from "@/context/ModalContext";
+import { NextAuthProvider } from "@/components/SessionProvider";
+import "@/styles/globals.scss";
 
 export const metadata: Metadata = {
   title: "Noteey",
@@ -30,7 +31,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ModalProvider>
-        <body>{children}</body>
+        <NextAuthProvider>
+          <body>{children}</body>
+        </NextAuthProvider>
       </ModalProvider>
     </html>
   );
