@@ -7,6 +7,7 @@ import { signIn } from "next-auth/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { toast } from "react-toastify";
 
+import { GoogleLoginButton } from "./CustomLoginButtons";
 import Spinner from "@/components/Spinner";
 import { loginSchema } from "@/constants/validation";
 import { messages } from "@/constants/messages";
@@ -76,6 +77,13 @@ const LoginForm = () => {
           <button type="submit" className={styles.loginBtn}>
             {loading ? <Spinner scale={0.8} /> : "Login"}
           </button>
+          <span className={styles.divider}>
+            <span className={styles.line}></span>
+            <span className={styles.or}>
+              <p>OR</p>
+            </span>
+          </span>
+          <GoogleLoginButton callbackUrl={callbackUrl} />
         </Form>
       )}
     </Formik>

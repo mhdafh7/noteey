@@ -50,3 +50,31 @@
     text-decoration: underline;
   }
 }
+
+.googleLoginButton {
+  @include btn($secondary, $primary);
+}
+
+.divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  width: 100%;
+  .line {
+    width: 100%;
+    height: 2px;
+    background-color: $disabled;
+  }
+  .or {
+    position: absolute;
+    padding: 3px;
+    background-color: $global-bg;
+    border-radius: $rounded;
+    p {
+      font-weight: 600;
+    }
+  }
+}
