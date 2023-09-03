@@ -7,6 +7,8 @@ export const loginSchema = Yup.object().shape({
 });
 
 export const SignUpSchema = Yup.object().shape({
+  firstName: Yup.string().required("First name is required"),
+  lastName: Yup.string().optional(),
   email: Yup.string().email("Invalid email").required("Required"),
   password: passwordValidation,
   confirmPassword: Yup.string()
