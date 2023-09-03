@@ -1,9 +1,13 @@
-import { prisma } from "@/libs/db";
 import { compare } from "bcrypt";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+import { prisma } from "./db";
+
 export const authOptions: NextAuthOptions = {
+  pages: {
+    signIn: "/login",
+  },
   session: {
     strategy: "jwt",
   },
@@ -44,7 +48,6 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     session: ({ session, token }) => {
-      console.log("Session Callback", { session, token });
       return {
         ...session,
         user: {
@@ -54,7 +57,6 @@ export const authOptions: NextAuthOptions = {
       };
     },
     jwt: ({ token, user }) => {
-      console.log("JWT Callback", { token, user });
       if (user) {
         const u = user as unknown as any;
         return {
