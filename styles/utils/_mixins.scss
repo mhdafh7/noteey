@@ -61,17 +61,18 @@
     }
   }
 }
-@mixin btn {
+@mixin btn($bgColor: $misc, $color: $secondary) {
   width: 100%;
   height: 4rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   border-radius: $rounded;
   border: $primary solid 2px;
-  background-color: $misc;
+  background-color: $bgColor;
   box-shadow: 4px 4px 0px $primary;
-  color: $secondary;
+  color: $color;
   padding: 1rem 1.5rem;
   margin-top: 1rem;
   font-family: "Synonym", Helvetica, sans-serif;
