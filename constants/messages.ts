@@ -6,6 +6,8 @@ export const messages = {
       logout: "Logout failed",
       incorrect_credentials: "Incorrect email or password",
       unauthorized: "Unauthorized",
+      user_not_found: "User not found",
+      user_already_exists: "User already exists",
     },
     success: {
       login: "Login successful",
