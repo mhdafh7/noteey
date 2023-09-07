@@ -25,13 +25,15 @@
     "react-dom": "^18.2.0",
     "react-feather": "^2.0.10",
     "react-toastify": "^9.0.8",
-    "yup": "^1.0.0"
+    "yup": "^1.0.0",
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/cookie": "^0.5.1",
     "@types/node": "20.3.2",
     "@types/react": "18.0.21",
+    "@types/react-dom": "^18.2.7",
     "eslint": "8.24.0",
     "eslint-config-next": "^13.4.6",
     "eslint-import-resolver-typescript": "^3.5.2",
