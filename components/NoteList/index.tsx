@@ -188,7 +188,7 @@ const NoteList = () => {
             Pinned <span>Notes</span>
           </h3>
           <MasonryGrid
-            gap={20}
+            gap={23}
             defaultDirection="end"
             align="center"
             autoResize
@@ -210,7 +210,7 @@ const NoteList = () => {
         </div>
       )}
       <div className={styles.container}>
-        <MasonryGrid gap={20} defaultDirection="end" align="center" autoResize>
+        <MasonryGrid gap={23} defaultDirection="end" align="center" autoResize>
           {unpinnedNotes.map((note: Note) => (
             <NoteItem
               id={note.id}
