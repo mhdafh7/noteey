@@ -30,6 +30,7 @@ model Note {
   owner       User    @relation(fields: [ownerId], references: [id])
   title       String?
   description String
+  isPinned    Boolean @default(false)
   deleted     Boolean @default(false)
 
   @@index([ownerId, id])
