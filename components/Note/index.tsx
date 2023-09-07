@@ -1,46 +1,36 @@
-import Modal from "../Modal";
-import styles from "./styles.module.scss";
-import { useContext, useState } from "react";
-import { Note } from "../../types";
-import { Pin } from "../Svgs/Pins";
-import { ModalContext } from "@/context/ModalContext";
+import { Note } from "@prisma/client";
 
-// type Props = Note & { color: string };
-const Note = ({ id, title, body, isPinned }: Note) => {
-  const [showModal, setShowModal] = useState(false);
-  const { modalData, setModalData, openModal } = useContext(ModalContext);
+import { useCurrentNoteStore } from "@/store/note";
+import { Pin } from "../Svgs/Pins";
+
+import styles from "./styles.module.scss";
+
+const Note = (note: Note) => {
+  const setCurrentNote = useCurrentNoteStore((state) => state.setCurrentNote);
+  const setModalOpen = useCurrentNoteStore((state) => state.setIsNoteModalOpen);
 
   return (
     <>
       <article
         className={styles.container}
         onClick={() => {
-          setShowModal(true);
-          setModalData({ id, title, body, isPinned });
-          openModal()
+          setCurrentNote(note);
+          setModalOpen(true);
         }}
       >
-        {isPinned ? (
+        {note.isPinned ? (
           <span className={styles.pinned}>
             <Pin />
           </span>
         ) : null}
 
-        {title === "" && body === "" ? (
+        {note.title === "" && note.description === "" ? (
           <div className={styles.title}>Empty Note</div>
         ) : (
-          <div className={styles.title}>{title}</div>
+          <div className={styles.title}>{note.title}</div>
         )}
-        <p className={styles.body}>{body}</p>
+        <p className={styles.body}>{note.description}</p>
       </article>
-      <Modal
-        title={title}
-        body={body}
-        id={id}
-        showModal={showModal}
-        isPinned={isPinned}
-        setShowModal={setShowModal}
-      />
     </>
   );
 };

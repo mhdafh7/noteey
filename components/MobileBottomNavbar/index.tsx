@@ -1,13 +1,16 @@
-import { useContext } from "react";
-import { ModalContext } from "@/context/ModalContext";
+"use client";
+
 import { Plus } from "react-feather";
+import { useCurrentNoteStore } from "@/store/note";
 import styles from "./styles.module.scss";
 
 const MobileBottomNavbar = () => {
-  const { openModal, isOpen } = useContext(ModalContext);
+  const setIsModalOpen = useCurrentNoteStore(
+    (state) => state.setIsNoteModalOpen
+  );
+
   const handleClick = () => {
-    openModal();
-    console.log(isOpen);
+    setIsModalOpen(true);
   };
   return (
     <nav className={styles.container}>
