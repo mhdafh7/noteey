@@ -2,9 +2,9 @@ import { Note } from "@prisma/client";
 import { create } from "zustand";
 
 type NoteStore = {
-  currentNote: Note;
+  currentNote: Omit<Note, "deleted">;
   isNoteModalOpen: boolean;
-  setCurrentNote: (note: Note) => void;
+  setCurrentNote: (note: Omit<Note, "deleted">) => void;
   setIsNoteModalOpen: (isNoteModalOpen: boolean) => void;
 };
 export const useCurrentNoteStore = create<NoteStore>((set) => ({
@@ -16,9 +16,8 @@ export const useCurrentNoteStore = create<NoteStore>((set) => ({
     createdAt: new Date(),
     updatedAt: new Date(),
     ownerId: "",
-    deleted: false,
   },
-  setCurrentNote: (note: Note) =>
+  setCurrentNote: (note: Omit<Note, "deleted">) =>
     set((state) => ({
       ...state,
       currentNote: note,

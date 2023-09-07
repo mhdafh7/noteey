@@ -203,7 +203,6 @@ const NoteList = () => {
                 createdAt={note.createdAt}
                 updatedAt={note.updatedAt}
                 ownerId={note.ownerId}
-                deleted={false}
               />
             ))}
           </MasonryGrid>
@@ -222,7 +221,6 @@ const NoteList = () => {
               createdAt={note.createdAt}
               updatedAt={note.updatedAt}
               ownerId={note.ownerId}
-              deleted={false}
             />
           ))}
         </MasonryGrid>

@@ -5,7 +5,7 @@ import { Pin } from "../Svgs/Pins";
 
 import styles from "./styles.module.scss";
 
-const Note = (note: Note) => {
+const Note = (note: Omit<Note, "deleted">) => {
   const setCurrentNote = useCurrentNoteStore((state) => state.setCurrentNote);
   const setModalOpen = useCurrentNoteStore((state) => state.setIsNoteModalOpen);
 
