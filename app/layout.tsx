@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { ModalProvider } from "@/context/ModalContext";
 import { NextAuthProvider } from "@/components/SessionProvider";
 import "@/styles/globals.scss";
 
@@ -30,11 +29,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <ModalProvider>
-        <NextAuthProvider>
-          <body>{children}</body>
-        </NextAuthProvider>
-      </ModalProvider>
+      <NextAuthProvider>
+        <body>{children}</body>
+      </NextAuthProvider>
     </html>
   );
 }
