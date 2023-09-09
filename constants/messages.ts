@@ -15,4 +15,18 @@ export const messages = {
       logout: "Logout successful",
     },
   },
+  notes: {
+    errors: {
+      get_notes: "Failed to get notes",
+      create_note: "Failed to create note",
+      update_note: "Failed to update note",
+      delete_note: "Failed to delete note",
+    },
+    success: {
+      get_notes: "Successfully got notes",
+      create_note: "Successfully created note",
+      update_note: "Successfully updated note",
+      delete_note: "Successfully deleted note",
+    },
+  },
 };
