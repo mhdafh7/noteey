@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 const createNote = z.object({
-  title: z.string().min(3).max(100),
-  description: z.string().min(3).max(1000),
+  title: z.string().max(100).optional(),
+  description: z.string().max(1000),
   isPinned: z.boolean(),
 });
 
