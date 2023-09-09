@@ -2,12 +2,11 @@
 
 import { useState } from "react";
 
-import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
-import { SignUpSchema } from "@/constants/validation";
+import { SignUpSchema } from "@/constants/formValidation";
 import { messages } from "@/constants/messages";
 import Spinner from "@/components/Spinner";
 

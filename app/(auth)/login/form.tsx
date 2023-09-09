@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 
 import { GoogleLoginButton } from "./CustomLoginButtons";
 import Spinner from "@/components/Spinner";
-import { loginSchema } from "@/constants/validation";
+import { loginSchema } from "@/constants/formValidation";
 import { messages } from "@/constants/messages";
 
 import styles from "./styles.module.scss";
