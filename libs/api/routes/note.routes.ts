@@ -1,12 +1,12 @@
 import { Prisma } from "@prisma/client";
 
 const getNotes = async () => {
-  const res = await fetch(`/api/note`);
+  const res = await fetch(`/api/notes`);
   return res.json();
 };
 
-const createNote = async (note: Prisma.NoteCreateInput) => {
-  const res = await fetch(`/api/note`, {
+const createNote = async (note: Omit<Prisma.NoteCreateInput, "owner">) => {
+  const res = await fetch(`/api/notes`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
