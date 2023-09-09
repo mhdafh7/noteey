@@ -182,18 +182,44 @@ const NoteList = () => {
           <MobileNoteModal />
         </>
       ) : null}
-      {pinnedNotes.length > 0 && (
+      <main className={styles.main}>
+        {pinnedNotes.length > 0 && (
+          <div className={styles.container}>
+            <h3 className={styles.title}>
+              Pinned <span>Notes</span>
+            </h3>
+            <MasonryGrid
+              gap={23}
+              defaultDirection="end"
+              align="center"
+              autoResize
+            >
+              {pinnedNotes.map((note: Note) => (
+                <NoteItem
+                  id={note.id}
+                  key={note.id}
+                  title={note.title}
+                  description={note.description}
+                  isPinned={note.isPinned}
+                  createdAt={note.createdAt}
+                  updatedAt={note.updatedAt}
+                  ownerId={note.ownerId}
+                />
+              ))}
+            </MasonryGrid>
+            <span className={styles.lineWrapper}>
+              <span className={styles.line}></span>
+            </span>
+          </div>
+        )}
         <div className={styles.container}>
-          <h3 className={styles.title}>
-            Pinned <span>Notes</span>
-          </h3>
           <MasonryGrid
             gap={23}
             defaultDirection="end"
             align="center"
             autoResize
           >
-            {pinnedNotes.map((note: Note) => (
+            {unpinnedNotes.map((note: Note) => (
               <NoteItem
                 id={note.id}
                 key={note.id}
@@ -206,25 +232,8 @@ const NoteList = () => {
               />
             ))}
           </MasonryGrid>
-          <hr />
         </div>
-      )}
-      <div className={styles.container}>
-        <MasonryGrid gap={23} defaultDirection="end" align="center" autoResize>
-          {unpinnedNotes.map((note: Note) => (
-            <NoteItem
-              id={note.id}
-              key={note.id}
-              title={note.title}
-              description={note.description}
-              isPinned={note.isPinned}
-              createdAt={note.createdAt}
-              updatedAt={note.updatedAt}
-              ownerId={note.ownerId}
-            />
-          ))}
-        </MasonryGrid>
-      </div>
+      </main>
     </>
   ) : (
     <div className={styles.emptyContainer}>
