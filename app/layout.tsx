@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { NextAuthProvider } from "@/components/SessionProvider";
 import "@/styles/globals.scss";
+import Providers from "@/components/QueryClientProvider";
 
 export const metadata: Metadata = {
   title: "Noteey",
@@ -30,7 +31,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <NextAuthProvider>
-        <body>{children}</body>
+        <Providers>
+          <body>{children}</body>
+        </Providers>
       </NextAuthProvider>
     </html>
   );
