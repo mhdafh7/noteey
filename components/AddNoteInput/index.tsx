@@ -1,36 +1,53 @@
 "use client";
 
-import { useState, useEffect, useRef, FormEvent } from "react";
+import { useState, useEffect, useRef, FormEvent, useReducer } from "react";
 import { toast } from "react-toastify";
 import styles from "./styles.module.scss";
 import { Pin, UnPin } from "../Svgs/Pins";
+import { Prisma } from "@prisma/client";
+import NoteRoutes from "@/libs/api/routes/note.routes";
 
 const AddNote = () => {
-  const [inputTitle, setInputTitle] = useState("");
-  const [inputBody, setInputBody] = useState("");
-  const [isPinned, setIsPinned] = useState(false);
+  const reducer = (
+    state: Omit<Prisma.NoteCreateInput, "owner">,
+    action: any
+  ) => {
+    switch (action.type) {
+      case "SET_TITLE":
+        return { ...state, title: action.payload };
+      case "SET_DESCRIPTION":
+        return { ...state, description: action.payload };
+      case "SET_PIN":
+        return { ...state, isPinned: action.payload };
+      case "RESET":
+        return {
+          title: "",
+          description: "",
+          isPinned: false,
+        };
+      default:
+        return state;
+    }
+  };
+
+  const [note, dispatch] = useReducer(reducer, {
+    title: "",
+    description: "",
+    isPinned: false,
+  });
+
   const [showInput, setShowInput] = useState(false);
+  const disabled = note.description === "" && note.title === "";
 
   const formRef = useRef<HTMLFormElement>(null);
 
-  // create note
-  const createNote = async () => {};
-
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    createNote();
-
-    toast.success("Note Created", {
-      position: toast.POSITION.BOTTOM_CENTER,
-      autoClose: 3500,
-      closeOnClick: true,
-    });
+    await NoteRoutes.createNote(note);
 
     // reseting states
-    setInputBody("");
-    setInputTitle("");
-    setIsPinned(false);
+    dispatch({ type: "RESET" });
     setShowInput(false);
   };
 
@@ -60,9 +77,9 @@ const AddNote = () => {
                 className={styles.titleInput}
                 type="text"
                 placeholder="Title"
-                value={inputTitle}
+                value={note.title}
                 onChange={(e) => {
-                  setInputTitle(e.target.value);
+                  dispatch({ type: "SET_TITLE", payload: e.target.value });
                 }}
                 onFocus={() => {
                   setShowInput(true);
@@ -75,36 +92,39 @@ const AddNote = () => {
             cols={20}
             rows={2}
             placeholder="Add a note..."
-            value={inputBody}
+            value={note.description}
             onChange={(e) => {
-              setInputBody(e.target.value);
+              dispatch({
+                type: "SET_DESCRIPTION",
+                payload: e.target.value,
+              });
             }}
             onFocus={() => {
               setShowInput(true);
             }}
           />
         </div>
-        {(inputTitle || inputBody) && showInput ? (
+        {!disabled && showInput ? (
           <div className={styles.buttonWrapper}>
-            {!isPinned ? (
-              <span
-                title="Pin note"
-                className={styles.pinned}
-                onClick={() => {
-                  setIsPinned(!isPinned);
-                }}
-              >
-                <Pin />
-              </span>
-            ) : (
+            {!note.isPinned ? (
               <span
                 title="Pin note"
                 className={styles.unpinned}
                 onClick={() => {
-                  setIsPinned(!isPinned);
+                  dispatch({ type: "SET_PIN", payload: true });
                 }}
               >
                 <UnPin />
+              </span>
+            ) : (
+              <span
+                title="Pin note"
+                className={styles.pinned}
+                onClick={() => {
+                  dispatch({ type: "SET_PIN", payload: false });
+                }}
+              >
+                <Pin />
               </span>
             )}
             <button
@@ -112,7 +132,7 @@ const AddNote = () => {
               onFocus={() => setShowInput(true)}
               type="submit"
               tabIndex={0}
-              disabled={!inputBody && !inputTitle}
+              disabled={disabled}
             >
               Done
             </button>
