@@ -9,6 +9,7 @@ import NoteService from "@/libs/api/services/note.service";
 import NoteValidation from "@/libs/api/validations/note.validation";
 import zodeError from "@/libs/api/validations/zodeError";
 
+// *** Get all notes ***
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);
@@ -17,7 +18,7 @@ export async function GET() {
       return unauthorizedResponse();
     }
 
-    const notes = NoteService.getNotes(session.user.id);
+    const notes = await NoteService.getNotes(session.user.id);
 
     return NextResponse.json(notes, {
       status: httpStatus.OK,
@@ -27,6 +28,7 @@ export async function GET() {
   }
 }
 
+// *** Create a note ***
 export async function POST(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
