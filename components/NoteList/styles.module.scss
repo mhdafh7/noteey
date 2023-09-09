@@ -1,3 +1,7 @@
+@import "@/styles/utils/animation";
+@import "@/styles/utils/border-radii";
+@import "@/styles/utils/colors";
+
 .main {
   display: flex;
   flex-direction: column;
@@ -48,5 +52,25 @@
         font-family: "Synonym", Helvetica Neue, sans-serif;
       }
     }
+  }
+}
+
+.skelton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  list-style: none;
+
+  li {
+    width: clamp(10rem, 100%, 22rem);
+    height: 12rem;
+    background-color: $skelton-bg;
+    border-radius: $rounded-lg;
+    box-shadow: $skelton-border 5px 5px 0px;
+    position: relative;
+    overflow: hidden;
+    @include skelton-loading-animation;
   }
 }

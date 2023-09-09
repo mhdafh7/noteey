@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Note } from "@prisma/client";
 import { MasonryGrid } from "@egjs/react-grid";
@@ -11,160 +11,12 @@ import NoteModal from "../NoteModal";
 import MobileNoteModal from "../MobileNoteModal";
 
 import styles from "./styles.module.scss";
+import { useGetNotes } from "@/libs/hooks/queries/note";
+import ListItemsSkelton from "./ListItemsSkelton";
 
 const NoteList = () => {
-  const [noteList] = useState([
-    {
-      id: "1",
-      ownerId: "user_id_1",
-      title: "Meeting Agenda",
-      description: "Discuss project updates and plan for the next quarter.",
-      isPinned: false,
-      deleted: false,
-      createdAt: new Date(), // Replace with actual timestamps
-      updatedAt: new Date(), // Replace with actual timestamps
-    },
-    {
-      id: "2",
-      ownerId: "user_id_1",
-      title: "Grocery List",
-      description: "Milk, eggs, bread, and fruits.",
-      isPinned: true,
-      deleted: false,
-      createdAt: new Date(), // Replace with actual timestamps
-      updatedAt: new Date(), // Replace with actual timestamps
-    },
-    {
-      id: "3",
-      ownerId: "user_id_2",
-      title: "Reminder",
-      description: "Don't forget to call mom on her birthday!",
-      isPinned: false,
-      deleted: false,
-      createdAt: new Date(), // Replace with actual timestamps
-      updatedAt: new Date(), // Replace with actual timestamps
-    },
-    {
-      id: "4",
-      ownerId: "user_id_2",
-      title: "Study Notes",
-      description: "Review chapters 5 to 10 for the exam.",
-      isPinned: true,
-      deleted: false,
-      createdAt: new Date(), // Replace with actual timestamps
-      updatedAt: new Date(), // Replace with actual timestamps
-    },
-    {
-      id: "5",
-      ownerId: "user_id_3",
-      title: "Vacation Plans",
-      description: "Book flights and hotels for the summer vacation.",
-      isPinned: false,
-      deleted: false,
-      createdAt: new Date(), // Replace with actual timestamps
-      updatedAt: new Date(), // Replace with actual timestamps
-    },
-    {
-      id: "6",
-      ownerId: "user_id_3",
-      title: "Recipes",
-      description: "Find new recipes for dinner this week.",
-      isPinned: false,
-      deleted: false,
-      createdAt: new Date(), // Replace with actual timestamps
-      updatedAt: new Date(), // Replace with actual timestamps
-    },
-    {
-      id: "7",
-      ownerId: "user_id_4",
-      title: "Gift Ideas",
-      description: "Birthday gift ideas for Sarah.",
-      isPinned: true,
-      deleted: false,
-      createdAt: new Date(), // Replace with actual timestamps
-      updatedAt: new Date(), // Replace with actual timestamps
-    },
-    {
-      id: "8",
-      ownerId: "user_id_4",
-      title: "Home Repairs",
-      description: "Fix the leaky faucet in the kitchen.",
-      isPinned: false,
-      deleted: false,
-      createdAt: new Date(), // Replace with actual timestamps
-      updatedAt: new Date(), // Replace with actual timestamps
-    },
-    {
-      id: "9",
-      ownerId: "user_id_5",
-      title: "Book Recommendations",
-      description: "Ask friends for book recommendations.",
-      isPinned: false,
-      deleted: false,
-      createdAt: new Date(), // Replace with actual timestamps
-      updatedAt: new Date(), // Replace with actual timestamps
-    },
-    {
-      id: "10",
-      ownerId: "user_id_5",
-      title: "Workout Routine",
-      description: "Plan the weekly workout routine.",
-      isPinned: true,
-      deleted: false,
-      createdAt: new Date(), // Replace with actual timestamps
-      updatedAt: new Date(), // Replace with actual timestamps
-    },
-    {
-      id: "11",
-      ownerId: "user_id_6",
-      title: "Coding Project",
-      description: "Work on the coding project for the client.",
-      isPinned: false,
-      deleted: false,
-      createdAt: new Date(), // Replace with actual timestamps
-      updatedAt: new Date(), // Replace with actual timestamps
-    },
-    {
-      id: "12",
-      ownerId: "user_id_6",
-      title: "Travel Itinerary",
-      description: "Create an itinerary for the business trip.",
-      isPinned: false,
-      deleted: false,
-      createdAt: new Date(), // Replace with actual timestamps
-      updatedAt: new Date(), // Replace with actual timestamps
-    },
-    {
-      id: "13",
-      ownerId: "user_id_7",
-      title: "Music Playlist",
-      description: "Create a playlist for the road trip.",
-      isPinned: true,
-      deleted: false,
-      createdAt: new Date(), // Replace with actual timestamps
-      updatedAt: new Date(), // Replace with actual timestamps
-    },
-    {
-      id: "14",
-      ownerId: "user_id_7",
-      title: "Financial Planning",
-      description: "Review monthly expenses and savings.",
-      isPinned: false,
-      deleted: false,
-      createdAt: new Date(), // Replace with actual timestamps
-      updatedAt: new Date(), // Replace with actual timestamps
-    },
-    {
-      id: "15",
-      ownerId: "user_id_8",
-      title: "Project Ideas",
-      description: "Brainstorm ideas for the next project.",
-      isPinned: true,
-      deleted: false,
-      createdAt: new Date(), // Replace with actual timestamps
-      updatedAt: new Date(), // Replace with actual timestamps
-    },
-  ]);
+  const notes = useGetNotes();
+  const [noteList, setNoteList] = useState<Note[]>([]);
 
   const isNoteModalOpen = useCurrentNoteStore((state) => state.isNoteModalOpen);
   const setIsNoteModalOpen = useCurrentNoteStore(
@@ -174,7 +26,17 @@ const NoteList = () => {
   const pinnedNotes = noteList.filter((note: Note) => note.isPinned);
   const unpinnedNotes = noteList.filter((note: Note) => !note.isPinned);
 
-  return noteList.length !== 0 ? (
+  useEffect(() => {
+    if (notes.isSuccess) {
+      setNoteList(notes.data);
+    } else if (notes.isError) {
+      console.error(notes.error);
+    }
+  }, [notes]);
+
+  return notes.isLoading ? (
+    <ListItemsSkelton />
+  ) : noteList.length !== 0 ? (
     <>
       {isNoteModalOpen ? (
         <>
@@ -207,9 +69,11 @@ const NoteList = () => {
                 />
               ))}
             </MasonryGrid>
-            <span className={styles.lineWrapper}>
-              <span className={styles.line}></span>
-            </span>
+            {pinnedNotes.length > 0 && unpinnedNotes.length > 0 && (
+              <span className={styles.lineWrapper}>
+                <span className={styles.line}></span>
+              </span>
+            )}
           </div>
         )}
         <div className={styles.container}>
