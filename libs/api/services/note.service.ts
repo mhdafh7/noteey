@@ -1,3 +1,4 @@
+import { messages } from "@/constants/messages";
 import { prisma } from "@/libs/db";
 import { Prisma } from "@prisma/client";
 
@@ -10,6 +11,20 @@ const getNotes = async (userId: string) => {
       createdAt: Prisma.SortOrder.desc,
     },
   });
+};
+
+const getNoteById = async (id: string) => {
+  const note = await prisma.note.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!note) {
+    throw new Error(messages.notes.errors.get_notes);
+  }
+
+  return note;
 };
 
 const createNote = async (
@@ -28,6 +43,6 @@ const createNote = async (
   });
 };
 
-const NoteService = { getNotes, createNote };
+const NoteService = { getNotes, getNoteById, createNote };
 
 export default NoteService;
