@@ -69,11 +69,6 @@ const NoteList = () => {
                 />
               ))}
             </MasonryGrid>
-            {pinnedNotes.length > 0 && unpinnedNotes.length > 0 && (
-              <span className={styles.lineWrapper}>
-                <span className={styles.line}></span>
-              </span>
-            )}
           </div>
         )}
         <div className={styles.container}>

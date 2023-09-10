@@ -12,6 +12,10 @@
     width: 100%;
     height: fit-content;
 
+    &:nth-child(2) {
+      margin-top: 4rem;
+    }
+
     @media (max-width: 768px) {
       margin-bottom: 10vh;
     }
@@ -27,20 +31,6 @@
 
       span {
         font-weight: 400;
-      }
-    }
-    .lineWrapper {
-      opacity: 0.2;
-      margin-top: 3.2rem;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .line {
-        width: 70%;
-        height: 2px;
-        background-color: #000;
       }
     }
     .emptyContainer {
@@ -63,6 +53,10 @@
   gap: 2rem;
   list-style: none;
 
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
   li {
     width: clamp(10rem, 100%, 22rem);
     height: 12rem;
@@ -72,5 +66,10 @@
     position: relative;
     overflow: hidden;
     @include skelton-loading-animation;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      margin: 0;
+    }
   }
 }
