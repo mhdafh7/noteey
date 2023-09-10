@@ -109,7 +109,7 @@ const AddNote = () => {
           <div className={styles.buttonWrapper}>
             {!note.isPinned ? (
               <span
-                title="Pin note"
+                title="Unpin note"
                 className={styles.unpinned}
                 onClick={() => {
                   dispatch({ type: "SET_PIN", payload: true });
