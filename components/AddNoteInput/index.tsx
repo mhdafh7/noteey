@@ -1,11 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef, FormEvent, useReducer } from "react";
-import { toast } from "react-toastify";
 import styles from "./styles.module.scss";
 import { Pin, UnPin } from "../Svgs/Pins";
 import { Prisma } from "@prisma/client";
-import NoteRoutes from "@/libs/api/routes/note.routes";
+import { useCreateNote } from "@/libs/hooks/mutations/note";
 
 const AddNote = () => {
   const reducer = (
@@ -41,10 +40,12 @@ const AddNote = () => {
 
   const formRef = useRef<HTMLFormElement>(null);
 
+  const createNoteMutation = useCreateNote();
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    await NoteRoutes.createNote(note);
+    createNoteMutation.mutate(note);
 
     // reseting states
     dispatch({ type: "RESET" });

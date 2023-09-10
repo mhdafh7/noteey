@@ -1,13 +1,17 @@
 "use client";
 
-import { useState } from "react";
-import { Pin, UnPin } from "../Svgs/Pins";
+import { useReducer } from "react";
 
 import { ArrowLeft } from "react-feather";
+
+import { Pin, UnPin } from "../Svgs/Pins";
+import { Prisma } from "@prisma/client";
 import Delete from "../Svgs/Delete";
 import { useCurrentNoteStore } from "@/store/note";
 
 import styles from "./styles.module.scss";
+import { useCreateNote } from "@/libs/hooks/mutations/note";
+import { messages } from "@/constants/messages";
 
 type FormEvent = {
   preventDefault: () => void;
@@ -16,32 +20,67 @@ type inputChange = {
   target: { value: string };
 };
 
-const MobileNoteModal = ({ isEdit = false }) => {
+const MobileNoteModal = () => {
   const currentNote = useCurrentNoteStore((state) => state.currentNote);
+  const resetCurrentNote = useCurrentNoteStore(
+    (state) => state.resetCurrentNote
+  );
   const setIsModalOpen = useCurrentNoteStore(
     (state) => state.setIsNoteModalOpen
   );
 
-  const [isPinned, setIsPinned] = useState(currentNote.isPinned);
-  const [modalTitle, setModalTitle] = useState(currentNote.title);
-  const [modalDescription, setModalDescription] = useState(
-    currentNote.description
-  );
+  const reducer = (
+    state: Omit<Prisma.NoteCreateInput, "owner">,
+    action: any
+  ) => {
+    switch (action.type) {
+      case "SET_TITLE":
+        return { ...state, title: action.payload };
+      case "SET_DESCRIPTION":
+        return { ...state, description: action.payload };
+      case "SET_PIN":
+        return { ...state, isPinned: action.payload };
+      case "RESET":
+        return {
+          title: "",
+          description: "",
+          isPinned: false,
+        };
+      default:
+        return state;
+    }
+  };
+
+  const [note, dispatch] = useReducer(reducer, {
+    title: currentNote.title || "",
+    description: currentNote.description || "",
+    isPinned: currentNote.isPinned || false,
+  });
+
+  const isEdit = currentNote.id && currentNote.id !== "" ? true : false;
+
+  const createNoteMutation = useCreateNote();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+
+    createNoteMutation.mutate(note);
+    resetCurrentNote();
+    closeModal();
+    console.log(messages.notes.success.create_note);
   };
 
   const handleTitleChange = (e: inputChange) => {
-    setModalTitle(e.target.value);
+    dispatch({ type: "SET_TITLE", payload: e.target.value });
   };
 
   const handleBodyChange = (e: inputChange) => {
-    setModalDescription(e.target.value);
+    dispatch({ type: "SET_DESCRIPTION", payload: e.target.value });
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+    resetCurrentNote();
   };
 
   return (
@@ -52,12 +91,12 @@ const MobileNoteModal = ({ isEdit = false }) => {
         </button>
 
         <div className={styles.actions}>
-          {!isPinned ? (
+          {!currentNote.isPinned ? (
             <span
               title="Pin note"
               className={styles.pinned}
               onClick={() => {
-                setIsPinned(!isPinned);
+                dispatch({ type: "SET_PIN", payload: true });
               }}
             >
               <Pin />
@@ -67,7 +106,7 @@ const MobileNoteModal = ({ isEdit = false }) => {
               title="Unpin note"
               className={styles.unpinned}
               onClick={() => {
-                setIsPinned(!isPinned);
+                dispatch({ type: "SET_PIN", payload: false });
               }}
             >
               <UnPin />
@@ -87,7 +126,7 @@ const MobileNoteModal = ({ isEdit = false }) => {
             type="text"
             placeholder="Title"
             onChange={handleTitleChange}
-            value={modalTitle || ""}
+            value={note.title}
           />
           <textarea
             className={styles.body}
@@ -95,14 +134,11 @@ const MobileNoteModal = ({ isEdit = false }) => {
             rows={6}
             placeholder="note it here..."
             onChange={handleBodyChange}
-            value={modalDescription}
+            value={note.description}
           />
         </section>
-        <button
-          type="submit"
-          disabled={modalDescription === "" && modalTitle === ""}
-        >
-          Save note
+        <button type="submit" disabled={note.description === ""}>
+          {createNoteMutation.isLoading ? "Loading..." : "Save note"}
         </button>
       </form>
     </div>
