@@ -134,6 +134,7 @@
       padding: 0.8rem 1rem;
       border-radius: $rounded-lg;
       box-shadow: 2px 2px 0 $primary;
+      cursor: pointer;
 
       &:disabled{
         background-color: $disabled;
