@@ -15,3 +15,15 @@ export const useCreateNote = () => {
     },
   });
 };
+
+export const useUpdateNote = (id: string) => {
+  const queryClient = useQueryClient();
+  return useMutation<Note, Error, Prisma.NoteUpdateInput, null>({
+    mutationFn: (note) => NoteRoutes.updateNoteById(id, note),
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries(["notes"]);
+      toast.success(messages.notes.success.update_note);
+    },
+  });
+};

@@ -1,6 +1,6 @@
 "use client";
 
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 
 import { ArrowLeft } from "react-feather";
 
@@ -10,7 +10,7 @@ import Delete from "../Svgs/Delete";
 import { useCurrentNoteStore } from "@/store/note";
 
 import styles from "./styles.module.scss";
-import { useCreateNote } from "@/libs/hooks/mutations/note";
+import { useCreateNote, useUpdateNote } from "@/libs/hooks/mutations/note";
 import { messages } from "@/constants/messages";
 
 type FormEvent = {
@@ -60,14 +60,14 @@ const MobileNoteModal = () => {
   const isEdit = currentNote.id && currentNote.id !== "" ? true : false;
 
   const createNoteMutation = useCreateNote();
+  const updateNoteMutation = useUpdateNote(currentNote.id || "");
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    createNoteMutation.mutate(note);
-    resetCurrentNote();
-    closeModal();
-    console.log(messages.notes.success.create_note);
+    if (isEdit) {
+      updateNoteMutation.mutate(note);
+    } else createNoteMutation.mutate(note);
   };
 
   const handleTitleChange = (e: inputChange) => {
@@ -83,6 +83,18 @@ const MobileNoteModal = () => {
     resetCurrentNote();
   };
 
+
+  useEffect(() => {
+    if (createNoteMutation.isSuccess || updateNoteMutation.isSuccess) {
+      resetCurrentNote();
+      closeModal();
+    }
+    if (createNoteMutation.isSuccess)
+      console.log(messages.notes.success.create_note);
+    if (updateNoteMutation.isSuccess)
+      console.log(messages.notes.success.update_note);
+  }, [createNoteMutation.isSuccess, updateNoteMutation.isSuccess]);
+
   return (
     <div className={styles.container}>
       <nav className={styles.topBar}>
@@ -91,25 +103,25 @@ const MobileNoteModal = () => {
         </button>
 
         <div className={styles.actions}>
-          {!currentNote.isPinned ? (
-            <span
-              title="Pin note"
-              className={styles.pinned}
-              onClick={() => {
-                dispatch({ type: "SET_PIN", payload: true });
-              }}
-            >
-              <Pin />
-            </span>
-          ) : (
+          {!note.isPinned ? (
             <span
               title="Unpin note"
               className={styles.unpinned}
               onClick={() => {
-                dispatch({ type: "SET_PIN", payload: false });
+                dispatch({ type: "SET_PIN", payload: true });
               }}
             >
               <UnPin />
+            </span>
+          ) : (
+            <span
+              title="Pin note"
+              className={styles.pinned}
+              onClick={() => {
+                dispatch({ type: "SET_PIN", payload: false });
+              }}
+            >
+              <Pin />
             </span>
           )}
           {isEdit ? (

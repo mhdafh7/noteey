@@ -16,6 +16,17 @@ const createNote = async (note: Omit<Prisma.NoteCreateInput, "owner">) => {
   return res.json();
 };
 
-const NoteRoutes = { getNotes, createNote };
+const updateNoteById = async (id: string, note: Prisma.NoteUpdateInput) => {
+  const res = await fetch(`/api/notes/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ note }),
+  });
+  return res.json();
+};
+
+const NoteRoutes = { getNotes, createNote, updateNoteById };
 
 export default NoteRoutes;

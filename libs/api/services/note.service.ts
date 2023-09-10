@@ -43,6 +43,25 @@ const createNote = async (
   });
 };
 
-const NoteService = { getNotes, getNoteById, createNote };
+const updateNoteById = async (
+  id: string,
+  title?: string,
+  description?: string,
+  isPinned?: boolean
+) => {
+
+  return await prisma.note.update({
+    where: {
+      id,
+    },
+    data: {
+      title,
+      description,
+      isPinned,
+    },
+  });
+};
+
+const NoteService = { getNotes, getNoteById, createNote, updateNoteById };
 
 export default NoteService;

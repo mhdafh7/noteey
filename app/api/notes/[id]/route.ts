@@ -35,3 +35,39 @@ export async function GET(req: NextRequest, { params }: paramsType) {
     return badRequestResponse(error.message);
   }
 }
+
+// *** Update note ***
+export async function PATCH(req: NextRequest, { params }: paramsType) {
+  try {
+    const session = await getServerSession(authOptions);
+
+    if (!session || !session.user) {
+      return unauthorizedResponse();
+    }
+
+    const requestData = await req.json();
+
+    const response = zodeError(NoteValidation.updateNote, requestData);
+
+    if (response) {
+      return badRequestResponse(response);
+    }
+
+    const { id } = params;
+    const { note } = requestData;
+    console.info({ requestData });
+
+    const updatedNote = await NoteService.updateNoteById(
+      id,
+      note?.title,
+      note?.description,
+      note?.isPinned
+    );
+
+    return NextResponse.json(updatedNote, {
+      status: httpStatus.OK,
+    });
+  } catch (error: any) {
+    return badRequestResponse(error.message);
+  }
+}
