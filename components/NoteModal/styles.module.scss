@@ -1,5 +1,6 @@
 @import "/styles/utils/colors";
 @import "/styles/utils/border-radii";
+@import "/styles/utils/mixins";
 
 .container,
 .overlay {
@@ -128,13 +129,5 @@
   }
 }
 .overlay {
-  translate: 0;
-  z-index: 1000;
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
-  background-color: rgba(0, 0, 0, 0.479);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  @include overlay;
 }
