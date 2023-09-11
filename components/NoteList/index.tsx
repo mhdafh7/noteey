@@ -10,9 +10,11 @@ import NoteItem from "../Note";
 import NoteModal from "../NoteModal";
 import MobileNoteModal from "../MobileNoteModal";
 
-import styles from "./styles.module.scss";
 import { useGetNotes } from "@/libs/hooks/queries/note";
 import ListItemsSkelton from "./ListItemsSkelton";
+import ConfirmMoveToTrashDialog from "../ConfirmMoveToTrashDialog";
+
+import styles from "./styles.module.scss";
 
 const NoteList = () => {
   const notes = useGetNotes();
@@ -21,6 +23,10 @@ const NoteList = () => {
   const isNoteModalOpen = useCurrentNoteStore((state) => state.isNoteModalOpen);
   const setIsNoteModalOpen = useCurrentNoteStore(
     (state) => state.setIsNoteModalOpen
+  );
+
+  const isConfirmMoveToTrashDialogOpen = useCurrentNoteStore(
+    (state) => state.isConfirmMoveToTrashDialogOpen
   );
 
   const pinnedNotes = noteList.filter((note: Note) => note.isPinned);
@@ -38,13 +44,17 @@ const NoteList = () => {
     <ListItemsSkelton />
   ) : noteList.length !== 0 ? (
     <>
+      {/* Modals and Dialogs */}
       {isNoteModalOpen ? (
         <>
           <NoteModal setIsModalOpen={setIsNoteModalOpen} />
           <MobileNoteModal />
         </>
       ) : null}
-      <main className={styles.main}>
+      {isConfirmMoveToTrashDialogOpen ? <ConfirmMoveToTrashDialog /> : null}
+
+      {/* Main */}
+      <div className={styles.main}>
         {pinnedNotes.length > 0 && (
           <div className={styles.container}>
             <h3 className={styles.title}>
@@ -92,7 +102,7 @@ const NoteList = () => {
             ))}
           </MasonryGrid>
         </div>
-      </main>
+      </div>
     </>
   ) : (
     <div className={styles.emptyContainer}>
