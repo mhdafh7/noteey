@@ -6,6 +6,7 @@ const getNotes = async (userId: string) => {
   return await prisma.note.findMany({
     where: {
       ownerId: userId,
+      deleted: false,
     },
     orderBy: {
       createdAt: Prisma.SortOrder.desc,
