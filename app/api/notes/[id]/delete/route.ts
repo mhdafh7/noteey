@@ -31,7 +31,7 @@ export async function PATCH(req: NextRequest, { params }: paramsType) {
       return badRequestResponse(messages.notes.errors.delete_note);
     }
 
-    return NextResponse.next({
+    return NextResponse.json({
       status: httpStatus.OK,
       statusText: messages.notes.success.delete_note,
     });
@@ -57,7 +57,7 @@ export async function DELETE(req: NextRequest, { params }: paramsType) {
       return badRequestResponse(messages.notes.errors.delete_note);
     }
 
-    return NextResponse.next({
+    return NextResponse.json({
       status: httpStatus.OK,
       statusText: messages.notes.success.delete_note,
     });
