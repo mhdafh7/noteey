@@ -27,6 +27,26 @@ const updateNoteById = async (id: string, note: Prisma.NoteUpdateInput) => {
   return res.json();
 };
 
-const NoteRoutes = { getNotes, createNote, updateNoteById };
+const moveToTrashNoteById = async (id: string) => {
+  const res = await fetch(`/api/notes/${id}/delete`, {
+    method: "PATCH",
+  });
+  return res.json();
+};
+
+const deleteNoteById = async (id: string) => {
+  const res = await fetch(`/api/notes/${id}`, {
+    method: "DELETE",
+  });
+  return res.json();
+};
+
+const NoteRoutes = {
+  getNotes,
+  createNote,
+  updateNoteById,
+  moveToTrashNoteById,
+  deleteNoteById,
+};
 
 export default NoteRoutes;

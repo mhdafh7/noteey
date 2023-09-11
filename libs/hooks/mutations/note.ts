@@ -27,3 +27,27 @@ export const useUpdateNote = (id: string) => {
     },
   });
 };
+
+export const useMoveToTrashNote = (id: string) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: () => NoteRoutes.moveToTrashNoteById(id),
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries(["notes"]);
+      toast.success(messages.notes.success.delete_note);
+    },
+  });
+};
+
+export const useDeleteNote = (id: string) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: () => NoteRoutes.deleteNoteById(id),
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries(["notes"]);
+      toast.success(messages.notes.success.delete_note);
+    },
+  });
+};

@@ -49,7 +49,6 @@ const updateNoteById = async (
   description?: string,
   isPinned?: boolean
 ) => {
-
   return await prisma.note.update({
     where: {
       id,
@@ -62,6 +61,44 @@ const updateNoteById = async (
   });
 };
 
-const NoteService = { getNotes, getNoteById, createNote, updateNoteById };
+const flagDeleteNoteById = async (id: string) => {
+  const note = await prisma.note.update({
+    where: {
+      id,
+    },
+    data: {
+      deleted: true,
+    },
+  });
+
+  if (!note) {
+    throw new Error(messages.notes.errors.delete_note);
+  }
+
+  return note;
+};
+
+const deleteNoteById = async (id: string) => {
+  const note = await prisma.note.delete({
+    where: {
+      id,
+    },
+  });
+
+  if (!note) {
+    throw new Error(messages.notes.errors.delete_note);
+  }
+
+  return note;
+};
+
+const NoteService = {
+  getNotes,
+  getNoteById,
+  createNote,
+  updateNoteById,
+  flagDeleteNoteById,
+  deleteNoteById,
+};
 
 export default NoteService;
