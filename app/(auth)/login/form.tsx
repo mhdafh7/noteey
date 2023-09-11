@@ -7,8 +7,8 @@ import { signIn } from "next-auth/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { toast } from "react-toastify";
 
+import Spinner from "@/components/Loaders/Spinner";
 import { GoogleLoginButton } from "./CustomLoginButtons";
-import Spinner from "@/components/Spinner";
 import { loginSchema } from "@/constants/formValidation";
 import { messages } from "@/constants/messages";
 

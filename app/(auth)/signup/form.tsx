@@ -8,7 +8,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import { SignUpSchema } from "@/constants/formValidation";
 import { messages } from "@/constants/messages";
-import Spinner from "@/components/Spinner";
+import Spinner from "@/components/Loaders/Spinner"
 
 import styles from "./styles.module.scss";
 
