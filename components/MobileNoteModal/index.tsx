@@ -10,7 +10,10 @@ import Delete from "../Svgs/Delete";
 import { useCurrentNoteStore } from "@/store/note";
 
 import styles from "./styles.module.scss";
-import { useCreateNote, useUpdateNote } from "@/libs/hooks/mutations/note";
+import {
+  useCreateNote,
+  useUpdateNote,
+} from "@/libs/hooks/mutations/note";
 import { messages } from "@/constants/messages";
 
 type FormEvent = {
@@ -27,6 +30,10 @@ const MobileNoteModal = () => {
   );
   const setIsModalOpen = useCurrentNoteStore(
     (state) => state.setIsNoteModalOpen
+  );
+
+  const setIsConfirmMoveToTrashDialogOpen = useCurrentNoteStore(
+    (state) => state.setIsConfirmMoveToTrashDialogOpen
   );
 
   const reducer = (
@@ -78,11 +85,14 @@ const MobileNoteModal = () => {
     dispatch({ type: "SET_DESCRIPTION", payload: e.target.value });
   };
 
+  const handleMoveToTrash = () => {
+    setIsConfirmMoveToTrashDialogOpen(true);
+  };
+
   const closeModal = () => {
     setIsModalOpen(false);
     resetCurrentNote();
   };
-
 
   useEffect(() => {
     if (createNoteMutation.isSuccess || updateNoteMutation.isSuccess) {
@@ -104,7 +114,7 @@ const MobileNoteModal = () => {
 
         <div className={styles.actions}>
           {!note.isPinned ? (
-            <span
+            <button
               title="Unpin note"
               className={styles.unpinned}
               onClick={() => {
@@ -112,9 +122,9 @@ const MobileNoteModal = () => {
               }}
             >
               <UnPin />
-            </span>
+            </button>
           ) : (
-            <span
+            <button
               title="Pin note"
               className={styles.pinned}
               onClick={() => {
@@ -122,10 +132,10 @@ const MobileNoteModal = () => {
               }}
             >
               <Pin />
-            </span>
+            </button>
           )}
           {isEdit ? (
-            <button className={styles.delete}>
+            <button className={styles.delete} onClick={handleMoveToTrash}>
               <Delete />
             </button>
           ) : null}
