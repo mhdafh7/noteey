@@ -24,6 +24,7 @@ const SignUpForm = () => {
   const handleSubmit = async (values: SignUpFormValues) => {
     setLoading(true);
     try {
+      // eslint-disable-next-line no-unused-vars
       const { confirmPassword, ...requiredValues } = values;
       const res = await fetch("/api/auth/signup", {
         method: "POST",
