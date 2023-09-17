@@ -25,6 +25,13 @@
     border-bottom: solid 3px $primary;
     border-radius: 0;
   }
+  .menuButton{
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
 
   .logo {
     font-family: "Space Grotesk", sans-serif;
