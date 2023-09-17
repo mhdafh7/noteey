@@ -61,7 +61,7 @@ const NoteList = () => {
               Pinned <span>Notes</span>
             </h3>
             <MasonryGrid
-              gap={23}
+              gap={29}
               defaultDirection="end"
               align="center"
               autoResize
@@ -82,8 +82,13 @@ const NoteList = () => {
           </div>
         )}
         <div className={styles.container}>
+          {pinnedNotes.length > 0 ? (
+            <h3 className={styles.title}>
+              Other <span>Notes</span>
+            </h3>
+          ) : null}
           <MasonryGrid
-            gap={23}
+            gap={29}
             defaultDirection="end"
             align="center"
             autoResize
