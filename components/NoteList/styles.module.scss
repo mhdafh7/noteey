@@ -18,6 +18,7 @@
 
     @media (max-width: 768px) {
       margin-bottom: 10vh;
+      margin-top: 10vh;
     }
 
     .title {
@@ -51,6 +52,7 @@
 
   @media (max-width: 768px) {
     flex-direction: column;
+    margin-top: 10vh;
   }
 
   li {
