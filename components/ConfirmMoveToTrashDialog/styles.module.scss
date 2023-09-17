@@ -4,6 +4,7 @@
 
 .overlay {
   @include overlay;
+  z-index: 1005;
 }
 
 .container {
