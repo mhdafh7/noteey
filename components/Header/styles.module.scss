@@ -2,19 +2,18 @@
 @import "/styles/utils/border-radii";
 
 .container {
-  // position: fixed;
+  position: fixed;
   z-index: 996;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 94vw;
+  gap: 1.5rem;
+  width: 100vw;
   padding-inline: 2vw;
   padding-block: 1rem;
-  margin-top: 1rem;
   color: $primary;
   background-color: $secondary;
-  border: solid 3px $primary;
-  border-radius: $rounded-lg;
+  border-bottom: solid 3px $primary ;
   text-transform: uppercase;
 
   @media (max-width: 768px) {
@@ -25,7 +24,7 @@
     border-bottom: solid 3px $primary;
     border-radius: 0;
   }
-  .menuButton{
+  .menuButton {
     all: unset;
     display: flex;
     align-items: center;
@@ -37,6 +36,7 @@
     font-family: "Space Grotesk", sans-serif;
     font-weight: bold;
     font-size: 1.3rem;
+    flex: 1;
   }
   .logOutBtn {
     display: flex;
