@@ -14,7 +14,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1001;
-  max-width: 70rem;
+  max-width: 50rem;
   width: 75%;
   border: solid 3px $primary;
   border-radius: $rounded-lg;
@@ -36,8 +36,7 @@
       transition: all 0.1s ease;
       border-radius: 5px;
 
-      &:focus,
-      &:hover {
+      &:focus {
         outline: 2px solid $accent;
       }
     }
@@ -49,7 +48,9 @@
     .description {
       font-family: "Space Grotesk", sans-serif;
       font-weight: 400;
-      resize: none;
+      resize: vertical;
+      flex-grow: 1;
+      min-height: 20rem;
     }
     .toolBar {
       width: 100%;
