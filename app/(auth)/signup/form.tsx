@@ -14,6 +14,8 @@ import styles from "./styles.module.scss";
 import AuthMutations from "@/libs/api/mutations/auth";
 
 type SignUpFormValues = {
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -27,7 +29,11 @@ const SignUpForm = () => {
   const handleSubmit = async (values: SignUpFormValues) => {
     setLoading(true);
     // eslint-disable-next-line no-unused-vars
-    const { confirmPassword, ...requiredValues } = values;
+    const { firstName, lastName, confirmPassword, ...restOfTheValues } = values;
+    const requiredValues = {
+      ...restOfTheValues,
+      name: `${firstName} ${lastName}`,
+    };
     signUpMutation.mutate(requiredValues);
   };
 
