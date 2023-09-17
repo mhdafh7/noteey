@@ -3,7 +3,6 @@
 import React from "react";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experimental";
-import ToastProvider from "./ToastProvider";
 
 function Providers({ children }: React.PropsWithChildren) {
   const [client] = React.useState(new QueryClient());
@@ -11,7 +10,7 @@ function Providers({ children }: React.PropsWithChildren) {
   return (
     <QueryClientProvider client={client}>
       <ReactQueryStreamedHydration>
-        <ToastProvider>{children}</ToastProvider>
+          {children}
       </ReactQueryStreamedHydration>
     </QueryClientProvider>
   );
