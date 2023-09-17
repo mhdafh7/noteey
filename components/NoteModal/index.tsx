@@ -3,7 +3,7 @@
 import styles from "./styles.module.scss";
 import { Field, Form, Formik } from "formik";
 import { Pin, UnPin } from "../Svgs/Pins";
-import { Delete } from "react-feather";
+import { Trash2 } from "react-feather";
 import ReactDOM from "react-dom";
 import { useCurrentNoteStore } from "@/store/note";
 import { useUpdateNote } from "@/libs/hooks/mutations/note";
@@ -16,6 +16,15 @@ type Props = {
 
 const NoteModal = ({ setIsModalOpen }: Props) => {
   const currentNote = useCurrentNoteStore((state) => state.currentNote);
+
+  const setIsConfirmMoveToTrashDialogOpen = useCurrentNoteStore(
+    (state) => state.setIsConfirmMoveToTrashDialogOpen
+  );
+
+  const handleMoveToTrash = () => {
+    setIsConfirmMoveToTrashDialogOpen(true);
+  };
+
   const initialValues = {
     title: currentNote.title,
     description: currentNote.description,
@@ -58,10 +67,11 @@ const NoteModal = ({ setIsModalOpen }: Props) => {
                 className={styles.title}
                 placeholder="Note Title."
                 maxLength={50}
+                autoComplete="off"
               />
               {errors.title && <p>{errors.title}</p>}
               <Field
-                type="textarea"
+                as="textarea"
                 name="description"
                 cols={20}
                 rows={6}
@@ -71,6 +81,7 @@ const NoteModal = ({ setIsModalOpen }: Props) => {
                 className={styles.description}
                 placeholder="Note description..."
                 maxLength={500}
+                autoComplete="off"
               />
               {errors.description && <p>{errors.description}</p>}
               <div className={styles.toolBar}>
@@ -108,9 +119,13 @@ const NoteModal = ({ setIsModalOpen }: Props) => {
                       <Pin />
                     </button>
                   )}
-                  <span className={styles.delete}>
-                    <Delete />
-                  </span>
+                  <button
+                    className={styles.delete}
+                    type="button"
+                    onClick={handleMoveToTrash}
+                  >
+                    <Trash2 />
+                  </button>
                 </span>
                 <button type="submit" className={styles.done}>
                   Save note
