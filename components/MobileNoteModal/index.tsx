@@ -115,7 +115,7 @@ const MobileNoteModal = () => {
         <div className={styles.actions}>
           {!note.isPinned ? (
             <button
-              title="Unpin note"
+              title="Pin note"
               className={styles.unpinned}
               onClick={() => {
                 dispatch({ type: "SET_PIN", payload: true });
@@ -125,7 +125,7 @@ const MobileNoteModal = () => {
             </button>
           ) : (
             <button
-              title="Pin note"
+              title="Unpin note"
               className={styles.pinned}
               onClick={() => {
                 dispatch({ type: "SET_PIN", payload: false });
