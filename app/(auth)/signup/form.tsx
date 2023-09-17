@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
@@ -8,9 +8,10 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import { SignUpSchema } from "@/constants/formValidation";
 import { messages } from "@/constants/messages";
-import Spinner from "@/components/Loaders/Spinner"
+import Spinner from "@/components/Loaders/Spinner";
 
 import styles from "./styles.module.scss";
+import AuthMutations from "@/libs/api/mutations/auth";
 
 type SignUpFormValues = {
   email: string;
@@ -21,31 +22,25 @@ type SignUpFormValues = {
 const SignUpForm = () => {
   const [loading, setLoading] = useState(false);
 
+  const signUpMutation = AuthMutations.useSignUp();
+
   const handleSubmit = async (values: SignUpFormValues) => {
     setLoading(true);
-    try {
-      // eslint-disable-next-line no-unused-vars
-      const { confirmPassword, ...requiredValues } = values;
-      const res = await fetch("/api/auth/signup", {
-        method: "POST",
-        body: JSON.stringify(requiredValues),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      setLoading(false);
-      if (!res.ok) {
-        toast.error((await res.json()).message);
-        return;
-      }
+    // eslint-disable-next-line no-unused-vars
+    const { confirmPassword, ...requiredValues } = values;
+    signUpMutation.mutate(requiredValues);
+  };
+
+  useEffect(() => {
+    setLoading(false);
+    if (signUpMutation.isSuccess) {
       toast.success(messages.auth.success.signup);
       signIn(undefined, { callbackUrl: "/" });
-    } catch (error) {
-      setLoading(false);
-      console.error(error);
+    }
+    if (signUpMutation.isError) {
       toast.error(messages.auth.errors.signup);
     }
-  };
+  }, [signUpMutation.isSuccess, signUpMutation.isError]);
 
   return (
     <Formik
