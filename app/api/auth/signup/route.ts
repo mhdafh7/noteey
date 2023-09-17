@@ -3,9 +3,9 @@ import { prisma } from "@/libs/db";
 import { Prisma } from "@prisma/client";
 import { hash } from "bcrypt";
 import httpStatus from "http-status";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const existingUser = await prisma.user.findUnique({
       where: {
@@ -44,12 +44,6 @@ export async function POST(req: Request) {
       },
     });
   } catch (error: any) {
-    return new NextResponse(
-      JSON.stringify({
-        status: "error",
-        message: error.message,
-      }),
-      { status: httpStatus.BAD_REQUEST }
-    );
+    throw new Error(error.message);
   }
 }
