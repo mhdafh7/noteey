@@ -43,10 +43,12 @@
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
+    & > * {
+      color: $danger;
+    }
     p {
       font-weight: bold;
       font-size: 0.8rem;
-      color: $primary;
       text-transform: uppercase;
 
       @media (max-width: 768px) {
@@ -56,6 +58,9 @@
 
     &:hover {
       background-color: $danger;
+      & > * {
+        color: $secondary;
+      }
       transform: translate(-4px, -4px);
       box-shadow: 4px 4px 0px 0px $primary;
     }
