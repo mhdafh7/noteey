@@ -65,7 +65,7 @@ const NoteList = () => {
                 <MasonryGrid
                   gap={29}
                   defaultDirection="end"
-                  align="center"
+                  align="start"
                   autoResize
                 >
                   {pinnedNotes.map((note: Note) => (
@@ -92,7 +92,7 @@ const NoteList = () => {
               <MasonryGrid
                 gap={29}
                 defaultDirection="end"
-                align="center"
+                align="start"
                 autoResize
               >
                 {unpinnedNotes.map((note: Note) => (

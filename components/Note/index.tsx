@@ -26,9 +26,9 @@ const Note = (note: Omit<Note, "deleted">) => {
 
         {note.title === "" && note.description === "" ? (
           <div className={styles.title}>Empty Note</div>
-        ) : (
+        ) : note.title !== "" ? (
           <div className={styles.title}>{note.title}</div>
-        )}
+        ) : null}
         <p className={styles.body}>{note.description}</p>
       </article>
     </>
