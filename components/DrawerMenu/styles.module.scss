@@ -50,6 +50,7 @@
       .listItem {
         justify-content: flex-start;
         padding: 1.3rem 1rem;
+        border: 2px solid $primary;
 
         p {
           display: block;
@@ -80,24 +81,27 @@
       cursor: pointer;
       transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       border-radius: $rounded-3xl;
+      border: 2px solid $primary;
+      box-shadow: $secondary 2px 2px 0px;
 
       p {
         display: none;
       }
 
       &:hover {
-        background-color: $primary;
-        color: $secondary;
+        border: solid 2px $primary;
+        box-shadow: $primary 5px 5px 0px;
       }
     }
 
     .activeTab {
       @extend .listItem;
-      background-color: $primary;
-      color: $secondary;
+      border: solid 2px $primary;
+      box-shadow: $primary 2px 2px 0px;
+      background-color: $accent-2;
 
       &:hover {
-        opacity: 0.7;
+        box-shadow: $primary 5px 5px 0px;
       }
     }
   }
