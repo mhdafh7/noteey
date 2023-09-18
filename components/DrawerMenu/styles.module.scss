@@ -15,9 +15,10 @@
   transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
   @media (max-width: 768px) {
-    display: none;
     position: fixed;
-    left: -100%;
+    padding: 0;
+    border: none;
+    width: 0;
   }
 
   &:hover {
@@ -39,6 +40,12 @@
     display: flex;
     width: 15rem;
 
+    @media (max-width: 768px) {
+      width: 20rem;
+      border-right: solid 3px $primary;
+      padding: 0.5rem;
+    }
+
     .list {
       li {
         justify-content: flex-start;
@@ -48,18 +55,6 @@
           display: block;
         }
       }
-    }
-  }
-
-  @media (max-width: 768px) {
-    width: 0;
-    padding: 0;
-    top: 0;
-    left: -100%;
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-    &:hover {
-      width: 0;
     }
   }
 
