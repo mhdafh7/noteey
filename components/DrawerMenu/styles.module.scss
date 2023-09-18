@@ -1,0 +1,100 @@
+@import "/styles/utils/colors";
+@import "/styles/utils/border-radii";
+
+.container {
+  z-index: 996;
+  display: flex;
+  align-items: flex-start;
+  margin-top: 8vh;
+  width: 4rem;
+  height: 92vh;
+  background-color: $secondary;
+  border-right: solid 3px $primary;
+  overflow: hidden;
+  padding: 0.5rem;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  @media (max-width: 768px) {
+    display: none;
+    position: fixed;
+    left: -100%;
+  }
+
+  &:hover {
+    width: 15rem;
+
+    .list {
+      li {
+        justify-content: flex-start;
+        padding: 1.3rem 1rem;
+
+        p {
+          display: block;
+        }
+      }
+    }
+  }
+
+  &.open {
+    display: flex;
+    width: 15rem;
+
+    .list {
+      li {
+        justify-content: flex-start;
+        padding: 1.3rem 1rem;
+
+        p {
+          display: block;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 0;
+    padding: 0;
+    top: 0;
+    left: -100%;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    &:hover {
+      width: 0;
+    }
+  }
+
+  .list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: $primary;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-top: 1rem;
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      width: 100%;
+      padding: 0.6rem;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border-radius: $rounded-lg;
+
+      p {
+        display: none;
+      }
+
+      &:hover {
+        border: solid 3px $secondary inset;
+        background-color: $primary;
+        color: $secondary;
+      }
+    }
+  }
+}
