@@ -5,10 +5,10 @@ import { useDrawerStore } from "@/store/drawer";
 import styles from "./styles.module.scss";
 
 const DrawerButton = () => {
-  const setIsDrawerOpen = useDrawerStore((state) => state.setIsDrawerOpen);
+  const toggleDrawer = useDrawerStore((state) => state.toggleDrawer);
 
   const handleClick = () => {
-    setIsDrawerOpen(true);
+    toggleDrawer();
   };
   return (
     <button className={styles.menuButton} onClick={handleClick}>
