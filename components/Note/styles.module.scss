@@ -14,7 +14,8 @@
   padding: 2rem;
   margin: 0.5rem;
   position: relative;
-  width: clamp(10rem, 100%, 22rem);
+  width: max-content;
+  max-width: 22rem;
   border: solid 2px $primary;
   border-radius: $rounded-lg;
   box-shadow: $primary 5px 5px 0px;
