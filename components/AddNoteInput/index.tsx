@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useEffect, useRef, FormEvent, useReducer } from "react";
-import styles from "./styles.module.scss";
+import ReactTextareaAutosize from "react-textarea-autosize";
 import { Pin, UnPin } from "../Svgs/Pins";
 import { Prisma } from "@prisma/client";
 import { useCreateNote } from "@/libs/hooks/mutations/note";
+
+import styles from "./styles.module.scss";
 
 const AddNote = () => {
   const reducer = (
@@ -40,6 +42,19 @@ const AddNote = () => {
 
   const formRef = useRef<HTMLFormElement>(null);
 
+  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch({
+      type: "SET_DESCRIPTION",
+      payload: e.target.value,
+    });
+  };
+
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: "SET_TITLE",
+      payload: e.target.value,
+    });
+  };
   const createNoteMutation = useCreateNote();
 
   const handleSubmit = async (e: FormEvent) => {
@@ -79,27 +94,21 @@ const AddNote = () => {
                 type="text"
                 placeholder="Title"
                 value={note.title}
-                onChange={(e) => {
-                  dispatch({ type: "SET_TITLE", payload: e.target.value });
-                }}
+                onChange={handleTitleChange}
                 onFocus={() => {
                   setShowInput(true);
                 }}
               />
             </div>
           ) : null}
-          <textarea
+          <ReactTextareaAutosize
             className={styles.bodyInput}
-            cols={20}
-            rows={2}
+            minRows={2}
+            maxRows={10}
+            maxLength={1000}
             placeholder="Add a note..."
             value={note.description}
-            onChange={(e) => {
-              dispatch({
-                type: "SET_DESCRIPTION",
-                payload: e.target.value,
-              });
-            }}
+            onChange={handleTextareaChange}
             onFocus={() => {
               setShowInput(true);
             }}
