@@ -105,6 +105,15 @@ const getNotesInTrash = async (userId: string) => {
   });
 };
 
+const emptyTrash = async (userId: string) => {
+  return await prisma.note.deleteMany({
+    where: {
+      ownerId: userId,
+      deleted: true,
+    },
+  });
+};
+
 const NoteService = {
   getNotes,
   getNoteById,
@@ -113,6 +122,7 @@ const NoteService = {
   flagDeleteNoteById,
   deleteNoteById,
   getNotesInTrash,
+  emptyTrash,
 };
 
 export default NoteService;

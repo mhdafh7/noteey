@@ -22,3 +22,21 @@ export async function GET() {
     return badRequestResponse(error.message);
   }
 }
+
+export async function DELETE() {
+  try {
+    const session = await getServerSession(authOptions);
+
+    if (!session || !session.user) {
+      return unauthorizedResponse();
+    }
+
+    await NoteService.emptyTrash(session.user.id);
+
+    return NextResponse.next({
+      status: httpStatus.NO_CONTENT,
+    });
+  } catch (error: any) {
+    return badRequestResponse(error.message);
+  }
+}
