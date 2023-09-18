@@ -1,17 +1,30 @@
 "use client";
 
 import { Edit2, Trash } from "react-feather";
+import { usePathname } from "next/navigation";
 import { DrawerState, useDrawerStore } from "@/store/drawer";
 
 import styles from "./styles.module.scss";
 import Link from "next/link";
+import { useEffect } from "react";
 
 const DrawerMenu = () => {
-  const { activeTab, isDrawerOpen, toggleDrawer } = useDrawerStore();
+  const { activeTab, isDrawerOpen, setCurrentSelected, toggleDrawer } =
+    useDrawerStore();
+
+  const currentPath = usePathname();
 
   const drawerClass = isDrawerOpen
     ? `${styles.container} ${styles.open}`
     : styles.container;
+
+  useEffect(() => {
+    if (currentPath === "/") {
+      setCurrentSelected(DrawerState.HOME);
+    } else if (currentPath === "/trash") {
+      setCurrentSelected(DrawerState.TRASH);
+    }
+  }, [currentPath, setCurrentSelected]);
 
   return (
     <>
