@@ -1,0 +1,71 @@
+@import "@/styles/utils/mixins";
+@import "@/styles/utils/border-radii";
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5rem;
+  padding-top: 12vh;
+  padding-inline: 2rem;
+  width: 100%;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    .title {
+      @include title;
+      margin-right: 2rem;
+    }
+
+    button {
+      all: unset;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      font-family: "Space Grotesk", sans-serif;
+      transition: all 0.2s ease-in;
+      border-style: solid;
+      border-width: 2px;
+      border-radius: $rounded-2xl;
+      background-color: $secondary;
+      cursor: pointer;
+
+      &:hover {
+        border: solid 2px $primary;
+        translate: -3px -3px;
+        box-shadow: $primary 5px 5px 0px;
+      }
+    }
+    .emptyTrashBtn {
+      border-color: $danger;
+      box-shadow: $danger 2px 2px 0px;
+      color: $danger;
+      &:hover {
+        border-color: $danger-hover;
+        color: $secondary;
+        background-color: $danger;
+        box-shadow: $danger-hover 5px 5px 0px;
+      }
+    }
+
+    .restoreAllBtn {
+      border-color: $misc;
+      box-shadow: $primary 2px 2px 0px;
+      color: $primary;
+      &:hover {
+        box-shadow: $primary 5px 5px 0px;
+        background-color: $misc;
+        color: $secondary;
+      }
+    }
+  }
+
+  .noteList {
+    width: 100%;
+  }
+}
