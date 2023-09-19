@@ -58,7 +58,7 @@ export const useEmptyTrash = () => {
     mutationFn: () => NoteRoutes.emptyTrash(),
     onSuccess: () => {
       // Invalidate and refetch
-      queryClient.invalidateQueries(["notes"]);
+      queryClient.invalidateQueries(["notesInTrash"]);
       toast.success(messages.trash.success.empty_trash);
     },
   });
