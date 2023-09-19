@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { MasonryGrid } from "@egjs/react-grid";
 import { AlertTriangle, RefreshCcw } from "react-feather";
 import NoteQueries from "@/libs/hooks/queries/note";
@@ -9,11 +10,14 @@ import ListItemsSkelton from "@/components/NoteList/ListItemsSkelton";
 import styles from "./trash.module.scss";
 import { useCurrentNoteStore } from "@/store/note";
 import ConfirmEmptyTrashDialog from "./ConfirmEmptyTrashDialog";
+import NoteMutation from "@/libs/hooks/mutations/note";
 
 const Trash = () => {
   const getTrashItemsQuery = NoteQueries.useGetNotesInTrash();
   const { isConfirmEmptyTrashDialogOpen, setIsConfirmEmptyTrashDialogOpen } =
     useCurrentNoteStore();
+
+  const restoreAllMutation = NoteMutation.useRestoreAllNotes();
 
   const renderNotes = () => (
     <MasonryGrid
@@ -34,18 +38,42 @@ const Trash = () => {
     setIsConfirmEmptyTrashDialogOpen(true);
   };
 
+  const handleRestoreAll = () => {
+    restoreAllMutation.mutate();
+  };
+
+  useEffect(
+    () => {
+      if (restoreAllMutation.isSuccess) {
+        getTrashItemsQuery.refetch();
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [restoreAllMutation.isSuccess]
+  );
+
   return (
     <>
       {isConfirmEmptyTrashDialogOpen ? <ConfirmEmptyTrashDialog /> : null}
       <main className={styles.container}>
         <header className={styles.header}>
           <h3 className={styles.title}>Trash</h3>
-          <button className={styles.emptyTrashBtn} onClick={handleEmptyTrash}>
-            <AlertTriangle /> Empty Trash
-          </button>
-          <button className={styles.restoreAllBtn}>
-            <RefreshCcw /> Restore All
-          </button>
+          {getTrashItemsQuery.data?.length !== 0 ? (
+            <>
+              <button
+                className={styles.emptyTrashBtn}
+                onClick={handleEmptyTrash}
+              >
+                <AlertTriangle /> Empty Trash
+              </button>
+              <button
+                className={styles.restoreAllBtn}
+                onClick={handleRestoreAll}
+              >
+                <RefreshCcw /> Restore All
+              </button>
+            </>
+          ) : null}
         </header>
         <section className={styles.noteList}>
           {getTrashItemsQuery.isLoading ? (
