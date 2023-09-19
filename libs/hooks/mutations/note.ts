@@ -4,7 +4,7 @@ import { Note, Prisma } from "@prisma/client";
 import NoteRoutes from "@/libs/api/routes/note.routes";
 import { messages } from "@/constants/messages";
 
-export const useCreateNote = () => {
+const useCreateNote = () => {
   const queryClient = useQueryClient();
   return useMutation<Note, Error, Omit<Prisma.NoteCreateInput, "owner">, null>({
     mutationFn: (note) => NoteRoutes.createNote(note),
@@ -16,7 +16,7 @@ export const useCreateNote = () => {
   });
 };
 
-export const useUpdateNote = (id: string) => {
+const useUpdateNote = (id: string) => {
   const queryClient = useQueryClient();
   return useMutation<Note, Error, Prisma.NoteUpdateInput, null>({
     mutationFn: (note) => NoteRoutes.updateNoteById(id, note),
@@ -28,7 +28,7 @@ export const useUpdateNote = (id: string) => {
   });
 };
 
-export const useMoveToTrashNote = (id: string) => {
+const useMoveToTrashNote = (id: string) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => NoteRoutes.moveToTrashNoteById(id),
@@ -40,7 +40,7 @@ export const useMoveToTrashNote = (id: string) => {
   });
 };
 
-export const useDeleteNote = (id: string) => {
+const useDeleteNote = (id: string) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => NoteRoutes.deleteNoteById(id),
@@ -52,7 +52,7 @@ export const useDeleteNote = (id: string) => {
   });
 };
 
-export const useEmptyTrash = () => {
+const useEmptyTrash = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => NoteRoutes.emptyTrash(),
@@ -63,3 +63,13 @@ export const useEmptyTrash = () => {
     },
   });
 };
+
+const NoteMutation = {
+  useCreateNote,
+  useUpdateNote,
+  useMoveToTrashNote,
+  useDeleteNote,
+  useEmptyTrash,
+};
+
+export default NoteMutation;

@@ -1,14 +1,15 @@
 "use client";
 
-import styles from "./styles.module.scss";
-import { Field, Form, Formik } from "formik";
-import { Pin, UnPin } from "../Svgs/Pins";
-import { Trash2 } from "react-feather";
-import ReactDOM from "react-dom";
-import { useCurrentNoteStore } from "@/store/note";
-import { useUpdateNote } from "@/libs/hooks/mutations/note";
-import { Prisma } from "@prisma/client";
 import { useEffect } from "react";
+import { Field, Form, Formik } from "formik";
+import ReactDOM from "react-dom";
+import { Trash2 } from "react-feather";
+import { Prisma } from "@prisma/client";
+import { useCurrentNoteStore } from "@/store/note";
+import NoteMutation from "@/libs/hooks/mutations/note";
+import { Pin, UnPin } from "../Svgs/Pins";
+
+import styles from "./styles.module.scss";
 
 type Props = {
   setIsModalOpen: (isNoteModalOpen: boolean) => void;
@@ -31,7 +32,7 @@ const NoteModal = ({ setIsModalOpen }: Props) => {
     isPinned: currentNote.isPinned,
   };
 
-  const updateNoteMutation = useUpdateNote(currentNote.id);
+  const updateNoteMutation = NoteMutation.useUpdateNote(currentNote.id);
 
   const handleSubmit = (values: Prisma.NoteUpdateInput) => {
     updateNoteMutation.mutate({

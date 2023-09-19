@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 
 import Image from "next/image";
 
-import { useMoveToTrashNote } from "@/libs/hooks/mutations/note";
+import NoteMutation from "@/libs/hooks/mutations/note";
 import { useCurrentNoteStore } from "@/store/note";
 
 import styles from "./styles.module.scss";
@@ -19,7 +19,9 @@ const ConfirmMoveToTrashDialog = () => {
     (state) => state.setIsConfirmMoveToTrashDialogOpen
   );
 
-  const moveToTrashMutation = useMoveToTrashNote(currentNote.id || "");
+  const moveToTrashMutation = NoteMutation.useMoveToTrashNote(
+    currentNote.id || ""
+  );
 
   const handleMoveToTrash = () => {
     moveToTrashMutation.mutate();

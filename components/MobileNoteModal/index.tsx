@@ -10,10 +10,7 @@ import Delete from "../Svgs/Delete";
 import { useCurrentNoteStore } from "@/store/note";
 
 import styles from "./styles.module.scss";
-import {
-  useCreateNote,
-  useUpdateNote,
-} from "@/libs/hooks/mutations/note";
+import NoteMutation from "@/libs/hooks/mutations/note";
 import { messages } from "@/constants/messages";
 
 type FormEvent = {
@@ -66,8 +63,8 @@ const MobileNoteModal = () => {
 
   const isEdit = currentNote.id && currentNote.id !== "" ? true : false;
 
-  const createNoteMutation = useCreateNote();
-  const updateNoteMutation = useUpdateNote(currentNote.id || "");
+  const createNoteMutation = NoteMutation.useCreateNote();
+  const updateNoteMutation = NoteMutation.useUpdateNote(currentNote.id || "");
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();

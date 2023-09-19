@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, FormEvent, useReducer } from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { Pin, UnPin } from "../Svgs/Pins";
 import { Prisma } from "@prisma/client";
-import { useCreateNote } from "@/libs/hooks/mutations/note";
+import NoteMutation from "@/libs/hooks/mutations/note";
 
 import styles from "./styles.module.scss";
 
@@ -55,7 +55,7 @@ const AddNote = () => {
       payload: e.target.value,
     });
   };
-  const createNoteMutation = useCreateNote();
+  const createNoteMutation = NoteMutation.useCreateNote();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
