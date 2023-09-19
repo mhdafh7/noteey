@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import DrawerMenu from "@/components/DrawerMenu";
-import MobileBottomNavbar from "@/components/MobileBottomNavbar";
 
 import styles from "./Home.module.scss";
 
@@ -14,7 +13,6 @@ export default function HomeLayout({
       <Header />
       <DrawerMenu />
       {children}
-      <MobileBottomNavbar />
     </section>
   );
 }
