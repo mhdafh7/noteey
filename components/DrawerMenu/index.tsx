@@ -1,12 +1,13 @@
 "use client";
 
+import { useEffect } from "react";
+import Link from "next/link";
 import { Edit2, Trash } from "react-feather";
 import { usePathname } from "next/navigation";
-import { DrawerState, useDrawerStore } from "@/store/drawer";
+import { useDrawerStore } from "@/store/drawer";
+import { UrlEnum } from "@/enum/url";
 
 import styles from "./styles.module.scss";
-import Link from "next/link";
-import { useEffect } from "react";
 
 const DrawerMenu = () => {
   const { activeTab, isDrawerOpen, setCurrentSelected, toggleDrawer } =
@@ -20,9 +21,9 @@ const DrawerMenu = () => {
 
   useEffect(() => {
     if (currentPath === "/") {
-      setCurrentSelected(DrawerState.HOME);
+      setCurrentSelected(UrlEnum.HOME);
     } else if (currentPath === "/trash") {
-      setCurrentSelected(DrawerState.TRASH);
+      setCurrentSelected(UrlEnum.TRASH);
     }
   }, [currentPath, setCurrentSelected]);
 
@@ -33,7 +34,7 @@ const DrawerMenu = () => {
           <Link
             href={"/"}
             className={
-              activeTab === DrawerState.HOME
+              activeTab === UrlEnum.HOME
                 ? `${styles.activeTab}`
                 : `${styles.listItem}`
             }
@@ -44,7 +45,7 @@ const DrawerMenu = () => {
           <Link
             href={"/trash"}
             className={
-              activeTab === DrawerState.TRASH
+              activeTab === UrlEnum.TRASH
                 ? `${styles.activeTab}`
                 : `${styles.listItem}`
             }
