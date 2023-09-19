@@ -84,6 +84,11 @@
       border: 2px solid $primary;
       box-shadow: $secondary 2px 2px 0px;
 
+      @media (max-width: 768px) {
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
+      }
+
       p {
         display: none;
       }
