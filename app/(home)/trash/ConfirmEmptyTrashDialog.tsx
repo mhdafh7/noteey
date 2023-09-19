@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import ReactDOM from "react-dom";
 import Image from "next/image";
 import { useCurrentNoteStore } from "@/store/note";
@@ -15,6 +16,12 @@ const ConfirmEmptyTrashDialog = () => {
   const handleConfirmEmptyTrash = () => {
     emptyTrashMutation.mutate();
   };
+
+  useEffect(() => {
+    if (emptyTrashMutation.isSuccess) {
+      setIsConfirmEmptyTrashDialogOpen(false);
+    }
+  }, [emptyTrashMutation.isSuccess]);
 
   return ReactDOM.createPortal(
     <>
