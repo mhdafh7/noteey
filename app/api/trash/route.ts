@@ -5,6 +5,7 @@ import { authOptions } from "@/libs/authOptions";
 import { unauthorizedResponse, badRequestResponse } from "@/libs/apiHelpers";
 import NoteService from "@/libs/api/services/note.service";
 
+// *** Get all notes in trash***
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);
@@ -23,6 +24,7 @@ export async function GET() {
   }
 }
 
+// *** Empty trash ***
 export async function DELETE() {
   try {
     const session = await getServerSession(authOptions);
