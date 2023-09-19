@@ -10,28 +10,26 @@ const Note = (note: Omit<Note, "deleted">) => {
   const setModalOpen = useCurrentNoteStore((state) => state.setIsNoteModalOpen);
 
   return (
-    <>
-      <article
-        className={styles.container}
-        onClick={() => {
-          setCurrentNote(note);
-          setModalOpen(true);
-        }}
-      >
-        {note.isPinned ? (
-          <span className={styles.pinned}>
-            <Pin />
-          </span>
-        ) : null}
+    <article
+      className={styles.container}
+      onClick={() => {
+        setCurrentNote(note);
+        setModalOpen(true);
+      }}
+    >
+      {note.isPinned ? (
+        <span className={styles.pinned}>
+          <Pin />
+        </span>
+      ) : null}
 
-        {note.title === "" && note.description === "" ? (
-          <div className={styles.title}>Empty Note</div>
-        ) : note.title !== "" ? (
-          <div className={styles.title}>{note.title}</div>
-        ) : null}
-        <p className={styles.body}>{note.description}</p>
-      </article>
-    </>
+      {note.title === "" && note.description === "" ? (
+        <div className={styles.title}>Empty Note</div>
+      ) : note.title !== "" ? (
+        <div className={styles.title}>{note.title}</div>
+      ) : null}
+      <p className={styles.body}>{note.description}</p>
+    </article>
   );
 };
 export default Note;
