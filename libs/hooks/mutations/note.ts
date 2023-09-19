@@ -51,3 +51,15 @@ export const useDeleteNote = (id: string) => {
     },
   });
 };
+
+export const useEmptyTrash = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: () => NoteRoutes.emptyTrash(),
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries(["notes"]);
+      toast.success(messages.trash.success.empty_trash);
+    },
+  });
+};
