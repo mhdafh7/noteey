@@ -10,14 +10,14 @@ import NoteItem from "../Note";
 import NoteModal from "../NoteModal";
 import MobileNoteModal from "../MobileNoteModal";
 
-import { useGetNotes } from "@/libs/hooks/queries/note";
+import NoteQueries from "@/libs/hooks/queries/note";
 import ListItemsSkelton from "./ListItemsSkelton";
 import ConfirmMoveToTrashDialog from "../ConfirmMoveToTrashDialog";
 
 import styles from "./styles.module.scss";
 
 const NoteList = () => {
-  const notes = useGetNotes();
+  const notes = NoteQueries.useGetNotes();
   const [noteList, setNoteList] = useState<Note[]>([]);
 
   const isNoteModalOpen = useCurrentNoteStore((state) => state.isNoteModalOpen);
