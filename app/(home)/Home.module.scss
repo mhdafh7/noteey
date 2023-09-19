@@ -1,6 +1,6 @@
 .container {
   padding: 0;
-  min-height: 100vh;
+  height: 100vh;
   overflow-x: hidden;
   display: flex;
   justify-content: flex-start;
@@ -13,9 +13,10 @@
     width: 100%;
     flex: 1;
     gap: 7rem;
+    overflow-y: auto;
 
     @media (max-width: 768px) {
-      padding: 2rem 1rem;
+      padding: 2rem 0.5rem;
     }
   }
 }
