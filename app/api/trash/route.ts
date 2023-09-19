@@ -35,7 +35,7 @@ export async function DELETE() {
 
     await NoteService.emptyTrash(session.user.id);
 
-    return NextResponse.next({
+    return NextResponse.json({
       status: httpStatus.NO_CONTENT,
     });
   } catch (error: any) {
