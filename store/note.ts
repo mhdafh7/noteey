@@ -11,7 +11,13 @@ type NoteStore = {
   setIsNoteModalOpen: (isNoteModalOpen: boolean) => void;
   isConfirmMoveToTrashDialogOpen: boolean;
   setIsConfirmMoveToTrashDialogOpen: (
+    // eslint-disable-next-line no-unused-vars
     isConfirmMoveToTrashDialogOpen: boolean
+  ) => void;
+  isConfirmEmptyTrashDialogOpen: boolean;
+  setIsConfirmEmptyTrashDialogOpen: (
+    // eslint-disable-next-line no-unused-vars
+    isConfirmEmptyTrashDialogOpen: boolean
   ) => void;
 };
 
@@ -56,5 +62,11 @@ export const useCurrentNoteStore = create<NoteStore>((set) => ({
     set((state) => ({
       ...state,
       isConfirmMoveToTrashDialogOpen,
+    })),
+  isConfirmEmptyTrashDialogOpen: false,
+  setIsConfirmEmptyTrashDialogOpen: (isConfirmEmptyTrashDialogOpen: boolean) =>
+    set((state) => ({
+      ...state,
+      isConfirmEmptyTrashDialogOpen,
     })),
 }));

@@ -69,3 +69,57 @@
     width: 100%;
   }
 }
+
+.confirmDialog {
+  @include dialog;
+
+  .title {
+    @include title;
+    margin-bottom: 1rem;
+  }
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    .cancelButton,
+    .confirmButton {
+      cursor: pointer;
+      padding: 0.5rem;
+      display: flex;
+      height: 2.8rem;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.1s ease-in;
+      border: solid $primary 1px;
+      border-radius: 5px;
+      box-shadow: 2px 2px 0px 0px $primary;
+      font-size: 1rem;
+
+      &:hover,
+      &:focus {
+        translate: -2px -2px;
+        box-shadow: 4px 4px 0px 0px $primary;
+      }
+    }
+
+    .cancelButton {
+      background-color: transparent;
+    }
+    .confirmButton {
+      background-color: $danger;
+      color: $secondary;
+
+      &:hover,
+      &:focus {
+        background-color: $danger-hover;
+      }
+    }
+  }
+}
+.overlay {
+  @include overlay;
+}
