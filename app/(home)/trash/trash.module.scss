@@ -123,3 +123,12 @@
 .overlay {
   @include overlay;
 }
+
+.emptyMessage {
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}

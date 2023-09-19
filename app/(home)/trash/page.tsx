@@ -1,16 +1,19 @@
 "use client";
 
 import { useEffect } from "react";
+
+import Image from "next/image";
+
 import { MasonryGrid } from "@egjs/react-grid";
 import { AlertTriangle, RefreshCcw } from "react-feather";
 import NoteQueries from "@/libs/hooks/queries/note";
+import NoteMutation from "@/libs/hooks/mutations/note";
+import { useCurrentNoteStore } from "@/store/note";
 import Note from "@/components/Note";
 import ListItemsSkelton from "@/components/NoteList/ListItemsSkelton";
+import ConfirmEmptyTrashDialog from "./ConfirmEmptyTrashDialog";
 
 import styles from "./trash.module.scss";
-import { useCurrentNoteStore } from "@/store/note";
-import ConfirmEmptyTrashDialog from "./ConfirmEmptyTrashDialog";
-import NoteMutation from "@/libs/hooks/mutations/note";
 
 const Trash = () => {
   const getTrashItemsQuery = NoteQueries.useGetNotesInTrash();
@@ -79,7 +82,15 @@ const Trash = () => {
           {getTrashItemsQuery.isLoading ? (
             <ListItemsSkelton />
           ) : getTrashItemsQuery.data?.length === 0 ? (
-            <p>Trash is empty!</p>
+            <div className={styles.emptyMessage}>
+              <Image
+                src="/images/empty-box.png"
+                width={300}
+                height={300}
+                alt="empty"
+              />
+              <h3>There is nothing here!</h3>
+            </div>
           ) : (
             renderNotes()
           )}
