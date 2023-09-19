@@ -29,4 +29,14 @@ export const messages = {
       delete_note: "Successfully deleted note",
     },
   },
+  trash: {
+    errors: {
+      get_notes: "Failed to get notes in trash",
+      empty_trash: "Failed to empty trash",
+    },
+    success: {
+      get_notes: "Successfully got notes in trash",
+      empty_trash: "Successfully emptied trash",
+    },
+  },
 };
