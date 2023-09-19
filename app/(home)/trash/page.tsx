@@ -60,7 +60,6 @@ const Trash = () => {
       {isConfirmEmptyTrashDialogOpen ? <ConfirmEmptyTrashDialog /> : null}
       <main className={styles.container}>
         <header className={styles.header}>
-          <h3 className={styles.title}>Trash</h3>
           {getTrashItemsQuery.data?.length !== 0 ? (
             <>
               <button

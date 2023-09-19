@@ -16,10 +16,6 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    .title {
-      @include title;
-      margin-right: 2rem;
-    }
 
     button {
       all: unset;
