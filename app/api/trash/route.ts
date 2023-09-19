@@ -42,3 +42,22 @@ export async function DELETE() {
     return badRequestResponse(error.message);
   }
 }
+
+// *** Restore all note ***
+export async function PATCH() {
+  try {
+    const session = await getServerSession(authOptions);
+
+    if (!session || !session.user) {
+      return unauthorizedResponse();
+    }
+
+    await NoteService.restoreAllNotes(session.user.id);
+
+    return NextResponse.json({
+      status: httpStatus.NO_CONTENT,
+    });
+  } catch (error: any) {
+    return badRequestResponse(error.message);
+  }
+}

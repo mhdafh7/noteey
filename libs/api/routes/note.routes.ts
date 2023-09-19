@@ -53,6 +53,13 @@ const getNotesInTrash = async () => {
   return res.json();
 }
 
+const restoreAllNotes = async () => {
+  const res = await fetch(`/api/trash`, {
+    method: "PATCH",
+  });
+  return res.json();
+}
+
 const NoteRoutes = {
   getNotes,
   createNote,
@@ -61,6 +68,7 @@ const NoteRoutes = {
   deleteNoteById,
   emptyTrash,
   getNotesInTrash,
+  restoreAllNotes,
 };
 
 export default NoteRoutes;

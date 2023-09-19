@@ -64,12 +64,26 @@ const useEmptyTrash = () => {
   });
 };
 
+const useRestoreAllNotes = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: () => NoteRoutes.restoreAllNotes(),
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries(["notesInTrash"]);
+      queryClient.invalidateQueries(["notes"]);
+      toast.success(messages.trash.success.restore_all_notes);
+    },
+  });
+};
+
 const NoteMutation = {
   useCreateNote,
   useUpdateNote,
   useMoveToTrashNote,
   useDeleteNote,
   useEmptyTrash,
+  useRestoreAllNotes,
 };
 
 export default NoteMutation;
