@@ -8,9 +8,10 @@ import { Prisma } from "@prisma/client";
 import { useCurrentNoteStore } from "@/store/note";
 import NoteMutation from "@/libs/hooks/mutations/note";
 import { Pin, UnPin } from "../Svgs/Pins";
+import ResizingTextarea from "../ResizingTextarea";
+import RoundSpinner from "../Loaders/RoundSpinner";
 
 import styles from "./styles.module.scss";
-import ResizingTextarea from "../ResizingTextarea";
 
 type Props = {
   setIsModalOpen: (isNoteModalOpen: boolean) => void;
@@ -124,7 +125,11 @@ const NoteModal = ({ setIsModalOpen }: Props) => {
                   </button>
                 </span>
                 <button type="submit" className={styles.done}>
-                  Save note
+                  {updateNoteMutation.isLoading ? (
+                    <RoundSpinner scale={0.4} />
+                  ) : (
+                    "Save note"
+                  )}
                 </button>
               </div>
             </Form>
