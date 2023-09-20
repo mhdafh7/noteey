@@ -40,20 +40,21 @@
         font-size: 1rem;
       }
     }
-    .emptyContainer {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      margin-top: 10vh;
-      .emptyMessage {
-        text-align: center;
-        width: 100%;
-        font-size: 1.5rem;
-        opacity: 0.5;
-        font-family: "Synonym", Helvetica Neue, sans-serif;
-      }
-    }
+  }
+}
+
+.emptyContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10vh;
+  .emptyMessage {
+    text-align: center;
+    width: 100%;
+    font-size: 1.5rem;
+    opacity: 0.5;
+    font-family: "Synonym", Helvetica Neue, sans-serif;
   }
 }
 
