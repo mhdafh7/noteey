@@ -34,11 +34,13 @@ export const messages = {
       get_notes: "Failed to get notes in trash",
       empty_trash: "Failed to empty trash",
       restore_all_notes: "Failed to restore all notes",
+      restore_note: "Failed to restore note",
     },
     success: {
       get_notes: "Successfully got notes in trash",
       empty_trash: "Successfully emptied trash",
       restore_all_notes: "Successfully restored all notes",
+      restore_note: "Successfully restored note",
     },
   },
 };
