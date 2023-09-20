@@ -8,7 +8,7 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   try {
     const requestBody = (await req.json()) as Prisma.UserCreateInput;
-    const { firstName, lastName, email, password } = requestBody;
+    const { name, email, password } = requestBody;
 
     console.log(requestBody);
     const existingUser = await prisma.user.findUnique({
@@ -27,12 +27,11 @@ export async function POST(req: Request) {
       );
     }
 
-    const hashed_password = await hash(password, 12);
+    const hashed_password = await hash(password as string, 12);
 
     const user = await prisma.user.create({
       data: {
-        firstName,
-        lastName,
+        name,
         email: email.toLowerCase(),
         password: hashed_password,
       },
@@ -40,8 +39,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       user: {
-        firstName: user.firstName,
-        lastName: user.lastName,
+        name: user.name,
         email: user.email,
       },
     });
