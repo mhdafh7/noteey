@@ -67,6 +67,9 @@ const NoteList = () => {
                   defaultDirection="end"
                   align="start"
                   autoResize
+                  observeChildren={true}
+                  isConstantSize={false}
+                  useResizeObserver={true}
                 >
                   {pinnedNotes.map((note: Note) => (
                     <NoteItem
@@ -94,6 +97,9 @@ const NoteList = () => {
                 defaultDirection="end"
                 align="start"
                 autoResize
+                observeChildren={true}
+                isConstantSize={false}
+                useResizeObserver={true}
               >
                 {unpinnedNotes.map((note: Note) => (
                   <NoteItem
