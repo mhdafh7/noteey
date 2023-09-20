@@ -96,7 +96,6 @@
     .formGroup {
       width: 100%;
       height: 100%;
-      gap: 1.5rem;
       input,
       textarea {
         width: 100%;
@@ -119,6 +118,9 @@
           font-weight: 700;
           font-size: 1.5rem;
         }
+      }
+      textarea {
+        margin-top: 1.5rem;
       }
     }
 
