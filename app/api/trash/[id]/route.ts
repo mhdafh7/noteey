@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import httpStatus from "http-status";
 import { authOptions } from "@/libs/authOptions";
@@ -13,13 +13,14 @@ type paramsType = {
 };
 
 // *** Restore a note from trash***
-export async function PATCH({ params }: paramsType) {
+export async function PATCH(req: NextRequest, { params }: paramsType) {
   try {
     const session = await getServerSession(authOptions);
 
     if (!session || !session.user) {
       return unauthorizedResponse();
     }
+    console.log({ params });
 
     const { id } = params;
 
@@ -34,7 +35,7 @@ export async function PATCH({ params }: paramsType) {
 }
 
 // *** Delete a note from trash permanently ***
-export async function DELETE({ params }: paramsType) {
+export async function DELETE(req: NextRequest, { params }: paramsType) {
   try {
     const session = await getServerSession(authOptions);
 
