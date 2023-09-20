@@ -41,6 +41,10 @@
       }
     }
     .emptyContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
       .emptyMessage {
         text-align: center;
         width: 100%;
