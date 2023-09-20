@@ -77,6 +77,19 @@ const useRestoreAllNotes = () => {
   });
 };
 
+const useRestoreNote = (id: string) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: () => NoteRoutes.restoreNoteFromTrash(id),
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries(["notesInTrash"]);
+      queryClient.invalidateQueries(["notes"]);
+      toast.success(messages.trash.success.restore_note);
+    },
+  });
+};
+
 const NoteMutation = {
   useCreateNote,
   useUpdateNote,
@@ -84,6 +97,7 @@ const NoteMutation = {
   useDeleteNote,
   useEmptyTrash,
   useRestoreAllNotes,
+  useRestoreNote,
 };
 
 export default NoteMutation;
