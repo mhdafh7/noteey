@@ -10,6 +10,7 @@ import NoteMutation from "@/libs/hooks/mutations/note";
 import { Pin, UnPin } from "../Svgs/Pins";
 
 import styles from "./styles.module.scss";
+import ResizingTextarea from "../ResizingTextarea";
 
 type Props = {
   setIsModalOpen: (isNoteModalOpen: boolean) => void;
@@ -71,18 +72,12 @@ const NoteModal = ({ setIsModalOpen }: Props) => {
                 autoComplete="off"
               />
               {errors.title && <p>{errors.title}</p>}
-              <Field
-                as="textarea"
+              <ResizingTextarea
                 name="description"
-                cols={20}
-                rows={6}
+                styles={styles.description}
                 onChange={handleChange}
-                onBlur={handleBlur}
                 value={values.description}
-                className={styles.description}
-                placeholder="Note description..."
-                maxLength={500}
-                autoComplete="off"
+                onBlur={handleBlur}
               />
               {errors.description && <p>{errors.description}</p>}
               <div className={styles.toolBar}>
