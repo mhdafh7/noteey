@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import ReactDOM from "react-dom";
 import Image from "next/image";
-import { useCurrentNoteStore } from "@/store/note";
+import { useTrashStore } from "@/store/trash";
 import NoteMutation from "@/libs/hooks/mutations/note";
 import RoundSpinner from "@/components/Loaders/RoundSpinner";
 
@@ -11,7 +11,7 @@ import styles from "./trash.module.scss";
 
 const ConfirmEmptyTrashDialog = () => {
   const emptyTrashMutation = NoteMutation.useEmptyTrash();
-  const { setIsConfirmEmptyTrashDialogOpen } = useCurrentNoteStore();
+  const { setIsConfirmEmptyTrashDialogOpen } = useTrashStore();
 
   const handleConfirmEmptyTrash = () => {
     emptyTrashMutation.mutate();
