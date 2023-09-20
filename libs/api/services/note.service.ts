@@ -124,7 +124,18 @@ const restoreAllNotes = async (userId: string) => {
       deleted: false,
     },
   });
-}
+};
+
+const restoreNoteFromTrash = async (id: string) => {
+  return await prisma.note.update({
+    where: {
+      id,
+    },
+    data: {
+      deleted: false,
+    },
+  });
+};
 
 const NoteService = {
   getNotes,
@@ -136,6 +147,7 @@ const NoteService = {
   getNotesInTrash,
   emptyTrash,
   restoreAllNotes,
+  restoreNoteFromTrash,
 };
 
 export default NoteService;
