@@ -8,17 +8,22 @@ import { MasonryGrid } from "@egjs/react-grid";
 import { AlertTriangle, RefreshCcw } from "react-feather";
 import NoteQueries from "@/libs/hooks/queries/note";
 import NoteMutation from "@/libs/hooks/mutations/note";
-import { useCurrentNoteStore } from "@/store/note";
-import Note from "@/components/Note";
+import { useTrashStore } from "@/store/trash";
+import TrashNote from "./TrashNote";
 import ListItemsSkelton from "@/components/NoteList/ListItemsSkelton";
 import ConfirmEmptyTrashDialog from "./ConfirmEmptyTrashDialog";
+import TrashNoteModal from "./TrashNoteModal";
+import MobileTrashNoteModal from "./MobileTrashNoteModal";
 
 import styles from "./trash.module.scss";
 
 const Trash = () => {
   const getTrashItemsQuery = NoteQueries.useGetNotesInTrash();
-  const { isConfirmEmptyTrashDialogOpen, setIsConfirmEmptyTrashDialogOpen } =
-    useCurrentNoteStore();
+  const {
+    isConfirmEmptyTrashDialogOpen,
+    setIsConfirmEmptyTrashDialogOpen,
+    isTrashNoteModalOpen,
+  } = useTrashStore();
 
   const restoreAllMutation = NoteMutation.useRestoreAllNotes();
 
@@ -32,7 +37,7 @@ const Trash = () => {
       isConstantSize={false}
     >
       {getTrashItemsQuery.data?.map((note) => (
-        <Note key={note.id} {...note} />
+        <TrashNote key={note.id} {...note} />
       ))}
     </MasonryGrid>
   );
@@ -57,6 +62,13 @@ const Trash = () => {
 
   return (
     <>
+      {/* Modals and dialogs */}
+      {isTrashNoteModalOpen ? (
+        <>
+          <MobileTrashNoteModal />
+          <TrashNoteModal />
+        </>
+      ) : null}
       {isConfirmEmptyTrashDialogOpen ? <ConfirmEmptyTrashDialog /> : null}
       <main className={styles.container}>
         <header className={styles.header}>

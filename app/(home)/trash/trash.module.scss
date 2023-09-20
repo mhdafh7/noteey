@@ -48,8 +48,8 @@
       &:hover {
         border-color: $danger-hover;
         color: $secondary;
-        background-color: $danger;
-        box-shadow: $danger-hover 5px 5px 0px;
+        background-color: $danger-hover;
+        box-shadow: $primary 5px 5px 0px;
       }
     }
 
@@ -329,15 +329,16 @@
       }
     }
     .delete {
-      background-color: $secondary;
       border-color: $danger;
+      box-shadow: 2px 2px 0px 0px $danger;
+      background-color: $secondary;
       color: $danger;
-      box-shadow: $danger 2px 2px 0px;
 
       &:hover,
       &:focus {
-        box-shadow: $danger-hover 5px 5px 0px 0px;
+        box-shadow: $primary 5px 5px 0px 0px;
         background-color: $danger-hover;
+        border-color: $danger-hover;
         color: $secondary;
       }
     }
@@ -345,3 +346,106 @@
 }
 
 // Trash note modal
+.trashNoteModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+  max-width: 50rem;
+  width: 75%;
+  border: solid 3px $primary;
+  border-radius: $rounded-lg;
+  padding: 0.5rem;
+  background: $secondary;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem;
+    .title,
+    .description {
+      background: transparent;
+      border: none;
+      padding: 1rem;
+      outline: none;
+      resize: none;
+      transition: all 0.1s ease;
+      border-radius: 5px;
+
+      &:focus {
+        outline: 2px solid $accent;
+      }
+    }
+    .title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .description {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 400;
+      resize: vertical;
+      flex-grow: 1;
+    }
+  }
+  .buttons {
+    width: 100%;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.5rem;
+
+    button {
+      cursor: pointer;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.1s ease-in;
+      font-size: 1rem;
+      border-style: solid;
+      border-width: 2px;
+      border-radius: $rounded;
+
+      &:hover,
+      &:focus {
+        translate: -2px -2px;
+      }
+    }
+
+    .delete {
+      border-color: $danger;
+      box-shadow: 2px 2px 0px 0px $danger;
+      background-color: $secondary;
+      color: $danger;
+
+      &:hover,
+      &:focus {
+        box-shadow: 4px 4px 0px 0px $primary;
+        background-color: $danger-hover;
+        border-color: $danger-hover;
+        color: $secondary;
+      }
+    }
+    .restore {
+      border-color: $primary;
+      background-color: $accent;
+      box-shadow: 2px 2px 0px 0px $primary;
+
+      &:hover {
+        translate: -2px -2px;
+        box-shadow: 4px 4px 0px 0px $primary;
+      }
+    }
+  }
+}
+.overlay {
+  @include overlay;
+}
