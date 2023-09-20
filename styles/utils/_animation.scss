@@ -1,0 +1,36 @@
+@import "@/styles/utils/colors";
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@mixin skelton-loading-animation {
+  animation: skeleton-loading 1.5s infinite linear;
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      rgba($shimmer-bg, 0),
+      rgba($shimmer-bg, 0.2) 20%,
+      rgba($shimmer-bg, 0.5) 60%,
+      rgba($shimmer-bg, 0)
+    );
+    animation: shimmer 3s infinite;
+    content: "";
+  }
+}

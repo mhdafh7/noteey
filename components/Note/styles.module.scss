@@ -1,50 +1,47 @@
 @import "/styles/utils/colors";
 @import "/styles/utils/fonts";
+@import "/styles/utils/border-radii";
 
 .container {
-  background: $secondary;
   color: $primary;
+  background-color: $secondary;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
 
-  padding: 2rem;
+  padding: 1.5rem;
   margin: 0.5rem;
   position: relative;
-  width: clamp(10rem, 100%, 22rem);
-  height: 12rem;
-  border: solid 3px $primary;
-  border-radius: 5px;
+  width: 15rem;
+  max-width: 22rem;
+  border: solid 2px $primary;
+  border-radius: $rounded-lg;
   box-shadow: $primary 5px 5px 0px;
   transition: all 0.1s ease-in;
   cursor: pointer;
 
-  &:hover{
+  &:hover {
     translate: -3px -3px;
     box-shadow: $primary 9px 9px 0px;
   }
 
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-
   .pinned {
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
     position: absolute;
-    right: -5%;
-    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -10px;
     padding: 0.2rem;
     border: 2px $primary solid;
-    background-color: $misc;
+    background-color: $accent;
     color: $secondary;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-
   }
   .title {
     display: block;
@@ -73,5 +70,19 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-align: justify;
+  }
+
+  @media (max-width: 768px) {
+    margin: 0;
+    padding: 1rem;
+    width: 45%;
+    max-width: unset;
+
+    .title {
+      font-size: 1rem;
+    }
+    .body {
+      font-size: 0.8rem;
+    }
   }
 }

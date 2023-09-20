@@ -1,0 +1,16 @@
+@import "@/styles/utils/mixins";
+
+.container {
+  @include container;
+
+  .branding {
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30vw;
+    font-weight: 700;
+    opacity: 0.02;
+    pointer-events: none;
+  }
+}

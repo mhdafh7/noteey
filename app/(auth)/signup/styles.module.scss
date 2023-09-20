@@ -1,0 +1,52 @@
+@import "@/styles/utils/mixins";
+@import "@/styles/utils/border-radii";
+
+.titleWrapper {
+  z-index: 5;
+  display: flex;
+  position: relative;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+
+  .title {
+    @include title;
+    z-index: 2;
+  }
+  svg {
+    z-index: 1;
+    position: absolute;
+
+    &:nth-of-type(1) {
+      //star
+      right: 98%;
+      top: 2rem;
+    }
+    &:nth-of-type(2) {
+      //signup
+      left: 70%;
+      bottom: 75%;
+    }
+  }
+}
+.card {
+  z-index: 4;
+  @include card;
+  .form {
+    @include form;
+
+    .errorMessage {
+      color: $danger;
+      font-weight: 600;
+    }
+    .signupBtn {
+      @include btn;
+    }
+  }
+}
+.loginText {
+  font-weight: 400;
+  span {
+    text-decoration: underline;
+  }
+}

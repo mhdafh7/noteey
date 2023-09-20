@@ -1,51 +1,83 @@
-.container {
+@import "@/styles/utils/animation";
+@import "@/styles/utils/border-radii";
+@import "@/styles/utils/colors";
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  height: fit-content;
+  gap: 2rem;
+  margin-bottom: 5rem;
 
-  .title {
+  .container {
     width: 100%;
-    text-align: center;
-    margin: auto;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    opacity: 0.7;
-    letter-spacing: 2px;
+    height: fit-content;
 
-    span{
-      font-weight: 400;
+    &:nth-child(2) {
+      margin-top: 4rem;
     }
-  }
-  hr {
-    opacity: 0.4;
-  }
-  .noteListContainer {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: auto;
-    gap: 0 20px;
-    place-items: center;
-    margin: 2rem auto;
 
-    @media (max-width: 1024px) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-template-rows: 1fr 1fr 1fr;
-    }
     @media (max-width: 768px) {
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
+      margin-top: 10vh;
+
+      &:nth-child(2) {
+        margin-top: 0;
+      }
+    }
+
+    .title {
+      width: 100%;
+      margin: auto;
+      margin-bottom: 1rem;
+      opacity: 0.7;
+      letter-spacing: 2px;
+      font-family: "Space Grotesk", sans-serif;
+
+      @media (max-width: 768px) {
+        text-align: center;
+        letter-spacing: unset;
+        font-size: 1rem;
+      }
+    }
+    .emptyContainer {
+      .emptyMessage {
+        text-align: center;
+        width: 100%;
+        font-size: 1.5rem;
+        opacity: 0.5;
+        font-family: "Synonym", Helvetica Neue, sans-serif;
+      }
     }
   }
-  .emptyContainer {
-    .emptyMessage {
-      text-align: center;
+}
+
+.skelton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  list-style: none;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin-top: 10vh;
+  }
+
+  li {
+    width: clamp(10rem, 100%, 22rem);
+    height: 12rem;
+    background-color: $skelton-bg;
+    border-radius: $rounded-lg;
+    box-shadow: $skelton-border 5px 5px 0px;
+    position: relative;
+    overflow: hidden;
+    @include skelton-loading-animation;
+
+    @media (max-width: 768px) {
       width: 100%;
-      font-size: 1.5rem;
-      opacity: 0.5;
-      font-family: 'Synonym', Helvetica Neue, sans-serif;
+      margin: 0;
     }
   }
 }

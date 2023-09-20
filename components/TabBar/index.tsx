@@ -1,11 +1,10 @@
 import styles from './styles.module.scss';
-import AddNote from '../AddNote';
-import { DocumentData } from '@firebase/firestore-types';
+import AddNote from '../AddNoteInput';
 
-const TabBar = ({ notesRef }: DocumentData) => {
+const TabBar = () => {
   return (
     <div className={styles.container}>
-      <AddNote notesRef={notesRef} />
+      <AddNote />
     </div>
   );
 };

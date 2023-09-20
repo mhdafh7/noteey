@@ -1,39 +1,75 @@
-@import '/styles/utils/colors';
+@import "/styles/utils/colors";
+@import "/styles/utils/border-radii";
 
 .container {
   position: fixed;
-  backdrop-filter: blur(10px);
   z-index: 996;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
   width: 100vw;
-  padding-inline: 4vw;
-  padding-block: 2rem;
-  color: whitesmoke;
-  background-color: $primary;
+  height: 8vh;
+  padding-inline: 2vw;
+  padding-block: 1rem;
+  color: $primary;
+  background-color: $secondary;
+  border-bottom: solid 3px $primary ;
+  text-transform: uppercase;
+
+  @media (max-width: 768px) {
+    padding-inline: 1.5rem;
+    margin-top: 0;
+    border: 0;
+    border-bottom: solid 3px $primary;
+    border-radius: 0;
+  }
+  .menuButton {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
 
   .logo {
-    font-family: 'Amulya', sans-serif;
+    font-family: "Space Grotesk", sans-serif;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    flex: 1;
   }
-  .logOutBtn{
-    background: none;
-    border:none;
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: pointer;
+  .logOutBtn {
     display: flex;
-    gap: 1rem;
     align-items: center;
+    gap: 1rem;
+    box-shadow: 2px 2px 0px 0px $primary;
+    background: $secondary;
+    border: solid $primary 2px;
+    border-radius: $rounded;
+    padding: 0.3rem 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
-    p{
-      font-weight: 500;
-      font-size: 1.2rem;
-      color: $secondary;
+    & > * {
+      color: $danger;
+    }
+    p {
+      font-weight: bold;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+
+      @media (max-width: 768px) {
+        display: none;
+      }
     }
 
-    &:hover{
-      scale: 1.1;
+    &:hover {
+      background-color: $danger;
+      & > * {
+        color: $secondary;
+      }
+      transform: translate(-4px, -4px);
+      box-shadow: 4px 4px 0px 0px $primary;
     }
   }
 }

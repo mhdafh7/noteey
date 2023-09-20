@@ -1,0 +1,22 @@
+.container {
+  padding: 0;
+  height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: flex-start;
+
+  .main {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 4rem 6rem;
+    width: 100%;
+    flex: 1;
+    gap: 7rem;
+    overflow-y: auto;
+
+    @media (max-width: 768px) {
+      padding: 2rem 0.5rem;
+    }
+  }
+}

@@ -1,0 +1,108 @@
+@import "/styles/utils/colors";
+@import "/styles/utils/border-radii";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: solid $primary 2.5px;
+  background-color: $tertiary;
+  border-radius: $rounded-lg;
+  width: 100%;
+  max-width: 30rem;
+  margin-top: 6vh;
+  overflow-x: hidden;
+  box-shadow: 4px 4px 0px 0px $primary;
+  transition: all 0.1s ease-in;
+
+  &:focus,
+  &:hover {
+    border: solid $primary 2px;
+    translate: -7px -7px;
+    box-shadow: 7px 7px 0px 0px $primary;
+  }
+
+  .form {
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+
+      .titleWrapper {
+        position: relative;
+
+        .titleInput {
+          font-family: "Space Grotesk", sans-serif;
+          font-weight: 700;
+          letter-spacing: 1.5px;
+          border: none;
+          width: 100%;
+          padding: 0.5rem;
+          background: transparent;
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      .bodyInput {
+        font-family: "Space Grotesk", sans-serif;
+        background: transparent;
+        outline: none;
+        padding: 0.5rem;
+        width: 100%;
+        border: none;
+        resize: none;
+
+        &::placeholder {
+          color: $primary;
+          opacity: 0.7;
+          font-weight: 800;
+        }
+      }
+    }
+    .buttonWrapper {
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .done {
+        padding: 0.5rem 1rem;
+        border-radius: 0;
+        border: solid 2px $primary;
+        border-radius: 5px;
+        transition: all 0.1s ease;
+        background-color: $success;
+        font-weight: 700;
+        box-shadow: 2px 2px 0px 0px $primary;
+        cursor: pointer;
+
+        &:hover {
+          translate: -2px -2px;
+          box-shadow: 4px 4px 0px 0px $primary;
+        }
+      }
+      .pinned {
+        cursor: pointer;
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.1s ease-in;
+        border: solid $primary 2px;
+        border-radius: 5px;
+        background-color: $misc;
+        box-shadow: 2px 2px 0px 0px $primary;
+
+        &:hover,
+        &:focus {
+          translate: -2px -2px;
+          box-shadow: 4px 4px 0px 0px $primary;
+        }
+      }
+      .unpinned {
+        @extend .pinned;
+        background-color: $secondary;
+      }
+    }
+  }
+}

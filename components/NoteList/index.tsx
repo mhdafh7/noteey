@@ -1,49 +1,128 @@
-import styles from './styles.module.scss';
-import Note from '../Note';
-import { DocumentData } from '@firebase/firestore-types';
+"use client";
 
-const NoteList = ({ noteList }: any) => {
-  return noteList.length !== 0 ? (
+import { useEffect, useState } from "react";
+
+import { Note } from "@prisma/client";
+import { MasonryGrid } from "@egjs/react-grid";
+import { useCurrentNoteStore } from "@/store/note";
+
+import NoteItem from "../Note";
+import NoteModal from "../NoteModal";
+import MobileNoteModal from "../MobileNoteModal";
+
+import NoteQueries from "@/libs/hooks/queries/note";
+import ListItemsSkelton from "./ListItemsSkelton";
+import ConfirmMoveToTrashDialog from "../ConfirmMoveToTrashDialog";
+
+import styles from "./styles.module.scss";
+
+const NoteList = () => {
+  const notes = NoteQueries.useGetNotes();
+  const [noteList, setNoteList] = useState<Note[]>([]);
+
+  const isNoteModalOpen = useCurrentNoteStore((state) => state.isNoteModalOpen);
+  const setIsNoteModalOpen = useCurrentNoteStore(
+    (state) => state.setIsNoteModalOpen
+  );
+
+  const isConfirmMoveToTrashDialogOpen = useCurrentNoteStore(
+    (state) => state.isConfirmMoveToTrashDialogOpen
+  );
+
+  const pinnedNotes = noteList.filter((note: Note) => note.isPinned);
+  const unpinnedNotes = noteList.filter((note: Note) => !note.isPinned);
+
+  useEffect(() => {
+    if (notes.isSuccess) {
+      setNoteList(notes.data);
+    } else if (notes.isError) {
+      console.error(notes.error);
+    }
+  }, [notes]);
+
+  return (
     <>
-      <div className={styles.container}>
-        <h3 className={styles.title}>Pinned <span>Notes</span></h3>
-        <div className={styles.noteListContainer}>
-          {noteList.map((note: DocumentData) => {
-            if (note.isPinned)
-              return (
-                <Note
-                  id={note.id}
-                  key={note.id}
-                  title={note.title}
-                  body={note.body}
-                  isPinned={note.isPinned}
-                />
-              );
-          })}
+      {/* Modals and Dialogs */}
+      {isNoteModalOpen ? (
+        <>
+          <NoteModal setIsModalOpen={setIsNoteModalOpen} />
+          <MobileNoteModal />
+        </>
+      ) : null}
+      {notes.isLoading ? (
+        <ListItemsSkelton />
+      ) : noteList.length !== 0 ? (
+        <>
+          {isConfirmMoveToTrashDialogOpen ? <ConfirmMoveToTrashDialog /> : null}
+
+          {/* Main */}
+          <div className={styles.main}>
+            {pinnedNotes.length > 0 && (
+              <div className={styles.container}>
+                <h3 className={styles.title}>
+                  Pinned <span>Notes</span>
+                </h3>
+                <MasonryGrid
+                  gap={29}
+                  defaultDirection="end"
+                  align="start"
+                  autoResize
+                  observeChildren={true}
+                  isConstantSize={false}
+                  useResizeObserver={true}
+                >
+                  {pinnedNotes.map((note: Note) => (
+                    <NoteItem
+                      id={note.id}
+                      key={note.id}
+                      title={note.title}
+                      description={note.description}
+                      isPinned={note.isPinned}
+                      createdAt={note.createdAt}
+                      updatedAt={note.updatedAt}
+                      ownerId={note.ownerId}
+                    />
+                  ))}
+                </MasonryGrid>
+              </div>
+            )}
+            <div className={styles.container}>
+              {pinnedNotes.length > 0 && unpinnedNotes.length > 0 ? (
+                <h3 className={styles.title}>
+                  Other <span>Notes</span>
+                </h3>
+              ) : null}
+              <MasonryGrid
+                gap={29}
+                defaultDirection="end"
+                align="start"
+                autoResize
+                observeChildren={true}
+                isConstantSize={false}
+                useResizeObserver={true}
+              >
+                {unpinnedNotes.map((note: Note) => (
+                  <NoteItem
+                    id={note.id}
+                    key={note.id}
+                    title={note.title}
+                    description={note.description}
+                    isPinned={note.isPinned}
+                    createdAt={note.createdAt}
+                    updatedAt={note.updatedAt}
+                    ownerId={note.ownerId}
+                  />
+                ))}
+              </MasonryGrid>
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className={styles.emptyContainer}>
+          <h4 className={styles.emptyMessage}>Notes you add appear here</h4>
         </div>
-      </div>
-      <div className={styles.container}>
-        <hr />
-        <div className={styles.noteListContainer}>
-          {noteList.map((note: DocumentData) => {
-            if (!note.isPinned)
-              return (
-                <Note
-                  id={note.id}
-                  key={note.id}
-                  title={note.title}
-                  body={note.body}
-                  isPinned={note.isPinned}
-                />
-              );
-          })}
-        </div>
-      </div>
+      )}
     </>
-  ) : (
-    <div className={styles.emptyContainer}>
-      <h4 className={styles.emptyMessage}>Notes you add appear here</h4>
-    </div>
   );
 };
 export default NoteList;

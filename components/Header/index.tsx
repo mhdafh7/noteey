@@ -1,40 +1,27 @@
-import { useRouter } from "next/router";
-import { toast } from "react-toastify";
-import { useAuth } from "../../context/AuthProvider";
-import SigninIcon from "../Svgs/SigninIcon";
+"use client";
+
+import { usePathname } from "next/navigation";
+import DrawerButton from "./DrawerButton";
+import LogoutButton from "./LogoutButton";
+
 import styles from "./styles.module.scss";
+import { UrlEnum } from "@/enum/url";
 
 const Header = () => {
-  const { logOut, user } = useAuth();
-  const router = useRouter();
+  const currentPath = usePathname();
+  console.log(currentPath);
 
-  const handleLogout = async () => {
-    try {
-      await logOut();
-      router.push("/login");
-    } catch (error) {
-      let errorMessage = "error.unknown";
-      if (typeof error === "string") {
-        errorMessage = error.toUpperCase();
-      } else if (error instanceof Error) {
-        errorMessage = error.message;
-      }
-      toast.error(`Sign in error! ${errorMessage}`, {
-        position: toast.POSITION.BOTTOM_CENTER,
-        closeOnClick: true,
-      });
-      console.error(errorMessage);
-    }
-  };
+  const logoText = currentPath === UrlEnum.TRASH ? "Trash" : "Noteey";
+
   return (
-    <div className={styles.container}>
-      <div className={styles.logo}>Noteey</div>
-      {/* TODO search */}
-      {/* <div className={styles.search}>search</div> */}
-      <button className={styles.logOutBtn} onClick={handleLogout}>
-        <p>Logout</p> <SigninIcon size={26} color={"#fff"} />
-      </button>
-    </div>
+    <>
+      <header className={styles.container}>
+        <DrawerButton />
+        <div className={styles.logo}>{logoText}</div>
+        {/* TODO search */}
+        <LogoutButton />
+      </header>
+    </>
   );
 };
 export default Header;

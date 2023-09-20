@@ -1,0 +1,455 @@
+@import "@/styles/utils/mixins";
+@import "@/styles/utils/border-radii";
+@import "/styles/utils/colors";
+@import "/styles/utils/fonts";
+
+// Trash page
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5rem;
+  padding-top: 12vh;
+  padding-inline: 2rem;
+  width: 100%;
+  flex: 1;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    button {
+      all: unset;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      font-family: "Space Grotesk", sans-serif;
+      transition: all 0.2s ease-in;
+      border-style: solid;
+      border-width: 2px;
+      border-radius: $rounded-2xl;
+      background-color: $secondary;
+      cursor: pointer;
+
+      &:hover {
+        border: solid 2px $primary;
+        translate: -3px -3px;
+        box-shadow: $primary 5px 5px 0px;
+      }
+    }
+    .emptyTrashBtn {
+      border-color: $danger;
+      box-shadow: $danger 2px 2px 0px;
+      color: $danger;
+      &:hover {
+        border-color: $danger-hover;
+        color: $secondary;
+        background-color: $danger-hover;
+        box-shadow: $primary 5px 5px 0px;
+      }
+    }
+
+    .restoreAllBtn {
+      border-color: $primary;
+      box-shadow: $primary 2px 2px 0px;
+      color: $secondary;
+      background-color: $misc;
+      &:hover {
+        box-shadow: $primary 5px 5px 0px;
+        color: $secondary;
+      }
+    }
+  }
+
+  .noteList {
+    width: 100%;
+  }
+}
+
+// Empty trash dialog
+.confirmDialog {
+  @include dialog;
+
+  .title {
+    @include title;
+    margin-bottom: 1rem;
+  }
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    .cancelButton,
+    .confirmButton {
+      cursor: pointer;
+      padding: 0.5rem;
+      display: flex;
+      height: 2.8rem;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.1s ease-in;
+      border: solid $primary 1px;
+      border-radius: 5px;
+      box-shadow: 2px 2px 0px 0px $primary;
+      font-size: 1rem;
+
+      &:hover,
+      &:focus {
+        translate: -2px -2px;
+        box-shadow: 4px 4px 0px 0px $primary;
+      }
+    }
+
+    .cancelButton {
+      background-color: transparent;
+    }
+    .confirmButton {
+      background-color: $danger;
+      color: $secondary;
+
+      &:hover,
+      &:focus {
+        background-color: $danger-hover;
+      }
+    }
+  }
+}
+.overlay {
+  @include overlay;
+}
+
+.emptyMessage {
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+// Trash note
+.trashNote {
+  color: $primary;
+  background-color: $secondary;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  padding: 1.5rem;
+  margin: 0.5rem;
+  position: relative;
+  width: 15rem;
+  max-width: 22rem;
+  border: solid 2px $primary;
+  border-radius: $rounded-lg;
+  box-shadow: $primary 5px 5px 0px;
+  transition: all 0.1s ease-in;
+  cursor: pointer;
+
+  &:hover {
+    translate: -3px -3px;
+    box-shadow: $primary 9px 9px 0px;
+  }
+
+  .pinned {
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -10px;
+    padding: 0.2rem;
+    border: 2px $primary solid;
+    background-color: $accent;
+    color: $secondary;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .title {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    padding-bottom: 12px;
+    font-family: "Amulya", sans-serif;
+    line-height: 1.5em;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-align: left;
+  }
+  .body {
+    font-family: "Synonym", Helvetica, sans-serif;
+    font-weight: 400;
+    opacity: 0.8;
+    font-size: 1.05rem;
+    height: 100%;
+    width: 100%;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: justify;
+  }
+
+  @media (max-width: 768px) {
+    margin: 0;
+    padding: 1rem;
+    width: 45%;
+    max-width: unset;
+
+    .title {
+      font-size: 1rem;
+    }
+    .body {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+// Trash note mobile modal
+@import "@/styles/utils/colors";
+@import "@/styles/utils/border-radii";
+
+.mobileTrashNoteModal {
+  width: 100vw;
+  height: 100vh;
+  background-color: $secondary;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1007;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  padding: 1.5rem 0.8rem;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+
+  .topBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .back {
+      cursor: pointer;
+      padding: 0.5rem;
+      display: flex;
+      height: 2.8rem;
+      width: 2.8rem;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.1s ease-in;
+      border: solid $primary 1px;
+      border-radius: $rounded-full;
+      background-color: $accent-2;
+      box-shadow: 2px 2px 0px 0px $primary;
+
+      &:hover,
+      &:focus {
+        translate: -2px -2px;
+        box-shadow: 4px 4px 0px 0px $primary;
+      }
+    }
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    gap: 1.5rem;
+
+    .title,
+    .description {
+      width: 100%;
+      padding: 0.3rem 0.5rem;
+      font-family: "Space Grotesk", sans-serif;
+
+      &:focus,
+      &:hover {
+        outline: none;
+      }
+    }
+    .title {
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      font-size: 1.5rem;
+      &::placeholder {
+        font-weight: 700;
+        font-size: 1.5rem;
+      }
+    }
+  }
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    button {
+      width: 100%;
+      height: 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid $primary;
+      font-weight: 600;
+      font-size: 1.2rem;
+      text-align: center;
+      padding: 0.8rem 1rem;
+      border-radius: $rounded-lg;
+      box-shadow: 2px 2px 0 $primary;
+      cursor: pointer;
+      transition: all 0.2s ease-in;
+
+      &:hover,
+      &:focus {
+        translate: -3px -3px;
+      }
+    }
+    .restore {
+      background-color: $accent;
+
+      &:hover,
+      &:focus {
+        box-shadow: 5px 5px 0px 0px $primary;
+      }
+    }
+    .delete {
+      border-color: $danger;
+      box-shadow: 2px 2px 0px 0px $danger;
+      background-color: $secondary;
+      color: $danger;
+
+      &:hover,
+      &:focus {
+        box-shadow: $primary 5px 5px 0px 0px;
+        background-color: $danger-hover;
+        border-color: $danger-hover;
+        color: $secondary;
+      }
+    }
+  }
+}
+
+// Trash note modal
+.trashNoteModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+  max-width: 50rem;
+  width: 75%;
+  border: solid 3px $primary;
+  border-radius: $rounded-lg;
+  padding: 0.5rem;
+  background: $secondary;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem;
+    .title,
+    .description {
+      background: transparent;
+      border: none;
+      padding: 1rem;
+      outline: none;
+      resize: none;
+      transition: all 0.1s ease;
+      border-radius: 5px;
+
+      &:focus {
+        outline: 2px solid $accent;
+      }
+    }
+    .title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .description {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 400;
+      resize: vertical;
+      flex-grow: 1;
+    }
+  }
+  .buttons {
+    width: 100%;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.5rem;
+
+    button {
+      cursor: pointer;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.1s ease-in;
+      font-size: 1rem;
+      border-style: solid;
+      border-width: 2px;
+      border-radius: $rounded-lg;
+      height: 3rem;
+      &:hover,
+      &:focus {
+        translate: -2px -2px;
+      }
+    }
+
+    .delete {
+      border-color: $danger;
+      box-shadow: 2px 2px 0px 0px $danger;
+      background-color: $secondary;
+      color: $danger;
+
+      &:hover,
+      &:focus {
+        box-shadow: 4px 4px 0px 0px $primary;
+        background-color: $danger-hover;
+        border-color: $danger-hover;
+        color: $secondary;
+      }
+    }
+    .restore {
+      border-color: $primary;
+      background-color: $accent;
+      box-shadow: 2px 2px 0px 0px $primary;
+
+      &:hover {
+        translate: -2px -2px;
+        box-shadow: 4px 4px 0px 0px $primary;
+      }
+    }
+  }
+}
+.overlay {
+  @include overlay;
+}
